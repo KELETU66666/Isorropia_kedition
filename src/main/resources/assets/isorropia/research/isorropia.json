@@ -42,7 +42,7 @@
 	        "icons": [ "isorropia:textures/items/base_lens.png" ],
 	        "category": "ISORROPIA", 
 	        "location": [0, -2],
-	        "parents": ["!BASEARTIFICE"],
+	        "parents": ["BASEARTIFICE"],
 	        "meta": ["ROUND", "HIDDEN", "SPIKY"],
 	        "stages": [
 	                {
