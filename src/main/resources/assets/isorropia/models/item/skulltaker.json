@@ -1,0 +1,8 @@
+{
+   "parent": "item/handheld",
+   
+   "overrides": [
+        { "predicate": { "active": 0 }, "model": "isorropia:item/skulltaker_inactive" },
+        { "predicate": { "active": 1 }, "model": "isorropia:item/skulltaker_active" }
+	]
+}

@@ -1,0 +1,9 @@
+{
+   "parent": "item/generated",
+   
+   "overrides": [
+        { "predicate": { "strength": 0 }, "model": "isorropia:item/command_seal_ligo_weak" },
+        { "predicate": { "strength": 1 }, "model": "isorropia:item/command_seal_ligo_normal" },
+        { "predicate": { "strength": 2 }, "model": "isorropia:item/command_seal_ligo_strength" }
+	]
+}

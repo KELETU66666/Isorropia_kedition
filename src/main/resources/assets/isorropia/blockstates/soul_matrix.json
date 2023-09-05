@@ -1,0 +1,11 @@
+{
+    "forge_marker": 1,
+    "defaults":
+    {
+        "model": "isorropia:placeHolder",
+        "transform": "forge:default-block"
+    },
+    "variants": { 
+        "normal":[{}] 
+    }
+}

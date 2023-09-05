@@ -1,0 +1,44 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "forge:multi-layer",
+		"custom": {
+			"base":"isorropia:curative_vat#top_solid"
+		}
+    },
+	
+	"variants": {
+		"variant":{
+			"placeholder": {"model": "isorropia:placeholder"}, 
+			"top": {
+				"custom": {
+					"Translucent":"isorropia:curative_vat#top_translucent",
+					"Solid":"isorropia:curative_vat#top_solid"
+				}
+			},
+       		"bottom": {
+				"custom": {
+					"Translucent":"isorropia:curative_vat#bottom_translucent",
+					"Solid":"isorropia:curative_vat#bottom_solid"
+				}
+			},
+       		"connector": {"model": "isorropia:placeholder"}
+		},
+		
+		"top_solid":{
+			"model":"isorropia:curative_vat_top_solid"
+		},
+		
+		"top_translucent":{
+			"model":"isorropia:curative_vat_top_translucent"
+		},
+		
+		"bottom_solid":{
+			"model":"isorropia:curative_vat_bottom_solid"
+		},
+		
+		"bottom_translucent":{
+			"model":"isorropia:curative_vat_bottom_translucent"
+		}
+	}
+}

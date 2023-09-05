@@ -1,0 +1,653 @@
+{
+    "entries":[
+        {
+            "key":"HANGINGLABEL",
+            "name" :"research.HANGINGLABEL.title",
+            "icons":["thaumcraft:textures/items/label.png"],
+            "category":"ISORROPIA",
+            "parents": ["WARDEDJARS"],      
+            "meta": ["ROUND", "HIDDEN"],   
+            "location" : [0, 2],
+
+            "stages":[
+                {
+                    "text":"research.HANGINGLABEL.stage.1.text"
+                }
+            ]
+        },
+        {
+        	"key":"SOMATICBRAIN",
+        	"name" :"research.SOMATICBRAIN.title",
+	        "icons": [ "isorropia:textures/items/somatic_brain.png" ],
+	        "category": "ISORROPIA",
+	        "location": [6, 3],
+	        "parents": ["CURATIVEVAT", "JARBRAIN", "MINDBIOTHAUMIC"],
+	        "meta": ["HIDDEN"],
+	        "stages": [
+	        	{
+	            	"text": "research.SOMATICBRAIN.stage.1.text",
+	            	"required_item":["thaumcraft:brain"],
+	            	"required_knowledge":["THEORY;ARTIFICE;1"]
+	            },
+	            {
+	           		"text": "research.SOMATICBRAIN.stage.2.text",
+	                "recipes":["isorropia:somatic_brain"],
+	                "warp":3
+	            }
+	        ]
+        },
+       	{
+            "key":"ARCANELENSES",
+            "name" :"research.ARCANELENSES.title",
+	        "icons": [ "isorropia:textures/items/base_lens.png" ],
+	        "category": "ISORROPIA", 
+	        "location": [0, -2],
+	        "parents": ["!BASEARTIFICE"],
+	        "meta": ["ROUND", "HIDDEN", "SPIKY"],
+	        "stages": [
+	                {
+	                    "text": "research.ARCANELENSES.stage.1.text",	                    
+						"required_item":["minecraft:glass_pane"],
+						"required_knowledge":["THEORY;ARTIFICE;1", "THEORY;AUROMANCY;1"]
+	                },
+	                {
+	                	"text":"research.ARCANELENSES.stage.2.text",
+	                	"recipes":["isorropia:base_lens"]
+	                }
+	            ]
+        },
+		{
+		    "key":"FIRELENS",
+            "name" :"research.FIRELENS.title",
+	        "icons": [ "isorropia:textures/items/fire_lens.png" ],
+	        "category": "ISORROPIA",
+	        "location": [-2, -3],
+	        "parents": [ "ARCANELENSES"],
+	        "meta": ["ROUND", "HIDDEN"],
+	        "stages": [
+	                {
+	                    "text": "research.FIRELENS.stage.1.text",
+	                    "required_item":["isorropia:lens", "thaumcraft:crystal_essence;1;0;{Aspects:[{amount:1,key:'ignis'}]}"]
+	                },
+					{
+						"text": "research.FIRELENS.stage.2.text",
+						"required_research":["!scan.sun"]
+					},
+					{
+						"text": "research.FIRELENS.stage.3.text",
+	                	"recipes":["isorropia:lens_fire"]
+					}
+	            ]
+		},
+        {
+            "key":"ORDOLENS",
+            "name" :"research.ORDOLENS.title",
+	        "icons": [ "isorropia:textures/items/ordo_lens.png" ],
+	        "category": "ISORROPIA", 
+	        "location": [2, -3],
+	        "parents": [ "ARCANELENSES"],        
+	        "meta": ["ROUND", "HIDDEN"],
+	        "stages": [
+	                {
+	                    "text": "research.ORDOLENS.stage.1.text",
+						"required_item": ["thaumcraft:thaumometer", "isorropia:lens", "thaumcraft:crystal_essence;1;0;{Aspects:[{amount:1,key:'ordo'}]}"]
+	                },
+					{
+						"text": "research.ORDOLENS.stage.2.text",
+						"recipes":["isorropia:lens_ordo"]
+					}
+	            ]
+        },
+        {
+            "key":"AIRLENS",
+            "name" :"research.AIRLENS.title",
+	        "icons": [ "isorropia:textures/items/air_lens.png" ],
+	        "category": "ISORROPIA", 
+	        "location": [-1, -5],
+	        "parents": [ "ARCANELENSES"],
+	        "meta": ["ROUND", "HIDDEN"],
+	        "stages": [
+	                {
+	                    "text": "research.AIRLENS.stage.1.text",
+	                    "required_item":["isorropia:lens", "thaumcraft:crystal_essence;1;0;{Aspects:[{amount:1,key:'aer'}]}"],
+						"required_knowledge":["OBSERVATION;AUROMANCY;1"]
+	                },
+					{
+						"text": "research.AIRLENS.stage.2.text",
+						"recipes": ["isorropia:lens_air"]
+					}
+	            ]
+        },
+        {
+            "key":"ENVYLENS",
+            "name" :"research.ENVYLENS.title",
+	        "icons": [ "isorropia:textures/items/envy_lens.png" ],
+	        "category": "ISORROPIA", 
+	        "location": [1, -5],
+	        "parents": [ "ARCANELENSES"],
+	        "meta": ["ROUND", "HIDDEN"],
+	        "stages": [
+	                {
+	                    "text": "research.ENVYLENS.stage.1.text",
+	                   	"required_item":["isorropia:lens", "thaumcraft:crystal_essence;1;0;{Aspects:[{amount:1,key:'invidia'}]}"],
+						"required_knowledge":["THEORY;AUROMANCY;1", "THEORY;ARTIFICE;1"]
+	                },
+					{
+						"text": "research.ENVYLENS.stage.2.text",
+						"recipes": ["isorropia:lens_envy"],
+						"warp": 2
+					}
+	            ]
+        },
+        {
+            "key": "CURATIVEVAT",
+            "name":"research.CURATIVEVAT.title",
+            "icons":["isorropia:textures/research/cat_curativevat.png"],
+            "category":"ISORROPIA",
+            "parents": ["GROWTH", "HARDNING", "INFUSION"],
+            "meta": ["SPIKY"],
+            "location":[6, 0],
+            "stages":[
+                {
+                    "text":"research.CURATIVEVAT.stage.1.text",
+					"required_item":["thaumcraft:taint_rock;15", "thaumcraft:taint_soil;15"],
+                    "required_research":["!scan.taint", "!scan.corrupted"],
+					"required_knowledge":["OBSERVATION;ALCHEMY;1"]
+                },
+				{				
+					"text":"research.CURATIVEVAT.stage.2.text",
+					"required_research":["!experiment.villager_zombie"],
+					"required_knowledge":["THEORY;ALCHEMY;1"]
+				},
+				{
+					"text":"research.CURATIVEVAT.stage.3.text",
+					"required_item":["thaumcraft:infusion_matrix"],
+					"required_knowledge":["THEORY;ARTIFICE;1", "THEORY;INFUSION;1"]
+				},
+				{
+					"text":"research.CURATIVEVAT.stage.4.text",
+                    "recipes":["isorropia:curative_vat"]
+				}
+            ],
+            "addenda":[
+                {
+                    "text": "research.curativevat.addenda.1.text",
+                    "required_research":["CONTAINMENT"]
+                }
+            ]
+        },
+		{
+		    "key":"CONTAINMENT",
+            "name" :"research.CONTAINMENT.title",
+	        "icons": [ "focus:isorropia.FOCUSCONTAINMENT" ],
+	        "category": "ISORROPIA",
+	        "location": [9, -2],
+			"parents": ["CREATUREINFUSIONS"],
+	        "meta": ["HIDDEN"],
+	        "stages": [
+				{
+					"text": "research.CONTAINMENT.stage.1.text",
+					"required_research":["f_TELEPORT"]
+				},
+				{
+					"text": "research.CONTAINMENT.stage.2.text"
+				}
+			]
+		},
+        {
+        	"key":"CREATUREINFUSIONS",
+        	"name":"research.CREATUREINFUSIONS.title",
+        	"icons":["isorropia:textures/research/cat_awakened_blood.png", "isorropia:textures/research/cat_diamond_skin.png", "isorropia:textures/research/cat_quicksilver_limbs.png", "isorropia:textures/research/cat_shockskin.png"],
+        	"category":"ISORROPIA",
+        	"parents":["CURATIVEVAT", "INFUSION"],
+            "meta": ["HIDDEN", "SPIKY", "ROUND"],
+        	"location":[8, 0],
+
+        	"stages":[
+				{
+					"text":"research.CREATUREINFUSIONS.stage.1.text",
+					"required_knowledge":["OBSERVATION;ISORROPIA;1"],
+					"required_research":["!scan.animal;isorropia:textures/research/cat_cow.png"]
+				},
+				{
+					"text":"research.CREATUREINFUSIONS.stage.2.text",
+					"recipes":["isorropia:modified_matrix"],
+					"required_craft":["isorropia:modified_matrix"]
+				},
+				{
+					"text":"research.CREATUREINFUSIONS.stage.3.text",
+					"recipes":["isorropia:modified_matrix", "isorropia:awakened_blood", "isorropia:diamond_skin", "isorropia:shockskin", "isorropia:enderheart"]
+				}
+			]    	
+        },
+        {
+        	"key":"SPECIEINFUSIONS",
+        	"name":"research.SPECIEINFUSIONS.title",
+        	"icons":["thaumcraft:textures/research/cat_infusion.png"],
+        	"category":"ISORROPIA",
+        	"parents":["CREATUREINFUSIONS"],
+            "meta": ["HIDDEN", "SPIKY"],
+        	"location":[7, -3],
+        	
+        	"stages":[
+        		{
+        			"text":"research.SPECIEINFUSIONS.stage.1.text"
+        		}
+        	]
+        },
+        {
+        	"key":"OREBOAR",
+        	"name":"research.OREBOAR.title",
+        	"icons":["isorropia:textures/research/cat_pig.png"],
+        	"category":"ISORROPIA",
+        	"parents":["SPECIEINFUSIONS"],
+            "meta": ["HIDDEN"],   
+        	"location":[6, -6],
+        	
+        	"stages":[
+        		{
+        			"text":"research.OREBOAR.stage.1.text",
+        			"required_knowledge":["THEORY;ALCHEMY;1"],
+        			"required_item":["minecraft:iron_nugget", "minecraft:gold_nugget",
+        				"thaumcraft:crystal_essence;1;0;{Aspects:[{amount:1,key:'ignis'}]}",
+        				"thaumcraft:phial;1;1;{Aspects:[{amount:10,key:'ignis'}]}",
+        				"minecraft:furnace"]
+        		},
+        		{
+        		
+        			"text":"research.OREBOAR.stage.2.text",
+        			"recipes":["isorropia:ore_boar"]
+        		}
+        	]
+        },
+        {
+        	"key":"TAINTFEEDER",
+        	"name":"research.TAINTFEEDER.title",
+        	"icons":["isorropia:textures/research/cat_pig.png"],
+        	"category":"ISORROPIA",
+        	"parents":["OREBOAR"],
+            "meta": ["HIDDEN"],   
+        	"location":[6, -8],
+
+        	"stages":[
+        		{
+        			"text":"research.TAINTFEEDER.stage.1.text",
+        			"required_item":["thaumcraft:taint_fibre;15", "thaumcraft:taint_crust;10", "thaumcraft:taint_soil;20", "thaumcraft:taint_rock:20", "thaumcraft:taint_log;20"],
+        			"required_knowledge":["!scan.taintsrc", "THEORY;ALCHEMY;1"]
+        		},
+        		{
+        			"text":"research.TAINTFEEDER.stage.2.text",
+        		    "recipes":["isorropia:taintfeeder"]
+        		}
+        	]        	
+        },
+        {
+        	"key":"SCHOLARSCHICKEN",
+        	"name":"research.SCHOLARSCHICKEN.title",
+        	"icons":["isorropia:textures/research/cat_chicken.png"],
+        	"category":"ISORROPIA",
+        	"parents":["SPECIEINFUSIONS"],
+            "meta": ["HIDDEN"],   
+        	"location":[5, -5],
+        	
+        	"stages":[
+        		{
+        			"text":"research.SCHOLARSCHICKEN.stage.1.text",
+        			"required_knowledge":["OBSERVATION;ALCHEMY;1"],
+        			"required_item":["minecraft:dye;1;0", "minecraft:egg"]
+        		},
+        		{
+        			"text":"research.SCHOLARSCHICKEN.stage.2.text",
+        			"recipes":["isorropia:scholarschicken"]
+        		}
+        	]        	
+        },     
+             {
+        	"key":"CHROMATICSHEEP",
+        	"name":"research.CHROMATICSHEEP.title",
+        	"icons":["isorropia:textures/research/cat_sheep.png"],
+        	"category":"ISORROPIA",
+        	"parents":["SPECIEINFUSIONS"],
+            "meta": ["HIDDEN"],
+        	"location":[4, -4],
+        	
+        	"stages":[
+        		{
+        			"text":"research.CHROMATICSHEEP.stage.1.text",
+        			"required_knowledge":["OBSERVATION;ALCHEMY;1"],
+        			"required_item":["minecraft:dye;1;1", "minecraft:dye;1;2", "minecraft:dye;1;4"]
+        		},
+        		{
+        		    "text":"research.CHROMATICSHEEP.stage.2.text",
+        			"recipes":["isorropia:chromaticsheep"]
+        		}
+        	]        	
+        },
+       	{
+        	"key":"GRAVEKEEPERINFUSION",
+        	"name":"research.GRAVEKEEPERINFUSIONS.title",
+        	"icons":["isorropia:textures/research/cat_ocelot.png"],
+        	"category":"ISORROPIA",
+        	"parents":["SPECIEINFUSIONS"],
+            "meta": ["HIDDEN"],   
+        	"location":[10, -4],
+        	
+        	"stages":[
+        		{
+        			"text":"research.GRAVEKEEPERINFUSIONS.stage.1.text",
+        			"required_knowledge":["OBSERVATION;AUROMANCY;1"],
+        			"required_item":["thaumcraft:brain", "thaumcraft:phial;1;1;{Aspects:[{amount:10,key:'mortuus'}]}"]
+        		},
+        		{
+        		    "text":"research.GRAVEKEEPERINFUSIONS.stage.2.text",
+        			"recipes":["isorropia:gravekeeper"]
+        		}
+        	]
+        },
+        {
+        	"key":"JELLYRABBIT",
+        	"name":"research.JELLYRABBIT.title",
+        	"icons":["isorropia:textures/research/cat_rabbit.png"],
+        	"category":["ISORROPIA", "SPECIEINFUSIONS"],
+        	"parents":["GRAVEKEEPERINFUSION"],
+            "meta": ["HIDDEN"],   
+        	"location":[9, -5],
+        	
+        	"stages":[
+        		{
+        			"text":"research.JELLYRABBIT.stage.1.text",
+        			"required_research":["!scan.rabbit;isorropia:textures/research/cat_rabbit.png", "!scan.slime;isorropia:textures/research/cat_slime.png"],
+                    "required_item":[
+                    	"minecraft:slime",
+                        "thaumcraft:crystal_essence;1;0;{Aspects:[{amount:1,key:'aer'}]}",
+                        "thaumcraft:crystal_essence;1;0;{Aspects:[{amount:1,key:'terra'}]}",
+                        "thaumcraft:crystal_essence;1;0;{Aspects:[{amount:1,key:'ignis'}]}",
+                        "thaumcraft:crystal_essence;1;0;{Aspects:[{amount:1,key:'aqua'}]}",
+                        "thaumcraft:crystal_essence;1;0;{Aspects:[{amount:1,key:'ordo'}]}",
+                        "thaumcraft:crystal_essence;1;0;{Aspects:[{amount:1,key:'perditio'}]}"
+                        ]
+        		},
+        		{
+        		    "text":"research.JELLYRABBIT.stage.2.text",
+        		    "recipes":["isorropia:jelly_rabbit"]
+        		}
+        	]
+        },
+        {
+        	"key":"SIMILITUDOINFUSIONS",
+        	"name":"research.SIMILITUDOINFUSIONS.title",
+        	"icons":["thaumcraft:textures/research/cat_infusion.png"],
+        	"category":"ISORROPIA",
+        	"parents":["CREATUREINFUSIONS"],
+            "meta": ["HIDDEN", "SPIKY"],
+        	"location":[8, 2],
+        	
+        	"stages":[
+        		{
+        			"text":"research.SIMILITUDOINFUSIONS.stage.1.text",
+        			"required_research":["!scan.chicken;isorropia:textures/research/cat_chicken.png",
+        								"!scan.cow;isorropia:textures/research/cat_cow.png",
+        								"!scan.pig;isorropia:textures/research/cat_pig.png"],
+        		    "required_knowledge":["OBSERVATION;INFUSION;1"]
+        		},
+        		{
+        			"text":"research.SIMILITUDOINFUSIONS.stage.2.text",
+        			"required_research":["!scan.pigman"]
+        		},
+        		{
+        			"text":"research.SIMILITUDOINFUSIONS.stage.3.text",
+        			"required_research":["!scan.enderman",
+        								"!scan.golem",
+        								"!scan.villager"],
+        		    "required_knowledge":["THEORY;INFUSION;1"]
+        		},
+        		{
+        			"text":"research.SIMILITUDOINFUSIONS.stage.4.text"
+        		}
+        	]        	
+        },
+        {
+        	"key":"INSTILLEDFIDELITY",
+        	"name":"research.INSTILLEDFIDELITY.title",
+        	"icons":["isorropia:textures/research/cat_instilledloyalty.png"],
+        	"category":"ISORROPIA",
+        	"parents":["SIMILITUDOINFUSIONS"],
+            "meta": ["HIDDEN", "HEX"],   
+        	"location":[9, 1],
+
+        	"stages":[
+        		{
+        			"text":"research.INSTILLEDFIDELITY.stage.1.text",
+        		    "required_research":["!scan.fidelity"]
+        		},
+        		{
+        			"text":"research.INSTILLEDFIDELITY.stage.2.text",
+        			"recipes":["isorropia:instilledfidelity"]
+        		}
+        	]        	
+        },
+        {
+        	"key":"SELFSHEARING",
+        	"name":"research.SELFSHEARING.title",
+        	"icons":["isorropia:textures/research/cat_selfshearing.png"],
+        	"category":"ISORROPIA",
+        	"parents":["SIMILITUDOINFUSIONS"],
+            "meta": ["HIDDEN", "HEX"],   
+        	"location":[10, 2],
+
+        	"stages":[
+        		{
+        			"text":"research.SELFSHEARING.stage.1.text",
+        			"required_research":["!scan.sheep;isorropia:textures/research/cat_sheep.png"]
+        		},
+        		{
+        			"text":"research.SELFSHEARING.stage.2.text",
+        			"recipes":["isorropia:selfshearing"]
+        		}
+        	]        	
+        },
+		{
+			"key":"CULTIVATION",
+			"name":"research.wheatdupe.title",
+			"icons":[
+				"minecraft:wheat"
+			],
+			"category":"ISORROPIA",
+			"parents": ["BASEALCHEMY"],
+			"meta":[
+				"REVERSE"
+			],
+			"location":[
+				0,
+				0
+			],
+			"stages":[
+				{
+					"text":"research.wheatdupe.stage.0",
+					"required_knowledge":[
+						"OBSERVATION;AUROMANCY;1"
+					],"required_item": [
+					"minecraft:seeds",
+					"minecraft:wheat",
+					"thaumcraft:essence_crystal;1;1;{Aspects:[{amount:1,key:'herba'}]}",
+					"thaumcraft:essence_crystal;1;1;{Aspects:[{amount:1,key:'aqua'}]}",
+					"thaumcraft:essence_crystal;1;1;{Aspects:[{amount:1,key:'terra'}]}",
+					"thaumcraft:essence_crystal;1;1;{Aspects:[{amount:1,key:'lux'}]}"
+				]
+				},
+				{
+					"text":"research.wheatdupe.stage.1",
+					"recipes": ["isorropia:wheat_growth", "isorropia:potato_dupe", "isorropia:carrot_dupe", "isorropia:beet_dupe", "isorropia:melon_growth", "isorropia:pumpkin_growth"]
+				}
+			]
+		},
+		{
+			"key":"INCUBATION",
+			"name":"research.incubated.title",
+			"icons":[
+				"isorropia:incubated_egg"
+			],
+			"category":"ISORROPIA",
+			"parents": ["CULTIVATION"],
+			"meta":[
+				"REVERSE"
+			],
+			"location":[
+				2,
+				0
+			],
+			"stages":[
+				{
+					"text":"research.incubated.stage.0",
+					"required_knowledge":[
+						"THEORY;AUROMANCY;1"
+					],
+					"required_item":["minecraft:egg"]
+				},
+				{
+					"text":"research.incubated.stage.1",
+					"recipes":["isorropia:egg_incubation"]
+				}
+			]
+		},
+		{
+			"key":"GROWTH",
+			"name":"research.meatgrowth.title",
+			"icons":[
+				"minecraft:beef"
+			],
+			"category":"ISORROPIA",
+			"parents": ["INCUBATION"],
+			"meta":[
+				"REVERSE"
+			],
+			"location":[
+				4,
+				-1
+			],
+			"stages":[
+				{
+					"text":"research.meatgrowth.stage.0",
+					"required_knowledge":[
+						"THEORY;AUROMANCY;1"
+					],
+					"required_item": [
+						"thaumcraft:phial;1;1;{Aspects:[{amount:10,key:'ignis'}]}",
+						"thaumcraft:phial;1;1;{Aspects:[{amount:10,key:'bestia'}]}",
+						"thaumcraft:phial;1;1;{Aspects:[{amount:10,key:'victus'}]}"
+					]
+				},
+				{
+					"text":"research.meatgrowth.stage.1",
+					"recipes": ["isorropia:meat_dupe1", "isorropia:meat_dupe2", "isorropia:meat_dupe3", "isorropia:meat_dupe4", "isorropia:meat_dupe5"]
+				}
+			]
+		},
+		{
+			"key":"HARDNING",
+			"name":"research.fleshharding.title",
+			"icons":[
+				"minecraft:leather"
+			],
+			"category":"ISORROPIA",
+			"parents": ["INCUBATION"],
+			"meta":[
+				"REVERSE"
+			],
+			"location":[
+				4,
+				1
+			],
+			"stages":[
+				{
+					"text":"research.fleshharding.stage.0",
+					"required_knowledge":[
+						"THEORY;AUROMANCY;1"
+					]
+				},
+				{
+					"text":"research.fleshharding.stage.1",
+					"recipes": ["isorropia:harding1", "isorropia:harding2", "isorropia:harding3", "isorropia:harding4", "isorropia:harding5"]
+				}
+			]
+		},
+		{
+			"key":"CHOCOCOW",
+			"name":"research.chococow.title",
+			"icons":[
+				"isorropia:cat;1;2"
+			],
+			"category":"ISORROPIA",
+			"parents": ["SPECIEINFUSIONS"],
+			"meta":[
+				"HIDDEN"
+			],
+			"location":[
+				8,
+				-6
+			],
+			"stages":[
+				{
+					"text":"research.chococow.stage.0",
+					"required_item": ["minecraft:beef"]
+				},
+				{
+					"text":"research.chococow.stage.1",
+					"recipes":["isorropia:chocow"]
+				}
+			]
+		},
+		{
+			"key":"MONSTEREXCHANGE",
+			"name":"research.mobexchange.title",
+			"icons":[
+				"isorropia:cat;1;2", "isorropia:cat;1;4"
+			],
+			"category":"ISORROPIA",
+			"parents": ["CHOCOCOW"],
+			"meta":[
+				"HIDDEN"
+			],
+			"location":[
+				8,
+				-8
+			],
+			"stages":[
+				{
+					"text":"research.mobexchange.stage.0",
+					"required_item": ["minecraft:mushroom_stew"]
+				},
+				{
+					"text":"research.mobexchange.stage.1",
+					"recipes":["isorropia:mooshroom"]
+				}
+			]
+		},
+		{
+			"key":"GOLDCHICKEN",
+			"name":"research.goldchicken.title",
+			"icons":[
+				"isorropia:cat;1;4"
+			],
+			"category":"ISORROPIA",
+			"parents": ["SCHOLARSCHICKEN"],
+			"meta":[
+				"HIDDEN"
+			],
+			"location":[
+				5,
+				-7
+			],
+			"stages":[
+				{
+					"text":"research.goldchicken.stage.0",
+					"required_item": ["minecraft:gold_ingot"]
+				},
+				{
+					"text":"research.goldchicken.stage.1",
+					"recipes":["isorropia:goldchicken"]
+				}
+			]
+		}
+    ]
+}
