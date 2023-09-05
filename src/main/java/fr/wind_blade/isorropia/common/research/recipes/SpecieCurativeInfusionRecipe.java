@@ -1,77 +1,75 @@
- package fr.wind_blade.isorropia.common.research.recipes;
+// Decompiled with: CFR 0.152
+// Class Version: 8
+package fr.wind_blade.isorropia.common.research.recipes;
 
- import fr.wind_blade.isorropia.Isorropia;
- import fr.wind_blade.isorropia.common.Common;
- import fr.wind_blade.isorropia.common.capabilities.LivingCapability;
- import fr.wind_blade.isorropia.common.tiles.TileVat;
- import net.minecraft.entity.Entity;
- import net.minecraft.entity.EntityLiving;
- import net.minecraft.entity.EntityLivingBase;
- import net.minecraft.entity.player.EntityPlayer;
- import net.minecraft.item.ItemStack;
- import net.minecraftforge.fml.common.FMLCommonHandler;
- import net.minecraftforge.fml.common.registry.EntityRegistry;
+import fr.wind_blade.isorropia.Isorropia;
+import fr.wind_blade.isorropia.common.Common;
+import fr.wind_blade.isorropia.common.capabilities.LivingCapability;
+import fr.wind_blade.isorropia.common.research.recipes.CurativeInfusionRecipe;
+import fr.wind_blade.isorropia.common.tiles.TileVat;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
- public class SpecieCurativeInfusionRecipe extends CurativeInfusionRecipe {
-   protected final Class<? extends EntityLiving> result;
+public class SpecieCurativeInfusionRecipe
+        extends CurativeInfusionRecipe {
+    protected final Class<? extends EntityLiving> result;
 
-   public SpecieCurativeInfusionRecipe(Builder<? extends Builder<?>> builder) {
-     super(builder);
-/* 20 */     this.result = builder.result;
-/* 21 */     if (this.result == null) {
-/* 22 */       Isorropia.logger.error("Specie Infusion Recipe can't have a null result");
-/* 23 */       FMLCommonHandler.instance().exitJava(1, false);
-     }
-   }
+    public SpecieCurativeInfusionRecipe(Builder<? extends Builder<?>> builder) {
+        super(builder);
+        this.result = builder.result;
+        if (this.result == null) {
+            Isorropia.logger.error("Specie Infusion Recipe can't have a null result");
+            FMLCommonHandler.instance().exitJava(1, false);
+        }
+    }
 
+    @Override
+    public void applyWithCheat(EntityPlayer player, EntityLivingBase old, ItemStack stack) {
+        EntityLiving entity = (EntityLiving)EntityRegistry.getEntry(this.result).newInstance(old.world);
+        if (entity == null) {
+            return;
+        }
+        ((LivingCapability)Common.getCap(entity)).uuidOwner = player.getUniqueID();
+        entity.setPositionAndRotation(old.posX, old.posY, old.posX, old.rotationYaw, old.rotationPitch);
+        old.world.spawnEntity(entity);
+        old.world.removeEntity(old);
+        super.applyWithCheat(player, entity, stack);
+    }
 
-   public void applyWithCheat(EntityPlayer player, EntityLivingBase old, ItemStack stack) {
-      EntityLiving entity = (EntityLiving)EntityRegistry.getEntry(this.result).newInstance(old.world);
+    @Override
+    public void onInfusionFinish(TileVat vat) {
+        EntityLivingBase old = vat.getEntityContained();
+        EntityLiving entity = (EntityLiving)EntityRegistry.getEntry(this.result).newInstance(vat.getWorld());
+        if (entity == null) {
+            return;
+        }
+        ((LivingCapability)Common.getCap(entity)).uuidOwner = vat.getRecipePlayer().getUniqueID();
+        entity.setPositionAndRotation(old.posX, old.posY, old.posX, old.rotationYaw, old.rotationPitch);
+        vat.getWorld().spawnEntity(entity);
+        vat.getWorld().removeEntity(vat.setEntityContained(entity, old.rotationYaw));
+        super.onInfusionFinish(vat);
+    }
 
-/* 31 */     if (entity == null)
-       return;
-/* 33 */     ((LivingCapability)Common.getCap((EntityLivingBase)entity)).uuidOwner = player.getUniqueID();
-/* 34 */     entity.setPositionAndRotation(old.posX, old.posY, old.posX, old.rotationYaw, old.rotationPitch);
-/* 35 */     old.world.spawnEntity((Entity)entity);
-/* 36 */     old.world.removeEntity((Entity)old);
-/* 37 */     super.applyWithCheat(player, (EntityLivingBase)entity, stack);
-   }
+    public Class<? extends EntityLiving> getResult() {
+        return this.result;
+    }
 
+    public static class Builder<T extends Builder<T>>
+            extends CurativeInfusionRecipe.Builder<T> {
+        protected Class<? extends EntityLiving> result = null;
 
-   public void onInfusionFinish(TileVat vat) {
-/* 42 */     EntityLivingBase old = vat.getEntityContained();
-/* 43 */     EntityLiving entity = (EntityLiving)EntityRegistry.getEntry(this.result).newInstance(vat.getWorld());
+        public T withResult(Class<? extends EntityLiving> result) {
+            this.result = result;
+            return this.self();
+        }
 
-/* 45 */     if (entity == null)
-       return;
-/* 47 */     ((LivingCapability)Common.getCap((EntityLivingBase)entity)).uuidOwner = vat.getRecipePlayer().getUniqueID();
-/* 48 */     entity.setPositionAndRotation(old.posX, old.posY, old.posX, old.rotationYaw, old.rotationPitch);
-/* 49 */     vat.getWorld().spawnEntity((Entity)entity);
-/* 50 */     vat.getWorld().removeEntity((Entity)vat.setEntityContained((EntityLivingBase)entity, old.rotationYaw));
-/* 51 */     super.onInfusionFinish(vat);
-   }
-
-   public Class<? extends EntityLiving> getResult() {
-/* 55 */     return this.result;
-   }
-
-   public static class Builder<T extends Builder<T>> extends CurativeInfusionRecipe.Builder<T> {
-/* 59 */     protected Class<? extends EntityLiving> result = null;
-
-     public T withResult(Class<? extends EntityLiving> result) {
-/* 62 */       this.result = result;
-/* 63 */       return self();
-     }
-
-
-     public CurativeInfusionRecipe build() {
-/* 68 */       return new SpecieCurativeInfusionRecipe(this);
-     }
-   }
- }
-
-
-/* Location:              E:\recaf\233.jar!\fr\wind_blade\isorropia\common\research\recipes\SpecieCurativeInfusionRecipe.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       1.1.3
- */
+        @Override
+        public CurativeInfusionRecipe build() {
+            return new SpecieCurativeInfusionRecipe(this);
+        }
+    }
+}

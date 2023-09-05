@@ -23,7 +23,7 @@ public class EntityGoldenChicken extends EntityChicken {
         if (--this.timeUntilNextEgg <= 0) {
             playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.rand
                     .nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            entityDropItem(new ItemStack(ItemsIS.itemCat, 1, 15), 0.0F);
+            dropItem(ItemsIS.itemGoldEgg, 1);
             this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
         }
     }

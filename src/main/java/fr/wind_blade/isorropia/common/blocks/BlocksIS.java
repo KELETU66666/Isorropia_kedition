@@ -17,9 +17,6 @@ public class BlocksIS {
     public static BlockModifiedMatrix blockModifiedMatrix;
     public static BlockJarSoul blockJarSoul;
     public static Chocolate blockChocolate;
-    public static BlockBalancedCrystal blockCrystalBalanced;
-    public static BlockCelestialMagnet blockCelestialMagnet;
-    public static BlockSoulAmber blockSoulAmber;
 
     public static void initBlocks() {
         blockCurativeVat = BlocksIS.getBlock(new BlockCurativeVat(), "curative_vat");

@@ -60,7 +60,7 @@ public class IsorropiaHelper {
     public static final DataSerializer<Aspect> ASPECT = new DataSerializer<Aspect>(){
 
         public DataParameter<Aspect> createKey(int id) {
-            return new DataParameter(id, this);
+            return new DataParameter(id, (DataSerializer)this);
         }
 
         public void write(PacketBuffer buf, Aspect value) {
@@ -77,7 +77,7 @@ public class IsorropiaHelper {
     };
 
     public static EntityPlayer getOwner(EntityLiving living) {
-        EntityPlayer player = living instanceof EntityTameable ? (EntityPlayer)((EntityTameable)living).getOwner() : living.world.getPlayerEntityByUUID(((LivingCapability)Common.getCap(living)).uuidOwner);
+        EntityPlayer player = living instanceof EntityTameable ? (EntityPlayer)((EntityTameable)living).getOwner() : living.world.getPlayerEntityByUUID(((LivingCapability)Common.getCap((EntityLivingBase)living)).uuidOwner);
         return player;
     }
 
@@ -97,7 +97,7 @@ public class IsorropiaHelper {
         boolean flag;
         boolean bl = flag = InventoryUtils.isPlayerCarryingAmount(player, new ItemStack(BlocksTC.jarNormal, 1), false) || player.isCreative();
         if (!simulate && !flag) {
-            player.sendMessage(new TextComponentString(String.valueOf(TextFormatting.ITALIC) + TextFormatting.GRAY + I18n.translateToLocal("isorropia.containment.jar")));
+            player.sendMessage(new TextComponentString(TextFormatting.ITALIC + "" + TextFormatting.GRAY + I18n.translateToLocal((String)"isorropia.containment.jar")));
         }
         return flag;
     }
@@ -109,7 +109,7 @@ public class IsorropiaHelper {
     }
 
     public static void playerJarEntity(EntityPlayer player, EntityLiving target) {
-        if (InventoryUtils.consumePlayerItem(player, Item.getItemFromBlock(BlocksTC.jarNormal), 0) || player.isCreative()) {
+        if (InventoryUtils.consumePlayerItem(player, Item.getItemFromBlock((Block)BlocksTC.jarNormal), 0) || player.isCreative()) {
             ItemStack jar = new ItemStack(BlocksIS.blockJarSoul);
             jar.setTagCompound(IsorropiaHelper.livingToNBT(target));
             if (!player.inventory.addItemStackToInventory(jar)) {
@@ -134,13 +134,69 @@ public class IsorropiaHelper {
     }
 
     public static EntityLiving nbtToLiving(NBTTagCompound nbt, World world, BlockPos pos) {
-        EntityLiving living = (EntityLiving)EntityList.createEntityFromNBT(nbt.getCompoundTag(ENTITY_DATA), world);
+        EntityLiving living = (EntityLiving)EntityList.createEntityFromNBT((NBTTagCompound)nbt.getCompoundTag(ENTITY_DATA), (World)world);
         if (living != null && !living.isDead) {
             living.moveToBlockPosAndAngles(pos, 0.0f, 0.0f);
             living.setPositionAndUpdate(pos.getX(), pos.getY(), pos.getZ());
             world.spawnEntity(living);
         }
         return living;
+    }
+
+    public static NBTTagCompound livingBaseToStatue(EntityLivingBase base) {
+        NBTTagCompound nbt = new NBTTagCompound();
+        if (base instanceof EntityLiving) {
+            nbt = IsorropiaHelper.livingToNBTNoWorld((EntityLiving)base);
+            nbt.setString(ENTITY_ID, "LIVING");
+        } else if (base instanceof EntityPlayer) {
+            NBTTagCompound profile = new NBTTagCompound();
+            NBTUtil.writeGameProfile((NBTTagCompound)profile, (GameProfile)((EntityPlayer)base).getGameProfile());
+            nbt.setString(ENTITY_ID, "PLAYER");
+            nbt.setTag(ENTITY_DATA, profile);
+        }
+        return nbt;
+    }
+
+    public static void profileToStatueData(NBTTagCompound nbt, GameProfile profile) {
+        NBTTagCompound data = new NBTTagCompound();
+        NBTUtil.writeGameProfile((NBTTagCompound)data, (GameProfile)profile);
+        nbt.setTag(ENTITY_DATA, data);
+        nbt.setString(ENTITY_ID, "PLAYER");
+    }
+
+    @SideOnly(value=Side.CLIENT)
+    public static ResourceLocation loadSkin(final MinecraftProfileTexture profileTexture, final MinecraftProfileTexture.Type textureType, final @Nullable SkinManager.SkinAvailableCallback skinAvailableCallback) {
+        final ResourceLocation resourcelocation = new ResourceLocation("skins/" + profileTexture.getHash());
+        ITextureObject itextureobject = Minecraft.getMinecraft().renderEngine.getTexture(resourcelocation);
+        if (itextureobject != null) {
+            if (skinAvailableCallback != null) {
+                skinAvailableCallback.skinAvailable(textureType, resourcelocation, profileTexture);
+            }
+        } else {
+            File file1 = new File(new File(Minecraft.getMinecraft().gameDir, "skins"), profileTexture.getHash().length() > 2 ? profileTexture.getHash().substring(0, 2) : "xx");
+            File file2 = new File(file1, profileTexture.getHash());
+            final ImageBufferDownload iimagebuffer = textureType == MinecraftProfileTexture.Type.SKIN ? new ImageBufferDownload() : null;
+            ThreadDownloadImageData threaddownloadimagedata = new ThreadDownloadImageData(file2, profileTexture.getUrl(), DefaultPlayerSkin.getDefaultSkinLegacy(), new IImageBuffer(){
+
+                public BufferedImage parseUserSkin(BufferedImage image) {
+                    if (iimagebuffer != null) {
+                        image = iimagebuffer.parseUserSkin(image);
+                    }
+                    return image;
+                }
+
+                public void skinAvailable() {
+                    if (iimagebuffer != null) {
+                        iimagebuffer.skinAvailable();
+                    }
+                    if (skinAvailableCallback != null) {
+                        skinAvailableCallback.skinAvailable(textureType, resourcelocation, profileTexture);
+                    }
+                }
+            });
+            Minecraft.getMinecraft().renderEngine.loadTexture(resourcelocation, threaddownloadimagedata);
+        }
+        return resourcelocation;
     }
 
     public static Entity getEntityByUUID(UUID uuid, World world) {

@@ -1,3 +1,5 @@
+// Decompiled with: CFR 0.152
+// Class Version: 8
 package fr.wind_blade.isorropia.common.curative;
 
 import fr.wind_blade.isorropia.common.tiles.TileVat;
@@ -6,16 +8,10 @@ import thaumcraft.api.aspects.Aspect;
 
 public interface ICurativeEffectProvider {
   Aspect getAspect();
-  
-  boolean effectCanApply(EntityLivingBase paramEntityLivingBase, TileVat paramTileVat);
-  
-  void onApply(EntityLivingBase paramEntityLivingBase, TileVat paramTileVat);
-  
-  int getCooldown(EntityLivingBase paramEntityLivingBase, TileVat paramTileVat);
+
+  boolean effectCanApply(EntityLivingBase var1, TileVat var2);
+
+  void onApply(EntityLivingBase var1, TileVat var2);
+
+  int getCooldown(EntityLivingBase var1, TileVat var2);
 }
-
-
-/* Location:              E:\recaf\233.jar!\fr\wind_blade\isorropia\common\curative\ICurativeEffectProvider.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       1.1.3
- */

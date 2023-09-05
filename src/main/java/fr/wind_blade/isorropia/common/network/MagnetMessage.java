@@ -1,13 +1,9 @@
  package fr.wind_blade.isorropia.common.network;
- 
- import fr.wind_blade.isorropia.common.tiles.TileCelestialMagnet;
+
  import io.netty.buffer.ByteBuf;
- import net.minecraft.tileentity.TileEntity;
  import net.minecraft.util.math.BlockPos;
  import net.minecraftforge.fml.common.network.ByteBufUtils;
  import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
- import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
- import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
  import thaumcraft.api.aspects.Aspect;
  
  
@@ -34,19 +30,13 @@
    }
  
    
-   public MagnetMessage(BlockPos pos, Aspect aspectIn, TileCelestialMagnet.EntityFilter entityFilter, boolean aspectFilter, int area) {
-/* 38 */     this(pos, aspectIn, aspectFilter, area);
-/* 39 */     this.meta = entityFilter.getMeta();
-   }
- 
-   
    public void fromBytes(ByteBuf buf) {
 /* 44 */     this.pos = BlockPos.fromLong(buf.readLong());
 /* 45 */     this.meta = buf.readInt();
 /* 46 */     this.aspectFilter = buf.readBoolean();
 /* 47 */     this.area = buf.readInt();
 /* 48 */     String tag = ByteBufUtils.readUTF8String(buf);
-/* 49 */     this.aspect = (tag == "") ? null : (Aspect)Aspect.aspects.get(tag);
+/* 49 */     this.aspect = (tag == "") ? null : Aspect.aspects.get(tag);
    }
  
    
@@ -59,26 +49,7 @@
    }
    
    public MagnetMessage() {}
-   
-   public static class MessageHandler implements IMessageHandler<MagnetMessage, IMessage> {
-     public IMessage onMessage(MagnetMessage message, MessageContext ctx) {
-/* 65 */       (ctx.getServerHandler()).player.getServerWorld().addScheduledTask(() -> {
-             if (!(ctx.getServerHandler()).player.world.isAreaLoaded(message.pos, 1))
-               return; 
-             TileEntity te = (ctx.getServerHandler()).player.world.getTileEntity(message.pos);
-             if (te instanceof TileCelestialMagnet) {
-               TileCelestialMagnet magnet = (TileCelestialMagnet)te;
-               magnet.aspectFilter = message.aspectFilter;
-               magnet.area = message.area;
-               if (message.meta != -1)
-                 magnet.setFilter(TileCelestialMagnet.EntityFilter.getByMeta(message.meta)); 
-               if (message.aspect != null && !magnet.addAspectFilter(message.aspect))
-                 magnet.removeAspectFilter(message.aspect); 
-             } 
-           });
-/* 79 */       return null;
-     }
-   }
+
  }
 
 
