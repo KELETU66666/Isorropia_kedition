@@ -36,7 +36,7 @@
  
      
      public int getHungerReplinish(ItemStack stack) {
-/* 39 */       return 7;
+        return 7;
      }
    }
    

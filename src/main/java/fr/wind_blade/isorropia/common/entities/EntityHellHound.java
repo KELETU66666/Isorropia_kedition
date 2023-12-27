@@ -14,14 +14,14 @@
    long soundDelay;
    
    public EntityHellHound(World worldIn) {
-/* 17 */     super(worldIn);
-/* 18 */     this.soundDelay = 0L;
+      super(worldIn);
+      this.soundDelay = 0L;
      this.isImmuneToFire = true;
    }
  
    
    public void onLivingUpdate() {
-/* 24 */     super.onLivingUpdate();
+      super.onLivingUpdate();
      EntityLivingBase target = null;
       if (getAttackTarget() != null) {
         target = getAttackTarget();
@@ -36,7 +36,7 @@
 /* 36 */     orb.damage = 1.0F;
 /* 37 */     orb.firey = 1;
 /* 38 */     this.world.spawnEntity((Entity)orb);
-/* 39 */     orb.posX += orb.motionX;
+      orb.posX += orb.motionX;
 /* 40 */     orb.posY += orb.motionY;
       orb.posZ += orb.motionZ;
    }

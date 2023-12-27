@@ -31,36 +31,36 @@
    extends EntitySpider
    implements IShearable {
    private int sheepTimer;
-/*  34 */   private static final DataParameter<Boolean> SHEER = EntityDataManager.createKey(EntitySheeder.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SHEER = EntityDataManager.createKey(EntitySheeder.class, DataSerializers.BOOLEAN);
  
    
    public EntitySheeder(World p_i1743_1_) {
-/*  38 */     super(p_i1743_1_);
+      super(p_i1743_1_);
    }
  
    
    public void entityInit() {
-/*  43 */     super.entityInit();
-/*  44 */     this.dataManager.register(SHEER, Boolean.valueOf(false));
+     super.entityInit();
+      this.dataManager.register(SHEER, Boolean.valueOf(false));
    }
  
    
    protected void initEntityAI() {
-/*  49 */     this.tasks.addTask(0, (EntityAIBase)new EntityAISwimming((EntityLiving)this));
-/*  50 */     this.tasks.addTask(1, (EntityAIBase)new EntityAIPanic((EntityCreature)this, 0.5D));
-/*  51 */     this.tasks.addTask(2, (EntityAIBase)new EntityAITempt((EntityCreature)this, 0.44D, Items.WHEAT, false));
-/*  52 */     this.tasks.addTask(3, (EntityAIBase)new EntityAIEatGrass((EntityLiving)this));
-/*  53 */     this.tasks.addTask(4, (EntityAIBase)new EntityAILeapAtTarget((EntityLiving)this, 0.4F));
-/*  54 */     this.tasks.addTask(5, (EntityAIBase)new EntityAIWander((EntityCreature)this, 0.8D));
-/*  55 */     this.tasks.addTask(6, (EntityAIBase)new EntityAIWatchClosest((EntityLiving)this, EntityPlayer.class, 8.0F));
-/*  56 */     this.tasks.addTask(8, (EntityAIBase)new EntityAILookIdle((EntityLiving)this));
+      this.tasks.addTask(0, (EntityAIBase)new EntityAISwimming((EntityLiving)this));
+      this.tasks.addTask(1, (EntityAIBase)new EntityAIPanic((EntityCreature)this, 0.5D));
+      this.tasks.addTask(2, (EntityAIBase)new EntityAITempt((EntityCreature)this, 0.44D, Items.WHEAT, false));
+      this.tasks.addTask(3, (EntityAIBase)new EntityAIEatGrass((EntityLiving)this));
+      this.tasks.addTask(4, (EntityAIBase)new EntityAILeapAtTarget((EntityLiving)this, 0.4F));
+     this.tasks.addTask(5, (EntityAIBase)new EntityAIWander((EntityCreature)this, 0.8D));
+     this.tasks.addTask(6, (EntityAIBase)new EntityAIWatchClosest((EntityLiving)this, EntityPlayer.class, 8.0F));
+      this.tasks.addTask(8, (EntityAIBase)new EntityAILookIdle((EntityLiving)this));
    }
  
    
    public void onUpdate() {
-/*  61 */     super.onUpdate();
-/*  62 */     if (this.isDead && !this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL && 
-/*  63 */       getHealth() > 0.0F) {
+      super.onUpdate();
+      if (this.isDead && !this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL && 
+        getHealth() > 0.0F) {
 /*  64 */       this.isDead = false;
      }
    }
@@ -68,27 +68,27 @@
    
    public void onLivingUpdate() {
 /*  70 */     if (this.world.isRemote) {
-/*  71 */       this.sheepTimer = Math.max(0, this.sheepTimer - 1);
+        this.sheepTimer = Math.max(0, this.sheepTimer - 1);
      }
-/*  73 */     super.onLivingUpdate();
+      super.onLivingUpdate();
    }
  
    
    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-/*  78 */     ArrayList<ItemStack> ret = new ArrayList<>();
-/*  79 */     setSheared(true);
+      ArrayList<ItemStack> ret = new ArrayList<>();
+      setSheared(true);
 /*  80 */     for (int i = 2 + this.rand.nextInt(4), j = 0; j < i; j++)
-/*  81 */       ret.add(new ItemStack(Items.STRING, 1, 0)); 
-/*  82 */     playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
-/*  83 */     return ret;
+        ret.add(new ItemStack(Items.STRING, 1, 0)); 
+      playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 1.0F);
+      return ret;
    }
    
    public void setSheared(boolean isShearing) {
-/*  87 */     this.dataManager.set(SHEER, Boolean.valueOf(isShearing));
+      this.dataManager.set(SHEER, Boolean.valueOf(isShearing));
    }
    
    public boolean getSheared() {
-/*  91 */     return ((Boolean)this.dataManager.get(SHEER)).booleanValue();
+      return ((Boolean)this.dataManager.get(SHEER)).booleanValue();
    }
  
    
@@ -98,7 +98,7 @@
  
    
    public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos) {
-/* 101 */     return (!item.isEmpty() && item.getItem() == Items.SHEARS && !getSheared());
+      return (!item.isEmpty() && item.getItem() == Items.SHEARS && !getSheared());
    }
  }
 

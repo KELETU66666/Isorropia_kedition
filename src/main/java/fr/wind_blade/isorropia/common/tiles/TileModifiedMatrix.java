@@ -1,5 +1,3 @@
-// Decompiled with: CFR 0.152
-// Class Version: 8
 package fr.wind_blade.isorropia.common.tiles;
 
 import fr.wind_blade.isorropia.common.tiles.TileVat;
@@ -21,11 +19,7 @@ import thaumcraft.api.aspects.IAspectContainer;
 import thaumcraft.api.casters.IInteractWithCaster;
 import thaumcraft.api.items.IGogglesDisplayExtended;
 
-public class TileModifiedMatrix
-        extends TileEntity
-        implements IInteractWithCaster,
-        IAspectContainer,
-        IGogglesDisplayExtended {
+public class TileModifiedMatrix extends TileEntity implements IInteractWithCaster, IAspectContainer, IGogglesDisplayExtended {
     static DecimalFormat myFormatter = new DecimalFormat("#######.##");
     private static final String[] EMPTY_STRING_ARRAY = new String[0];
 

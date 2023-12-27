@@ -1,5 +1,3 @@
-// Decompiled with: CFR 0.152
-// Class Version: 8
 package fr.wind_blade.isorropia.common.capabilities;
 
 import fr.wind_blade.isorropia.common.Common;
@@ -12,8 +10,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 
-public class LivingCapability
-        extends LivingBaseCapability {
+public class LivingCapability extends LivingBaseCapability {
     public int envy = 0;
     public boolean hasLooted;
     public UUID uuidOwner;

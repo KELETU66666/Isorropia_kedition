@@ -21,7 +21,7 @@
    }
    
    public int getSize() {
-/* 24 */     return (int)this.stacks.stream().filter(stack -> !stack.isEmpty()).count();
+      return (int)this.stacks.stream().filter(stack -> !stack.isEmpty()).count();
    }
    
    public ItemStack removeLastItemStack() {

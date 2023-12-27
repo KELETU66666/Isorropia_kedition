@@ -19,17 +19,7 @@
     <remote-repository>
       <option name="id" value="maven2" />
       <option name="name" value="maven2" />
-      <option name="url" value="file:/$PROJECT_DIR$/.gradle/local-repo/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="deobfDeps" />
-      <option name="name" value="deobfDeps" />
-      <option name="url" value="file:/$USER_HOME$/.gradle/caches/minecraft/deobfedDeps/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven3" />
-      <option name="name" value="maven3" />
-      <option name="url" value="https://download.mcbbs.net/maven" />
+      <option name="url" value="http://www.cursemaven.com" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="minecraft" />
@@ -42,19 +32,9 @@
       <option name="url" value="https://maven.minecraftforge.net" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="maven" />
-      <option name="name" value="maven" />
-      <option name="url" value="https://maven.aliyun.com/nexus/content/groups/public" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="MavenRepo2" />
-      <option name="name" value="MavenRepo2" />
-      <option name="url" value="https://repo1.maven.org/maven2/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven" />
-      <option name="name" value="maven" />
-      <option name="url" value="https://www.cursemaven.com" />
+      <option name="id" value="deobfDeps" />
+      <option name="name" value="deobfDeps" />
+      <option name="url" value="file:/D:/.gradle/caches/minecraft/deobfedDeps/" />
     </remote-repository>
   </component>
 </project>

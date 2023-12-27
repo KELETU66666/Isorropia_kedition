@@ -15,12 +15,12 @@
    public static ResourceLocation TEXTURE = new ResourceLocation("isorropia", "textures/entity/hellhound.png");
    
    public RenderHellHound(RenderManager rendermanagerIn) {
-/* 18 */     super(rendermanagerIn, (ModelBase)new ModelWolf(), 0.5F);
+      super(rendermanagerIn, (ModelBase)new ModelWolf(), 0.5F);
    }
  
    
    protected ResourceLocation getEntityTexture(EntityHellHound entity) {
-/* 23 */     return TEXTURE;
+      return TEXTURE;
    }
  }
 

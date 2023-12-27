@@ -1,5 +1,3 @@
-// Decompiled with: CFR 0.152
-// Class Version: 8
 package fr.wind_blade.isorropia.common.items.misc;
 
 import fr.wind_blade.isorropia.common.Common;
@@ -19,8 +17,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import thaumcraft.common.lib.utils.EntityUtils;
 
-public class ItemCat
-        extends Item {
+public class ItemCat extends Item {
     public ItemCat() {
         this.setHasSubtypes(true);
     }

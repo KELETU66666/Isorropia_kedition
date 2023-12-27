@@ -14,7 +14,7 @@
 /* 14 */   private static final ResourceLocation PIG_TEXTURES = new ResourceLocation("textures/entity/pig/pig.png");
 
    public RenderSaehrimnir(RenderManager renderManagerIn) {
-/* 17 */     super(renderManagerIn, (ModelBase)new ModelPig(), 0.5F);
+      super(renderManagerIn, (ModelBase)new ModelPig(), 0.5F);
    }
 
 

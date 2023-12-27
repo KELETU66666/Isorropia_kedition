@@ -39,75 +39,75 @@
      private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemsTC.bottleTaint);
    
    public EntityTaintPig(World worldIn) {
-/*  42 */     super(worldIn);
+   super(worldIn);
    }
  
    
    protected void initEntityAI() {
-/*  47 */     this.tasks.addTask(0, (EntityAIBase)new EntityAISwimming((EntityLiving)this));
-/*  48 */     this.tasks.addTask(1, (EntityAIBase)new EntityAIPanic((EntityCreature)this, 1.25D));
-/*  49 */     this.tasks.addTask(2, (EntityAIBase)new EntityAIAttackMelee((EntityCreature)this, 1.0D, false));
-/*  50 */     this.tasks.addTask(3, (EntityAIBase)new EntityAIEatTaint((EntityLiving)this));
-/*  51 */     this.tasks.addTask(4, (EntityAIBase)new EntityAITaintTempt((EntityCreature)this, 1.2D, false, TEMPTATION_ITEMS));
-/*  52 */     this.tasks.addTask(5, (EntityAIBase)new EntityAIWander((EntityCreature)this, 1.0D));
-/*  53 */     this.tasks.addTask(6, (EntityAIBase)new EntityAIWatchClosest((EntityLiving)this, EntityPlayer.class, 6.0F));
-/*  54 */     this.tasks.addTask(7, (EntityAIBase)new EntityAILookIdle((EntityLiving)this));
-/*  55 */     this.targetTasks.addTask(1, (EntityAIBase)new EntityAINearestAttackableTarget((EntityCreature)this, EntityTaintCrawler.class, true));
+      this.tasks.addTask(0, (EntityAIBase)new EntityAISwimming((EntityLiving)this));
+      this.tasks.addTask(1, (EntityAIBase)new EntityAIPanic((EntityCreature)this, 1.25D));
+      this.tasks.addTask(2, (EntityAIBase)new EntityAIAttackMelee((EntityCreature)this, 1.0D, false));
+      this.tasks.addTask(3, (EntityAIBase)new EntityAIEatTaint((EntityLiving)this));
+      this.tasks.addTask(4, (EntityAIBase)new EntityAITaintTempt((EntityCreature)this, 1.2D, false, TEMPTATION_ITEMS));
+      this.tasks.addTask(5, (EntityAIBase)new EntityAIWander((EntityCreature)this, 1.0D));
+      this.tasks.addTask(6, (EntityAIBase)new EntityAIWatchClosest((EntityLiving)this, EntityPlayer.class, 6.0F));
+     this.tasks.addTask(7, (EntityAIBase)new EntityAILookIdle((EntityLiving)this));
+     this.targetTasks.addTask(1, (EntityAIBase)new EntityAINearestAttackableTarget((EntityCreature)this, EntityTaintCrawler.class, true));
    }
  
  
    
    protected void applyEntityAttributes() {
-/*  61 */     super.applyEntityAttributes();
-/*  62 */     getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
+      super.applyEntityAttributes();
+      getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D);
    }
  
    
    public void updateAITasks() {
-/*  67 */     super.updateAITasks();
+      super.updateAITasks();
      
 /*  69 */     if (isPotionActive(PotionFluxTaint.instance))
 /*  70 */       removePotionEffect(PotionFluxTaint.instance); 
-/*  71 */     if (isPotionActive(PotionVisExhaust.instance))
+      if (isPotionActive(PotionVisExhaust.instance))
 /*  72 */       removePotionEffect(PotionVisExhaust.instance); 
-/*  73 */     if (isPotionActive(PotionInfectiousVisExhaust.instance)) {
-/*  74 */       removePotionEffect(PotionInfectiousVisExhaust.instance);
+      if (isPotionActive(PotionInfectiousVisExhaust.instance)) {
+        removePotionEffect(PotionInfectiousVisExhaust.instance);
      }
    }
    
    public boolean attackEntityAsMob(Entity entityIn) {
-/*  79 */     setLastAttackedEntity(entityIn);
+      setLastAttackedEntity(entityIn);
      
-/*  81 */     boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage((EntityLivingBase)this), 
-/*  82 */         (float)getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
+      boolean flag = entityIn.attackEntityFrom(DamageSource.causeMobDamage((EntityLivingBase)this), 
+          (float)getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
      
-/*  84 */     if (flag) {
-/*  85 */       applyEnchantments((EntityLivingBase)this, entityIn);
+      if (flag) {
+        applyEnchantments((EntityLivingBase)this, entityIn);
      }
      
-/*  88 */     return flag;
+      return flag;
    }
  
  
    
    public boolean isEntityInvulnerable(DamageSource source) {
-/*  94 */     if (source instanceof EntityDamageSource) {
-/*  95 */       Entity entity = ((EntityDamageSource)source).getTrueSource();
+      if (source instanceof EntityDamageSource) {
+        Entity entity = ((EntityDamageSource)source).getTrueSource();
        
        if (entity instanceof thaumcraft.api.entities.ITaintedMob) {
          return true;
        }
-/* 100 */     } else if (source instanceof DamageSourceThaumcraft && ((DamageSourceThaumcraft)source).damageType
-/* 101 */       .equals("taint")) {
+      } else if (source instanceof DamageSourceThaumcraft && ((DamageSourceThaumcraft)source).damageType
+        .equals("taint")) {
 /* 102 */       return true;
      } 
      
-/* 105 */     return super.isEntityInvulnerable(source);
+    return super.isEntityInvulnerable(source);
    }
  
    
    public boolean isInLove() {
-/* 110 */     return true;
+      return true;
    }
  
    

@@ -15,7 +15,7 @@
    public int timeUntilNextFeather;
    
    public EntityScholarChicken(World world) {
-/* 18 */     super(world);
+      super(world);
      this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
 /* 20 */     this.timeUntilNextFeather = this.rand.nextInt(4000) + 4000;
    }
@@ -55,7 +55,7 @@
    
    public void readEntityFromNBT(NBTTagCompound compound) {
 /* 57 */     super.readEntityFromNBT(compound);
-/* 58 */     this.timeUntilNextEgg = (compound.getInteger("egg") != 0) ? compound.getInteger("egg") : this.timeUntilNextEgg;
+      this.timeUntilNextEgg = (compound.getInteger("egg") != 0) ? compound.getInteger("egg") : this.timeUntilNextEgg;
 /* 59 */     this.timeUntilNextFeather = (compound.getInteger("feather") != 0) ? compound.getInteger("feather") : this.timeUntilNextFeather;
    }
  }

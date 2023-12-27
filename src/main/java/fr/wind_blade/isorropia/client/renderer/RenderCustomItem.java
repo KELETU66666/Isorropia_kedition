@@ -15,13 +15,13 @@
  
  @SideOnly(Side.CLIENT)
  public class RenderCustomItem extends TileEntityItemStackRenderer {
-/* 18 */   public ItemCameraTransforms.TransformType transform = ItemCameraTransforms.TransformType.GUI;
+    public ItemCameraTransforms.TransformType transform = ItemCameraTransforms.TransformType.GUI;
  
    
    public void renderByItem(ItemStack stack) {
 /* 22 */     super.renderByItem(stack);
-/* 23 */     if (stack.getItem() == Item.getItemFromBlock((Block)BlocksIS.blockJarSoul)) {
-/* 24 */       GlStateManager.pushMatrix();
+      if (stack.getItem() == Item.getItemFromBlock((Block)BlocksIS.blockJarSoul)) {
+        GlStateManager.pushMatrix();
        GlStateManager.translate(0.5D, 0.5D, 0.4D);
         Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
         Minecraft.getMinecraft().getRenderItem().renderItem(stack, RenderEventHandler.jar_soul);

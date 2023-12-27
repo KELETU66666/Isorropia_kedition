@@ -14,7 +14,7 @@
    extends EntityAITempt
  {
    public EntityAITaintTempt(EntityCreature temptedEntityIn, double speedIn, boolean scaredByPlayerMovementIn) {
-/* 17 */     this(temptedEntityIn, speedIn, scaredByPlayerMovementIn, Collections.emptySet());
+      this(temptedEntityIn, speedIn, scaredByPlayerMovementIn, Collections.emptySet());
    }
  
    

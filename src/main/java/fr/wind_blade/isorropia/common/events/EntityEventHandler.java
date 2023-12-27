@@ -65,29 +65,29 @@
  
  public class EntityEventHandler
  {
-/*  78 */   private static final ItemStack SHEARS = new ItemStack((Item)Items.SHEARS);
+    private static final ItemStack SHEARS = new ItemStack((Item)Items.SHEARS);
    private Lens theRightLens;
 /*  80 */   private static Random randy = new Random();
    private Lens theLeftLens;
    
    @SubscribeEvent
    public void playerTick(TickEvent.PlayerTickEvent event) {
-/*  85 */     if (event.phase == TickEvent.Phase.START) {
-/*  86 */       World world = event.player.world;
-/*  87 */       ItemStack revealer = LensManager.getRevealer(event.player);
+      if (event.phase == TickEvent.Phase.START) {
+        World world = event.player.world;
+        ItemStack revealer = LensManager.getRevealer(event.player);
        
-/*  89 */       if (!revealer.isEmpty() && revealer.hasTagCompound() && revealer
-/*  90 */         .getTagCompound().getString("LeftLens") != null) {
-/*  91 */         this.theLeftLens = LensManager.getLens(revealer, LensManager.LENSSLOT.LEFT);
-/*  92 */         this.theRightLens = LensManager.getLens(revealer, LensManager.LENSSLOT.RIGHT);
-/*  93 */         boolean doubleLens = (this.theRightLens != null && this.theRightLens.equals(this.theLeftLens));
+        if (!revealer.isEmpty() && revealer.hasTagCompound() && revealer
+          .getTagCompound().getString("LeftLens") != null) {
+          this.theLeftLens = LensManager.getLens(revealer, LensManager.LENSSLOT.LEFT);
+         this.theRightLens = LensManager.getLens(revealer, LensManager.LENSSLOT.RIGHT);
+        boolean doubleLens = (this.theRightLens != null && this.theRightLens.equals(this.theLeftLens));
  
          
 /*  96 */         if (this.theLeftLens != null) {
            this.theLeftLens.handleTicks(world, event.player, doubleLens);
          }
-/*  99 */         if (!doubleLens && this.theRightLens != null) {
-/* 100 */           this.theRightLens.handleTicks(world, event.player, false);
+          if (!doubleLens && this.theRightLens != null) {
+            this.theRightLens.handleTicks(world, event.player, false);
          }
        }
      } 
@@ -95,11 +95,11 @@
    
    @SubscribeEvent
    public void onAttachCapability(AttachCapabilitiesEvent<Entity> event) {
-/* 109 */     Entity entity = (Entity)event.getObject();
-/* 110 */     if (entity instanceof EntityLiving) {
-/* 111 */       event.addCapability(new ResourceLocation("isorropia", "LIVING_CAPABILITY"), (ICapabilityProvider)new LivingCapability((EntityLiving)event
+     Entity entity = (Entity)event.getObject();
+      if (entity instanceof EntityLiving) {
+        event.addCapability(new ResourceLocation("isorropia", "LIVING_CAPABILITY"), (ICapabilityProvider)new LivingCapability((EntityLiving)event
 /* 112 */             .getObject()));
-/* 113 */     } else if (entity instanceof EntityLivingBase) {
+   } else if (entity instanceof EntityLivingBase) {
 /* 114 */       event.addCapability(new ResourceLocation("isorropia", "LIVING_BASE_CAPABILITY"), (ICapabilityProvider)new LivingBaseCapability((EntityLivingBase)event
 /* 115 */             .getObject()));
      } 
@@ -110,7 +110,7 @@
    
    @SubscribeEvent
    public void onRevealerRemoved(LivingEquipmentChangeEvent event) {
-/* 124 */     ItemStack stack = event.getFrom();
+      ItemStack stack = event.getFrom();
      
 /* 126 */     if (!(event.getEntityLiving() instanceof EntityPlayer))
        return; 

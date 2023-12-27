@@ -15,13 +15,13 @@
  
  @SideOnly(Side.CLIENT)
  public class RenderJarSoul extends TileEntitySpecialRenderer<TileJarSoul> {
-/* 18 */   public static ResourceLocation fx3 = new ResourceLocation("isorropia", "textures/misc/soul.png");
+    public static ResourceLocation fx3 = new ResourceLocation("isorropia", "textures/misc/soul.png");
  
  
    
    public void render(TileJarSoul te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-/* 23 */     if (te.entity != null) {
-/* 24 */       GL11.glPushMatrix();
+      if (te.entity != null) {
+        GL11.glPushMatrix();
        GL11.glDisable(2884);
         GL11.glTranslatef((float)x + 0.5F, (float)y + 0.01F, (float)z + 0.5F);
         GL11.glRotated((((EnumFacing)te

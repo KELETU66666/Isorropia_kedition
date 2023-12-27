@@ -36,7 +36,7 @@
    
    protected void initEntityAI() {
 /* 38 */     this.aiSit = new EntityAISit(this);
-/* 39 */     this.tasks.addTask(1, new EntityAISwimming(this));
+      this.tasks.addTask(1, new EntityAISwimming(this));
 /* 40 */     this.tasks.addTask(2, this.aiSit);
       this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 10.0F, 5.0F));
 /* 42 */     this.tasks.addTask(6, new EntityAIOcelotSit(this, 0.8D));
@@ -65,8 +65,8 @@
 /* 65 */         ent.setFire(1);
          
 /* 67 */         if (this.world.isRemote)
-/* 68 */           FXDispatcher.INSTANCE.beamBore(this.posX, this.posY + (this.height / 2.0F), this.posZ, ent.posX, ent.posY + (ent.height / 2.0F), ent.posZ, 0, 16773444, false, 2.5F, 
-/* 69 */               Integer.valueOf(1), 1); 
+            FXDispatcher.INSTANCE.beamBore(this.posX, this.posY + (this.height / 2.0F), this.posZ, ent.posX, ent.posY + (ent.height / 2.0F), ent.posZ, 0, 16773444, false, 2.5F, 
+                Integer.valueOf(1), 1); 
        } 
      } 
    }

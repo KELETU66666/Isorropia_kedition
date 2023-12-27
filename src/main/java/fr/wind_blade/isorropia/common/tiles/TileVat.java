@@ -1,5 +1,3 @@
-// Decompiled with: CFR 0.152
-// Class Version: 8
 package fr.wind_blade.isorropia.common.tiles;
 
 import fr.wind_blade.isorropia.client.fx.ISFXDispatcher;
@@ -71,11 +69,7 @@ import thaumcraft.common.world.aura.AuraHandler;
 
 import java.util.*;
 
-public class TileVat
-        extends TileThaumcraft
-        implements IAspectContainer,
-        ITickable,
-        IStabilizable {
+public class TileVat extends TileThaumcraft implements IAspectContainer, ITickable, IStabilizable {
     private static final int X_RANGE = 12;
     private static final int Y_RANGE = 10;
     private static final int Z_RANGE = 12;

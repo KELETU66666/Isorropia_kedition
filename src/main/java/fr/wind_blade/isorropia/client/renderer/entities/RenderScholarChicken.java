@@ -13,7 +13,7 @@
  
  @SideOnly(Side.CLIENT)
  public class RenderScholarChicken extends RenderLiving<EntityScholarChicken> {
-/* 16 */   public static ResourceLocation TEXTURE = new ResourceLocation("isorropia", "textures/entity/scholar_chicken.png");
+    public static ResourceLocation TEXTURE = new ResourceLocation("isorropia", "textures/entity/scholar_chicken.png");
  
    
    public RenderScholarChicken(RenderManager rendermanagerIn) {

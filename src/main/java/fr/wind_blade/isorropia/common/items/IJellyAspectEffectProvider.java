@@ -13,7 +13,7 @@
    }
    
    default int getEatDuration(ItemStack stack) {
-/* 16 */     return 32;
+      return 32;
    }
    
    default int getHungerReplinish(ItemStack stack) {
@@ -21,7 +21,7 @@
    }
    
    default int getSaturationReplinish(ItemStack stack) {
-/* 24 */     return getHungerReplinish(stack);
+      return getHungerReplinish(stack);
    }
  }
 

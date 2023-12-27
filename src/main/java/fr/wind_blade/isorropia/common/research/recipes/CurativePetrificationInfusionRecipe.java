@@ -1,5 +1,3 @@
-// Decompiled with: CFR 0.152
-// Class Version: 8
 package fr.wind_blade.isorropia.common.research.recipes;
 
 import fr.wind_blade.isorropia.common.research.recipes.CurativeInfusionRecipe;

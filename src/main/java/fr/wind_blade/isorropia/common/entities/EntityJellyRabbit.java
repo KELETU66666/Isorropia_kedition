@@ -30,9 +30,9 @@
  
  public class EntityJellyRabbit
    extends EntityRabbit implements IShearable {
-/*  33 */   private static final DataParameter<String> aspect = EntityDataManager.createKey(EntityJellyRabbit.class, DataSerializers.STRING);
+    private static final DataParameter<String> aspect = EntityDataManager.createKey(EntityJellyRabbit.class, DataSerializers.STRING);
    
-/*  35 */   private static final DataParameter<Integer> jelly = EntityDataManager.createKey(EntityJellyRabbit.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> jelly = EntityDataManager.createKey(EntityJellyRabbit.class, DataSerializers.VARINT);
    
    private static final int JELLY_BY_TICKS = 8000;
    
@@ -42,82 +42,82 @@
    
    private int count;
    
-/*  45 */   private Color color = new Color(Aspect.ORDER.getColor());
+    private Color color = new Color(Aspect.ORDER.getColor());
    
    public EntityJellyRabbit(World worldIn) {
-/*  48 */     super(worldIn);
+      super(worldIn);
    }
  
    
    protected void entityInit() {
-/*  53 */     super.entityInit();
-/*  54 */     this.dataManager.register(aspect, Aspect.ORDER.getTag());
-/*  55 */     this.dataManager.register(jelly, Integer.valueOf(0));
+      super.entityInit();
+     this.dataManager.register(aspect, Aspect.ORDER.getTag());
+     this.dataManager.register(jelly, Integer.valueOf(0));
    }
  
    
    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingdata) {
-/*  60 */     Aspect[] displayAspects = (Aspect[])Aspect.aspects.values().toArray((Object[])new Aspect[0]);
-/*  61 */     setAspect(displayAspects[this.world.rand.nextInt(displayAspects.length)]);
-/*  62 */     setJellySize(2);
-/*  63 */     return super.onInitialSpawn(difficulty, livingdata);
+      Aspect[] displayAspects = (Aspect[])Aspect.aspects.values().toArray((Object[])new Aspect[0]);
+      setAspect(displayAspects[this.world.rand.nextInt(displayAspects.length)]);
+      setJellySize(2);
+      return super.onInitialSpawn(difficulty, livingdata);
    }
  
    
    public void onLivingUpdate() {
-/*  68 */     super.onLivingUpdate();
+      super.onLivingUpdate();
 /*  69 */     this.fallDistance = 0.0F;
      
-/*  71 */     if (this.world.isRemote || getJellySize() > 8) {
+      if (this.world.isRemote || getJellySize() > 8) {
        return;
      }
-/*  74 */     if (this.count % 80 == 0) {
-/*  75 */       if (getAspect() == Aspect.FLUX) {
-/*  76 */         if (AuraHelper.getFlux(getEntityWorld(), getPosition()) > 0.0F) {
-/*  77 */           AuraHelper.addVis(this.world, getPosition(), AuraHelper.drainFlux(this.world, getPosition(), 10.0F, false));
+      if (this.count % 80 == 0) {
+        if (getAspect() == Aspect.FLUX) {
+          if (AuraHelper.getFlux(getEntityWorld(), getPosition()) > 0.0F) {
+            AuraHelper.addVis(this.world, getPosition(), AuraHelper.drainFlux(this.world, getPosition(), 10.0F, false));
          }
        } else {
 /*  80 */         AuraHelper.drainVis(getEntityWorld(), getPosition(), 100.0F, false);
        } 
      }
      
-/*  84 */     if (this.count >= 8000) {
-/*  85 */       setJellySize(getJellySize() + 1);
-/*  86 */       this.count = 0;
+      if (this.count >= 8000) {
+        setJellySize(getJellySize() + 1);
+        this.count = 0;
      } 
      
-/*  89 */     this.count++;
+      this.count++;
    }
  
    
    public boolean attackEntityFrom(DamageSource source, float amount) {
-/*  94 */     if (getJellySize() > 0 && source != DamageSource.OUT_OF_WORLD) {
+      if (getJellySize() > 0 && source != DamageSource.OUT_OF_WORLD) {
        
 /*  96 */       Entity entity = source.getTrueSource();
        if (entity != null) {
          double d1 = entity.posX - this.posX;
          
          double d0;
-/* 101 */         for (d0 = entity.posZ - this.posZ; d1 * d1 + d0 * d0 < 1.0E-4D; d0 = (Math.random() - Math.random()) * 0.01D)
+          for (d0 = entity.posZ - this.posZ; d1 * d1 + d0 * d0 < 1.0E-4D; d0 = (Math.random() - Math.random()) * 0.01D)
          {
-/* 103 */           d1 = (Math.random() - Math.random()) * 0.01D;
+          d1 = (Math.random() - Math.random()) * 0.01D;
          }
          
-/* 106 */         this.attackedAtYaw = (float)(MathHelper.atan2(d0, d1) * 57.29577951308232D - this.rotationYaw);
-/* 107 */         knockBack(entity, 0.4F, d1, d0);
+          this.attackedAtYaw = (float)(MathHelper.atan2(d0, d1) * 57.29577951308232D - this.rotationYaw);
+          knockBack(entity, 0.4F, d1, d0);
          
-/* 109 */         if (entity instanceof EntityLivingBase) {
-/* 110 */           setRevengeTarget((EntityLivingBase)entity);
+         if (entity instanceof EntityLivingBase) {
+            setRevengeTarget((EntityLivingBase)entity);
          }
        } 
-/* 113 */       playSound((getJellySize() > 0) ? SoundEvents.ENTITY_SLIME_HURT : SoundEvents.ENTITY_RABBIT_HURT, 1.0F, 
+     playSound((getJellySize() > 0) ? SoundEvents.ENTITY_SLIME_HURT : SoundEvents.ENTITY_RABBIT_HURT, 1.0F, 
 /* 114 */           getSoundPitch());
        
 /* 116 */       if (!this.world.isRemote) {
 /* 117 */         entityDropItem(getJelly(), 0.0F);
        }
        
-/* 120 */       return false;
+      return false;
      } 
 /* 122 */     return super.attackEntityFrom(source, amount);
    }

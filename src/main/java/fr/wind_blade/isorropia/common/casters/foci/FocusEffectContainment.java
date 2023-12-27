@@ -1,5 +1,3 @@
-// Decompiled with: CFR 0.152
-// Class Version: 8
 package fr.wind_blade.isorropia.common.casters.foci;
 
 import fr.wind_blade.isorropia.common.libs.helpers.IsorropiaHelper;
@@ -18,8 +16,7 @@ import thaumcraft.api.casters.FocusEffect;
 import thaumcraft.api.casters.NodeSetting;
 import thaumcraft.api.casters.Trajectory;
 
-public class FocusEffectContainment
-        extends FocusEffect {
+public class FocusEffectContainment extends FocusEffect {
     public String getResearch() {
         return "FOCUSSPELLBAT";
     }

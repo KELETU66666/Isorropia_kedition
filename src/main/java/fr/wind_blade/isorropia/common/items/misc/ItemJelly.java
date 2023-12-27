@@ -26,19 +26,19 @@
    private static final int ASPECT_SIZE = 5;
    
    public ItemJelly() {
-/*  29 */     super(0, false);
-/*  30 */     setNoRepair();
-/*  31 */     setHasSubtypes(true);
+      super(0, false);
+      setNoRepair();
+      setHasSubtypes(true);
    }
  
    
    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-/*  36 */     if (tab == Common.isorropiaCreativeTabs || tab == CreativeTabs.SEARCH) {
-/*  37 */       items.add(new ItemStack((Item)this));
-/*  38 */       for (Aspect tag : Aspect.aspects.values()) {
-/*  39 */         ItemStack i = new ItemStack((Item)this);
-/*  40 */         setAspects(i, (new AspectList()).add(tag, 5));
-/*  41 */         items.add(i);
+      if (tab == Common.isorropiaCreativeTabs || tab == CreativeTabs.SEARCH) {
+        items.add(new ItemStack((Item)this));
+        for (Aspect tag : Aspect.aspects.values()) {
+          ItemStack i = new ItemStack((Item)this);
+          setAspects(i, (new AspectList()).add(tag, 5));
+          items.add(i);
        } 
      } 
    }
@@ -46,20 +46,20 @@
    
    @SideOnly(Side.CLIENT)
    public String getItemStackDisplayName(ItemStack stack) {
-/*  49 */     return (getAspects(stack) != null && !(getAspects(stack)).aspects.isEmpty()) ? (
-/*  50 */       (getAspects(stack).getAspects()[0] == Aspect.FLUX) ? 
-/*  51 */       I18n.format(getTranslationKey(stack) + ".vitium.name", new Object[0]) : 
-/*  52 */       String.format(super.getItemStackDisplayName(stack), new Object[] {
-/*  53 */           getAspects(stack).getAspects()[0].getName()
-/*  54 */         })) : I18n.format(getTranslationKey(stack) + ".default.name", new Object[0]);
+      return (getAspects(stack) != null && !(getAspects(stack)).aspects.isEmpty()) ? (
+        (getAspects(stack).getAspects()[0] == Aspect.FLUX) ? 
+        I18n.format(getTranslationKey(stack) + ".vitium.name", new Object[0]) : 
+        String.format(super.getItemStackDisplayName(stack), new Object[] {
+            getAspects(stack).getAspects()[0].getName()
+         })) : I18n.format(getTranslationKey(stack) + ".default.name", new Object[0]);
    }
  
    
    public AspectList getAspects(ItemStack itemstack) {
-/*  59 */     if (itemstack.hasTagCompound()) {
-/*  60 */       AspectList aspects = new AspectList();
-/*  61 */       aspects.readFromNBT(itemstack.getTagCompound());
-/*  62 */       return (aspects.size() > 0) ? aspects : null;
+      if (itemstack.hasTagCompound()) {
+        AspectList aspects = new AspectList();
+        aspects.readFromNBT(itemstack.getTagCompound());
+        return (aspects.size() > 0) ? aspects : null;
      } 
 /*  64 */     return null;
    }
@@ -74,51 +74,45 @@
  
    
    public boolean ignoreContainedAspects() {
-/*  77 */     return false;
+      return false;
    }
  
    
    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-/*  82 */     ItemStack itemstack = playerIn.getHeldItem(handIn);
+      ItemStack itemstack = playerIn.getHeldItem(handIn);
      
-/*  84 */     if (getProvider(itemstack).canBeEaten(playerIn, itemstack)) {
-/*  85 */       playerIn.setActiveHand(handIn);
-/*  86 */       return new ActionResult(EnumActionResult.SUCCESS, itemstack);
+      if (getProvider(itemstack).canBeEaten(playerIn, itemstack)) {
+        playerIn.setActiveHand(handIn);
+        return new ActionResult(EnumActionResult.SUCCESS, itemstack);
      } 
-/*  88 */     return new ActionResult(EnumActionResult.FAIL, itemstack);
+      return new ActionResult(EnumActionResult.FAIL, itemstack);
    }
  
  
    
    protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
-/*  94 */     getProvider(stack).onFoodEeaten(player, stack);
+      getProvider(stack).onFoodEeaten(player, stack);
    }
  
    
    public int getMaxItemUseDuration(ItemStack stack) {
-/*  99 */     return getProvider(stack).getEatDuration(stack);
+      return getProvider(stack).getEatDuration(stack);
    }
  
    
    public int getHealAmount(ItemStack stack) {
-/* 104 */     return getProvider(stack).getHungerReplinish(stack);
+      return getProvider(stack).getHungerReplinish(stack);
    }
  
    
    public float getSaturationModifier(ItemStack stack) {
-/* 109 */     return getProvider(stack).getSaturationReplinish(stack);
+     return getProvider(stack).getSaturationReplinish(stack);
    }
    
    private static IJellyAspectEffectProvider getProvider(ItemStack stack) {
-/* 113 */     AspectList aspects = ItemsIS.itemJelly.getAspects(stack);
+   AspectList aspects = ItemsIS.itemJelly.getAspects(stack);
      
 /* 115 */     IJellyAspectEffectProvider provider = IsorropiaAPI.getJellyAspectEffect((aspects == null) ? null : aspects.getAspects()[0]);
 /* 116 */     return (provider == null) ? IsorropiaAPI.getJellyAspectEffect(null) : provider;
    }
  }
-
-
-/* Location:              E:\recaf\233.jar!\fr\wind_blade\isorropia\common\items\misc\ItemJelly.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       1.1.3
- */

@@ -37,7 +37,7 @@
 /* 36 */     super.doRender(entity, x, y, z, entityYaw, partialTicks);
 /* 37 */     GL11.glPushMatrix();
 /* 38 */     GL11.glAlphaFunc(516, 0.003921569F);
-/* 39 */     GL11.glEnable(3042);
+      GL11.glEnable(3042);
 /* 40 */     GL11.glBlendFunc(770, 1);
       GL11.glPushMatrix();
 /* 42 */     GL11.glDepthMask(false);
@@ -51,7 +51,7 @@
 /* 50 */     GL11.glPopMatrix();
 /* 51 */     GL11.glDisable(3042);
 /* 52 */     GL11.glAlphaFunc(516, 0.1F);
-/* 53 */     GL11.glPopMatrix();
+      GL11.glPopMatrix();
    }
  }
 
