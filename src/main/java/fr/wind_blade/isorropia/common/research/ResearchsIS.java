@@ -101,15 +101,6 @@ public class ResearchsIS {
             }
             ThaumcraftApi.registerObjectTag(stack, list.add(IsorropiaAPI.GLUTTONY, Math.round(food.getSaturationModifier(stack) * (float)food.getHealAmount(stack))));
         }
-        ResearchsIS.addAspects(Items.GUNPOWDER, new AspectList().add(IsorropiaAPI.WRATH, 2));
-        ResearchsIS.addAspects(new ItemStack(Items.SKULL, 1, 4), new AspectList().add(IsorropiaAPI.WRATH, 4));
-        ResearchsIS.addAspects(Items.GHAST_TEAR, new AspectList().add(IsorropiaAPI.WRATH, 14));
-        ResearchsIS.addAspects(Items.ENDER_EYE, new AspectList().add(IsorropiaAPI.ENVY, 2));
-        ResearchsIS.addAspects(Items.EMERALD, new AspectList().add(IsorropiaAPI.ENVY, 10));
-        ResearchsIS.addAspects(Items.DIAMOND, new AspectList().add(IsorropiaAPI.ENVY, 5));
-        ResearchsIS.addAspects(Items.SADDLE, new AspectList().add(IsorropiaAPI.LUST, 8));
-        ResearchsIS.addAspects(Items.LEAD, new AspectList().add(IsorropiaAPI.LUST, 6));
-        ResearchsIS.addAspects(Items.CARROT_ON_A_STICK, new AspectList().add(IsorropiaAPI.LUST, 2));
         ResearchsIS.addAspects(Items.RABBIT, new AspectList().add(IsorropiaAPI.FLESH, 2));
         ResearchsIS.addAspects(Items.PORKCHOP, new AspectList().add(IsorropiaAPI.FLESH, 2));
         ResearchsIS.addAspects(Items.BEEF, new AspectList().add(IsorropiaAPI.FLESH, 2));
