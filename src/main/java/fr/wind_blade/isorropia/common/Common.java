@@ -102,6 +102,7 @@ public class Common {
         Common.registerEntity("hanging_label", EntityHangingLabel.class, 160, Integer.MAX_VALUE, false);
         registerEntity("chocolate_cow", EntityChocow.class, 64, 3, true);
         registerEntity("golden_chicken", EntityGoldenChicken.class, 64, 3, true);
+        registerEntity("guardian_panther", EntityGuardianPanther.class, 64, 3, true);
     }
 
     public static void initProviders() {
@@ -146,9 +147,9 @@ public class Common {
         Part in = new Part(Material.WATER, BlocksIS.blockVatInterior);
         Part[][][] curative_vat = new Part[][][]{{{pl, pl, pl}, {pl, top, pl}, {pl, pl, pl}}, {{gl, gl, gl}, {gl, in, gl}, {gl, gl, gl}}, {{gl, gl, gl}, {gl, in, gl}, {gl, gl, gl}}, {{pl, co, pl}, {co, bottom, co}, {pl, co, pl}}};
         IDustTrigger.registerDustTrigger(new DustTriggerMultiblock("CURATIVEVAT", curative_vat));
-        curative_vat = (Part[][][])curative_vat.clone();
+        curative_vat = curative_vat.clone();
         Part[][][] crafting_recipe = new Part[][][]{{{pl, pl, pl}, {pl, top, pl}, {pl, pl, pl}}, {{gl, gl, gl}, {gl, null, gl}, {gl, gl, gl}}, {{gl, gl, gl}, {gl, null, gl}, {gl, gl, gl}}, {{pl, co, pl}, {co, bottom, co}, {pl, co, pl}}};
-        ThaumcraftApi.addFakeCraftingRecipe(new ResourceLocation("isorropia", "curative_vat"), new ThaumcraftApi.BluePrint("CURATIVEVAT", crafting_recipe, new ItemStack[]{new ItemStack(BlocksTC.plankGreatwood, 16), new ItemStack(Blocks.GLASS, 16), new ItemStack(BlocksTC.metalAlchemical, 2, 0), new ItemStack(Items.WATER_BUCKET, 2)}));
+        ThaumcraftApi.addFakeCraftingRecipe(new ResourceLocation("isorropia", "curative_vat"), new ThaumcraftApi.BluePrint("CURATIVEVAT", crafting_recipe, new ItemStack(BlocksTC.plankGreatwood, 16), new ItemStack(Blocks.GLASS, 16), new ItemStack(BlocksTC.metalAlchemical, 2, 0), new ItemStack(Items.WATER_BUCKET, 2)));
     }
 
     public static void initOreDictionary() {
@@ -167,8 +168,8 @@ public class Common {
 
     public static LivingBaseCapability getCap(EntityLivingBase base) {
         if (base instanceof EntityLiving) {
-            return (LivingBaseCapability)base.getCapability(LIVING_CAPABILITY, null);
+            return base.getCapability(LIVING_CAPABILITY, null);
         }
-        return (LivingBaseCapability)base.getCapability(LIVING_BASE_CAPABILITY, null);
+        return base.getCapability(LIVING_BASE_CAPABILITY, null);
     }
 }

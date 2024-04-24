@@ -60,7 +60,7 @@ public class BlockJarSoul
         if (!player.isCreative() && (te = worldIn.getTileEntity(pos)) instanceof TileJarSoul) {
             ItemStack drop = new ItemStack(this);
             drop.setTagCompound(((TileJarSoul)te).entityData);
-            BlockJarSoul.spawnAsEntity((World)worldIn, (BlockPos)pos, (ItemStack)drop);
+            BlockJarSoul.spawnAsEntity(worldIn, pos, drop);
         }
     }
 
@@ -88,15 +88,15 @@ public class BlockJarSoul
     }
 
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex((int)meta));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
     }
 
     public int getMetaFromState(IBlockState state) {
-        return ((EnumFacing)state.getValue(FACING)).getIndex();
+        return state.getValue(FACING).getIndex();
     }
 
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[]{FACING});
+        return new BlockStateContainer(this, FACING);
     }
 
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {

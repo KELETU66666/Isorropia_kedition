@@ -23,11 +23,14 @@ import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.PotionTypes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.PotionType;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -232,6 +235,16 @@ public class ResearchsIS {
                         .withPredicate(entity -> entity.getClass() == EntityChicken.class)
                         .withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.CHICKEN, "Chicken"))
                                 , ItemCat.createCat(ItemCat.EnumCat.CHICKEN, "GoldChicken")).build());
+
+        IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "guardian_panther"), ((SpecieCurativeInfusionRecipe.Builder) new SpecieCurativeInfusionRecipe.Builder()
+                        .withAspects(new AspectList().add(Aspect.BEAST, 8).add(Aspect.AVERSION, 8))
+                        .withComponents(Ingredient.fromStacks(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.STRONG_STRENGTH)), Ingredient.fromItem(Items.SADDLE))
+                        .withInstability(2).withKnowledgeRequirement("GUARDIAN_PANTHER"))
+                        .withResult(EntityGuardianPanther.class)
+                        .withPredicate(entity -> entity.getClass() == EntityOcelot.class)
+                        .withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.OCELOT, "Ocelot"))
+                                , ItemCat.createCat(ItemCat.EnumCat.OCELOT, "panther")).build());
+
 
         Ingredient food = Ingredient.fromItems(Items.CARROT, Items.POTATO, Items.BEETROOT, Items.WHEAT, Items.APPLE, Items.BONE, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.WHEAT_SEEDS);
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "instilledfidelity"), new CurativeInfusionRecipe.Builder().withAspects(new AspectList().add(Aspect.BEAST, 16).add(Aspect.MIND, 16)).withComponents(food, food, food).withInstability(2).withKnowledgeRequirement("INSTILLEDFIDELITY").withPredicate(entity -> entity instanceof EntityTameable).withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.WOLF, "Tameable Mob")), ItemCat.createCat(ItemCat.EnumCat.LOVE, "Tamed Mob")).build());

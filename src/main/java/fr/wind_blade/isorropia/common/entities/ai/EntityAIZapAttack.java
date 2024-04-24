@@ -64,11 +64,7 @@ public class EntityAIZapAttack
         }
 
 
-        if (!target.isEntityAlive()) {
-            return false;
-        }
-
-        return true;
+        return target.isEntityAlive();
     }
 
 
@@ -81,7 +77,7 @@ public class EntityAIZapAttack
 
         if (!(target instanceof EntityPlayer) || (
                 !((EntityPlayer)target).isSpectator() && !((EntityPlayer)target).isCreative())) {
-            return (IRMathHelper.getTchebychevDistance((Entity)this.attacker, (Entity)target) <= getAttackRange(target));
+            return (IRMathHelper.getTchebychevDistance(this.attacker, target) <= getAttackRange(target));
         }
 
         return false;
@@ -96,16 +92,16 @@ public class EntityAIZapAttack
         }
 
         this.attacker.playSound(SoundsTC.zap, 1.0F, 1.1F);
-        PacketHandler.INSTANCE.sendToAllAround((IMessage)new PacketFXWispZap(this.attacker.getEntityId(), target.getEntityId()), new NetworkRegistry.TargetPoint(this.attacker.world.provider
+        PacketHandler.INSTANCE.sendToAllAround(new PacketFXWispZap(this.attacker.getEntityId(), target.getEntityId()), new NetworkRegistry.TargetPoint(this.attacker.world.provider
                 .getDimension(), this.attacker.posX, this.attacker.posY, this.attacker.posZ, 32.0D));
 
 
         float damage = (float)this.attacker.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
         if (Math.abs(target.motionX) > 0.10000000149011612D || Math.abs(target.motionY) > 0.10000000149011612D ||
                 Math.abs(target.motionZ) > 0.10000000149011612D) {
-            target.attackEntityFrom(DamageSource.causeMobDamage((EntityLivingBase)this.attacker), damage);
+            target.attackEntityFrom(DamageSource.causeMobDamage(this.attacker), damage);
         } else {
-            target.attackEntityFrom(DamageSource.causeMobDamage((EntityLivingBase)this.attacker), damage + 1.0F);
+            target.attackEntityFrom(DamageSource.causeMobDamage(this.attacker), damage + 1.0F);
         }
     }
 

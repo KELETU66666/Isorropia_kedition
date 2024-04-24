@@ -4,9 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0487f38c-42ff-4f53-8da4-c5e9a0688d91" name="更改" comment="fix gradle">
+    <list default="true" id="0487f38c-42ff-4f53-8da4-c5e9a0688d91" name="更改" comment="Fix a bug">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/model/ModelGuardianPanther.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/entities/RenderGuardianPanther.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityGuardianPanther.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/tiles/RenderJarSoul.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/tiles/RenderJarSoul.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/Common.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/Common.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlockJarSoul.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlockJarSoul.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlockJarSoulItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlockJarSoulItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityChromaticSheep.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityChromaticSheep.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityGravekeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityGravekeeper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityJellyRabbit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityJellyRabbit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntitySaehrimnirReborn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntitySaehrimnirReborn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityScholarChicken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityScholarChicken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntitySheeder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntitySheeder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/ai/EntityAIZapAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/ai/EntityAIZapAttack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/events/EntityEventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/events/EntityEventHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/research/ResearchsIS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/research/ResearchsIS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/tiles/TileJarSoul.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/tiles/TileJarSoul.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/lang/en_us.lang" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/lang/en_us.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/research/isorropia.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/research/isorropia.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,12 +41,44 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Isorropia_kedition" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Isorropia_kedition" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Isorropia_kedition" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="forgegradle" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Isorropia_kedition" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="ide" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Isorropia_kedition" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Isorropia_kedition" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="verification" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -43,12 +95,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true"
   }
-}</component>
+}]]></component>
+  <component name="RunManager">
+    <configuration name="Isorropia_kedition [runClient]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="runClient" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.Isorropia_kedition [runClient]" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
@@ -66,13 +148,22 @@
       <option name="project" value="LOCAL" />
       <updated>1703648020426</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Fix a bug">
+      <option name="closed" value="true" />
+      <created>1711846185389</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1711846185389</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="fix gradle" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix gradle" />
+    <MESSAGE value="Fix a bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix a bug" />
   </component>
 </project>

@@ -329,9 +329,9 @@
         	"icons":["isorropia:textures/research/cat_ocelot.png"],
         	"category":"ISORROPIA",
         	"parents":["SPECIEINFUSIONS"],
-            "meta": ["HIDDEN"],   
+            "meta": ["HIDDEN"],
         	"location":[10, -4],
-        	
+
         	"stages":[
         		{
         			"text":"research.GRAVEKEEPERINFUSIONS.stage.1.text",
@@ -344,12 +344,33 @@
         		}
         	]
         },
+		{
+			"key":"GUARDIAN_PANTHER",
+			"name":"research.GUARDIANPANTHER.title",
+			"icons":["isorropia:textures/research/cat_ocelot.png"],
+			"category":"ISORROPIA",
+			"parents":["GRAVEKEEPERINFUSION"],
+			"meta": ["HIDDEN"],
+			"location":[10, -6],
+
+			"stages":[
+				{
+					"text":"research.GUARDIANPANTHER.stage.1.text",
+					"required_knowledge":["THEORY;BASICS;1", "THEORY;AUROMANCY;1"],
+					"required_item":["thaumcraft:thaumium_sword", "thaumcraft:phial;1;1;{Aspects:[{amount:10,key:'aversio'}]}"]
+				},
+				{
+					"text":"research.GUARDIANPANTHER.stage.2.text",
+					"recipes":["isorropia:guardian_panther"]
+				}
+			]
+		},
         {
         	"key":"JELLYRABBIT",
         	"name":"research.JELLYRABBIT.title",
         	"icons":["isorropia:textures/research/cat_rabbit.png"],
-        	"category":["ISORROPIA", "SPECIEINFUSIONS"],
-        	"parents":["GRAVEKEEPERINFUSION"],
+        	"category":"ISORROPIA",
+        	"parents":["SPECIEINFUSIONS"],
             "meta": ["HIDDEN"],   
         	"location":[9, -5],
         	
@@ -601,7 +622,7 @@
 			"key":"MONSTEREXCHANGE",
 			"name":"research.mobexchange.title",
 			"icons":[
-				"isorropia:cat;1;2", "isorropia:cat;1;4"
+				"isorropia:cat;1;2"
 			],
 			"category":"ISORROPIA",
 			"parents": ["CHOCOCOW"],

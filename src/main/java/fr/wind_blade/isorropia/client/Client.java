@@ -59,6 +59,7 @@ public class Client
   RenderingRegistry.registerEntityRenderingHandler(EntityEmber.class, RenderEmber::new);
   RenderingRegistry.registerEntityRenderingHandler(EntityGoldenChicken.class, RenderGoldChicken::new);
   RenderingRegistry.registerEntityRenderingHandler(EntityChocow.class, RenderChocolateCow::new);
+  RenderingRegistry.registerEntityRenderingHandler(EntityGuardianPanther.class, RenderGuardianPanther::new);
   OBJLoader.INSTANCE.addDomain("isorropia");
  }
 

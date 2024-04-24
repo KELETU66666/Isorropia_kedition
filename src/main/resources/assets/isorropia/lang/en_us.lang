@@ -16,9 +16,6 @@ ir.mirrorLink=Linked to %s, %s, %s in %s
 # Blocks
 ##########################################
 tile.isorropia.modified_matrix.name=Modified Matrix
-tile.isorropia.arcane_cake.name=Arcane Cake
-tile.isorropia.statue.name=Statue
-tile.isorropia.celestial_magnet.name=Celestial Magnet
 tile.isorropia.chocolate.name=Chocolate
 
 ##########################################
@@ -65,7 +62,8 @@ entity.jelly_rabbit.bunnignis.name=Jelly Bunnignis
 entity.elemental_wisp.name=%s Elemental Wisp
 isorropia.elemental_order_wisp.epiphany=%s seems to have an epiphany and shares his knowledge to you
 entity.chocolate_cow.name=Chocolate Cow
-entity.gold_chicken.name=Golden Chicken
+entity.golden_chicken.name=Golden Chicken
+entity.guardian_panther.name=Guardian Panther
 
 ##########################################
 # Isorropia Research
@@ -184,6 +182,10 @@ research.JELLYRABBIT.stage.2.text=The Jelly Rabbit is the culmination of what a 
 research.GRAVEKEEPERINFUSIONS.title=Gravekeeper
 research.GRAVEKEEPERINFUSIONS.stage.1.text=I have heard strange tales about ancient civilisations that revered cats for their link to the underworld.<BR>And it truly seems like Mortuus Essentia reacts almost calm in the presence of cats, while Exanimis seems to try and dissolve itself.<BR>Now that I have mastered Creature Infusion, I should be able to not just find the truth of these tales, but to draw it out and use it for myself.
 research.GRAVEKEEPERINFUSIONS.stage.2.text=My first test subject may have aged visibly with every second due to a little imperfection in my local aura (note to self: Only use this infusion by day).<BR>I have learned everything I could want about the Grave Keeper, including how to make a proper one!<LINE>This adorable little feline immolates the undead by casting a strange glowing ray upon them.<PAGE>Interestingly, only the smartest of the undead nasties actually try to avoid this cat and the rest seem to be unable to even detect it.
+#
+research.GUARDIANPANTHER.title=Guardian Panther
+research.GUARDIANPANTHER.stage.1.text=Your cats make fine companions, but with a few tweaks they could also be put to more practical uses.
+research.GUARDIANPANTHER.stage.2.text=The first such infusion you have discovered radically increases a housecat's size, resulting in a human-sized animal which retains its feline grace and power. By overstimulating its bonding instinct you have also instilled ferocious loyalty in the resulting panther. It will now defend you much like a tamed wolf, although it is faster and stronger. Creepers retain their fear of cats regardless of size.
 #
 research.SIMILITUDOINFUSIONS.title=Similitudo Infusions
 research.SIMILITUDOINFUSIONS.stage.1.text=Unlike Infusions that work on everything and infusions that only apply to one certain creatures, those that target a specific set of creatures, that all share similarities, are plenty pesterful.<BR>Why? Simple: I need to find out said similarities and differences between species. Not just one species, but multiples. All so that I can distill the distinctive similarities between creatures of a certain type.<PAGE>Because all of these animals share similarities, I have dubbed this type of infusion "Similitudo", Similarity, the same way I gave the aspects their name.<LINE>I might as well start with the least dangerous animals. Those that are typically found on a farm.
