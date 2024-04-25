@@ -61,6 +61,7 @@ public class OrganCurativeInfusionRecipe extends CurativeInfusionRecipe {
         public static Organ SKIN = new Organ(new ResourceLocation("isorropia", "skin"));
         public static Organ BLOOD = new Organ(new ResourceLocation("isorropia", "blood"));
         public static Organ MUSCLE = new Organ(new ResourceLocation("isorropia", "muscle"));
+        public static Organ VOID = new Organ(new ResourceLocation("isorropia", "void"));
 
         public Organ(ResourceLocation registryName) {
             this.registryName = registryName;

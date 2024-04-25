@@ -18,7 +18,7 @@ import thaumcraft.api.casters.Trajectory;
 
 public class FocusEffectContainment extends FocusEffect {
     public String getResearch() {
-        return "FOCUSSPELLBAT";
+        return "CONTAINMENT";
     }
 
     public String getKey() {

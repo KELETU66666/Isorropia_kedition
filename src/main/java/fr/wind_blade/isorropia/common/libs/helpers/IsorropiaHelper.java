@@ -101,13 +101,13 @@ public class IsorropiaHelper {
     }
 
     public static boolean containEntity(EntityLivingBase owner, EntityLivingBase target, float amount) {
-        float progression = (contain.containsKey(target.getUniqueID()) ? contain.get(target.getUniqueID()).floatValue() : 0.0f) + amount;
-        contain.put(target.getUniqueID(), Float.valueOf(progression));
+        float progression = (contain.containsKey(target.getUniqueID()) ? contain.get(target.getUniqueID()) : 0.0f) + amount;
+        contain.put(target.getUniqueID(), progression);
         return progression > target.getHealth() * 20.0f;
     }
 
     public static void playerJarEntity(EntityPlayer player, EntityLiving target) {
-        if (InventoryUtils.consumePlayerItem(player, Item.getItemFromBlock((Block)BlocksTC.jarNormal), 0) || player.isCreative()) {
+        if (InventoryUtils.consumePlayerItem(player, Item.getItemFromBlock(BlocksTC.jarNormal), 0) || player.isCreative()) {
             ItemStack jar = new ItemStack(BlocksIS.blockJarSoul);
             jar.setTagCompound(IsorropiaHelper.livingToNBT(target));
             if (!player.inventory.addItemStackToInventory(jar)) {

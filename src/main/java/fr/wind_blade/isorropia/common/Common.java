@@ -9,6 +9,7 @@ import fr.wind_blade.isorropia.common.casters.foci.FocusEffectContainment;
 import fr.wind_blade.isorropia.common.config.Config;
 import fr.wind_blade.isorropia.common.curative.CurativeEffects;
 import fr.wind_blade.isorropia.common.entities.*;
+import fr.wind_blade.isorropia.common.entities.projectile.EntityEmber;
 import fr.wind_blade.isorropia.common.entities.projectile.EntityIncubatedEgg;
 import fr.wind_blade.isorropia.common.events.EntityEventHandler;
 import fr.wind_blade.isorropia.common.events.RegistryEventHandler;
@@ -103,6 +104,8 @@ public class Common {
         registerEntity("chocolate_cow", EntityChocow.class, 64, 3, true);
         registerEntity("golden_chicken", EntityGoldenChicken.class, 64, 3, true);
         registerEntity("guardian_panther", EntityGuardianPanther.class, 64, 3, true);
+        registerEntity("nether_hound", EntityHellHound.class, 64, 3, true);
+        registerEntity("ember", EntityEmber.class, 64, 1, true);
     }
 
     public static void initProviders() {

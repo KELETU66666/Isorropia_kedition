@@ -150,7 +150,6 @@
             "stages":[
                 {
                     "text":"research.CURATIVEVAT.stage.1.text",
-					"required_item":["thaumcraft:taint_rock;15", "thaumcraft:taint_soil;15"],
                     "required_research":["!scan.taint", "!scan.corrupted"],
 					"required_knowledge":["OBSERVATION;ALCHEMY;1"]
                 },
@@ -197,7 +196,7 @@
         {
         	"key":"CREATUREINFUSIONS",
         	"name":"research.CREATUREINFUSIONS.title",
-        	"icons":["isorropia:textures/research/cat_awakened_blood.png", "isorropia:textures/research/cat_diamond_skin.png", "isorropia:textures/research/cat_quicksilver_limbs.png", "isorropia:textures/research/cat_shockskin.png"],
+        	"icons":["isorropia:textures/research/cat_awakened_blood.png", "isorropia:textures/research/cat_diamond_skin.png", "isorropia:textures/research/cat_quicksilver_limbs.png", "isorropia:textures/research/cat_shockskin.png", "isorropia:textures/research/cat_portability.png"],
         	"category":"ISORROPIA",
         	"parents":["CURATIVEVAT", "INFUSION"],
             "meta": ["HIDDEN", "SPIKY", "ROUND"],
@@ -216,7 +215,7 @@
 				},
 				{
 					"text":"research.CREATUREINFUSIONS.stage.3.text",
-					"recipes":["isorropia:modified_matrix", "isorropia:awakened_blood", "isorropia:diamond_skin", "isorropia:shockskin", "isorropia:enderheart"]
+					"recipes":["isorropia:modified_matrix", "isorropia:awakened_blood", "isorropia:diamond_skin", "isorropia:shockskin", "isorropia:enderheart", "isorropia:portability"]
 				}
 			]    	
         },
@@ -667,6 +666,33 @@
 				{
 					"text":"research.goldchicken.stage.1",
 					"recipes":["isorropia:goldchicken"]
+				}
+			]
+		},
+		{
+			"key":"NETHER_HOUND",
+			"name":"research.NETHERHOUND.title",
+			"icons":[
+				"isorropia:cat;1;6"
+			],
+			"category":"ISORROPIA",
+			"parents": ["SPECIEINFUSIONS"],
+			"meta":[
+				"HIDDEN"
+			],
+			"location":[
+				7,
+				-5
+			],
+			"stages":[
+				{
+					"text":"research.NETHERHOUND.stage.0",
+					"required_research":["!ignis","m_hellandback"],
+					"required_item": ["minecraft:fire_charge", "minecraft:lava_bucket"]
+				},
+				{
+					"text":"research.NETHERHOUND.stage.1",
+					"recipes":["isorropia:nether_hound"]
 				}
 			]
 		}

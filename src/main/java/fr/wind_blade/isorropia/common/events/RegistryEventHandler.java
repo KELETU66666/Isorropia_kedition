@@ -92,8 +92,7 @@ public class RegistryEventHandler {
         }
 
 
-        ModelLoader.setCustomStateMapper(BlocksIS.blockJarSoul, (new StateMap.Builder())
-                .ignore(BlockJarSoul.FACING).build());
+        ModelLoader.setCustomStateMapper(BlocksIS.blockJarSoul, new StateMap.Builder().ignore(BlockJarSoul.FACING).build());
         registerItemRenders((Block[])BlocksIS.blocks.toArray((Object[])new Block[0]));
     }
 

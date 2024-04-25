@@ -186,6 +186,13 @@ public class ResearchsIS {
                         Ingredient.fromItem(Item.getItemFromBlock(BlocksTC.logSilverwood)))
                 .withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.PIG, "Creature")), ItemCat.createCat(ItemCat.EnumCat.AWAKENED_BLOOD, "Awakened Blood"))
                 .build());
+        IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "portability"), (new OrganCurativeInfusionRecipe.Builder())
+                .withOrganTarget(OrganCurativeInfusionRecipe.Organ.VOID)
+                .withAspects((new AspectList()).add(Aspect.VOID, 32).add(Aspect.MOTION, 32))
+                .withComponents(Ingredient.fromItem(Items.ENDER_PEARL),
+                        Ingredient.fromItem(Item.getItemFromBlock(BlocksTC.jarNormal)))
+                .withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.PIG, "Creature")), ItemCat.createCat(ItemCat.EnumCat.PORTABILITY, "Portability"))
+                .build());
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "diamond_skin"), (new OrganCurativeInfusionRecipe.Builder())
 
                 .withOrganTarget(OrganCurativeInfusionRecipe.Organ.SKIN)
@@ -245,6 +252,14 @@ public class ResearchsIS {
                         .withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.OCELOT, "Ocelot"))
                                 , ItemCat.createCat(ItemCat.EnumCat.OCELOT, "panther")).build());
 
+        IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "nether_hound"), ((SpecieCurativeInfusionRecipe.Builder) new SpecieCurativeInfusionRecipe.Builder()
+                .withAspects(new AspectList().add(Aspect.FIRE, 30).add(Aspect.AVERSION, 30).add(Aspect.ALCHEMY, 30))
+                .withComponents(Ingredient.fromItem(Items.LAVA_BUCKET), Ingredient.fromItem(Items.BLAZE_ROD), Ingredient.fromStacks(ThaumcraftApiHelper.makeCrystal(Aspect.FIRE)), Ingredient.fromItem(Items.BLAZE_ROD))
+                .withInstability(2).withKnowledgeRequirement("NETHER_HOUND"))
+                .withResult(EntityGuardianPanther.class)
+                .withPredicate(entity -> entity.getClass() == EntityWolf.class)
+                .withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.WOLF, "Dog"))
+                        , ItemCat.createCat(ItemCat.EnumCat.WOLF, "hellhound")).build());
 
         Ingredient food = Ingredient.fromItems(Items.CARROT, Items.POTATO, Items.BEETROOT, Items.WHEAT, Items.APPLE, Items.BONE, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.WHEAT_SEEDS);
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "instilledfidelity"), new CurativeInfusionRecipe.Builder().withAspects(new AspectList().add(Aspect.BEAST, 16).add(Aspect.MIND, 16)).withComponents(food, food, food).withInstability(2).withKnowledgeRequirement("INSTILLEDFIDELITY").withPredicate(entity -> entity instanceof EntityTameable).withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.WOLF, "Tameable Mob")), ItemCat.createCat(ItemCat.EnumCat.LOVE, "Tamed Mob")).build());

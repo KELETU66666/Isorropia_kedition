@@ -1,49 +1,51 @@
- package fr.wind_blade.isorropia.common.entities;
- 
- import fr.wind_blade.isorropia.common.entities.projectile.EntityEmber;
- import net.minecraft.entity.Entity;
- import net.minecraft.entity.EntityLivingBase;
- import net.minecraft.entity.passive.EntityWolf;
- import net.minecraft.world.World;
- 
- 
- 
- public class EntityHellHound
-   extends EntityWolf
- {
-   long soundDelay;
-   
-   public EntityHellHound(World worldIn) {
-      super(worldIn);
-      this.soundDelay = 0L;
-     this.isImmuneToFire = true;
-   }
- 
-   
-   public void onLivingUpdate() {
-      super.onLivingUpdate();
-     EntityLivingBase target = null;
-      if (getAttackTarget() != null) {
-        target = getAttackTarget();
-     }
-      if (getAttackTarget() != null) {
-/* 30 */       target = getAttackTarget();
-     }
- 
-     
-/* 34 */     float scatter = 8.0F;
-/* 35 */     EntityEmber orb = new EntityEmber(this.world, (EntityLivingBase)this, scatter);
-/* 36 */     orb.damage = 1.0F;
-/* 37 */     orb.firey = 1;
-/* 38 */     this.world.spawnEntity((Entity)orb);
-      orb.posX += orb.motionX;
-/* 40 */     orb.posY += orb.motionY;
-      orb.posZ += orb.motionZ;
-   }
- }
+//
+// Decompiled by Procyon v0.5.30
+//
 
+package fr.wind_blade.isorropia.common.entities;
 
-/* Location:              E:\recaf\233.jar!\fr\wind_blade\isorropia\common\entities\EntityHellHound.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       1.1.3
- */
+import fr.wind_blade.isorropia.common.entities.projectile.EntityEmber;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntityWolf;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import thaumcraft.common.lib.SoundsTC;
+
+public class EntityHellHound extends EntityWolf {
+
+    long soundDelay;
+
+    public EntityHellHound(final World p_i1696_1_) {
+        super(p_i1696_1_);
+        this.soundDelay = 0L;
+        this.isImmuneToFire = true;
+    }
+
+    public void onLivingUpdate() {
+        super.onLivingUpdate();
+        EntityLivingBase target = null;
+        if (this.getAttackTarget() != null) {
+            target = this.getAttackTarget();
+        }
+        if (this.getAttackTarget() != null) {
+            target = this.getAttackTarget();
+        }
+        if (target != null) {
+            if (!this.world.isRemote && this.soundDelay < System.currentTimeMillis()) {
+                this.world.playSound(null, this.getPosition(), SoundsTC.zap, SoundCategory.NEUTRAL, 0.33f, 2.0f);
+                this.soundDelay = System.currentTimeMillis() + 500L;
+            }
+            final float scatter = 8.0f;
+            final EntityEmber orb = new EntityEmber(this.world, this, scatter);
+            orb.damage = 1.0f;
+            orb.firey = 1;
+            Vec3d v = this.getLookVec();
+            orb.setLocationAndAngles(this.posX + v.x / 2.0, this.posY + (double)this.getEyeHeight() + v.y / 2.0, this.posZ + v.z / 2.0, this.rotationYaw, this.rotationPitch);
+            orb.shoot(this, this.rotationPitch, this.rotationYaw, 0.0F, 1.0f, scatter);
+            this.world.spawnEntity(orb);
+        }
+    }
+}

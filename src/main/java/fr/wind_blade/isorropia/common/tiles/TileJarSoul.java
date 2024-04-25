@@ -12,8 +12,8 @@ public class TileJarSoul extends TileThaumcraft implements ITickable {
     public Entity entity = null;
 
     public void update() {
-        if (this.entity == null && this.entityData != null && !this.entityData.hasKey("ENTITY_DATA")) {
-            this.entity = EntityList.createEntityFromNBT(this.entityData.getCompoundTag("ENTITY_DATA"), (World)this.world);
+        if (this.entity == null && this.entityData != null /*&& !this.entityData.hasKey("ENTITY_DATA")*/) {
+            this.entity = EntityList.createEntityFromNBT(this.entityData.getCompoundTag("ENTITY_DATA"), this.world);
             if (!this.world.isRemote) {
                 this.syncTile(false);
             }

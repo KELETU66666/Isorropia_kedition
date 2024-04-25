@@ -2,6 +2,7 @@ package fr.wind_blade.isorropia.common.entities.projectile;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
@@ -10,40 +11,37 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
 
 public class EntityEmber extends EntityThrowable implements IEntityAdditionalSpawnData {
-    public int duration;
-    public int firey;
-    public float damage;
+    public int duration = 20;
+    public int firey = 0;
+    public float damage = 1.0F;
 
     public EntityEmber(World par1World) {
         super(par1World);
-        this.duration = 20;
-        this.firey = 0;
-        this.damage = 1.0F;
     }
 
     public EntityEmber(World par1World, EntityLivingBase par2EntityLiving, float scatter) {
         super(par1World, par2EntityLiving);
-        this.duration = 20;
-        this.firey = 0;
-        this.damage = 1.0F;
-        shoot(this.motionX, this.motionY, this.motionZ, lolreplace(), scatter);
+        Vec3d v = par2EntityLiving.getLookVec();
+        this.setLocationAndAngles(par2EntityLiving.posX + v.x / 2.0, par2EntityLiving.posY + (double)par2EntityLiving.getEyeHeight() + v.y / 2.0, par2EntityLiving.posZ + v.z / 2.0, par2EntityLiving.rotationYaw, par2EntityLiving.rotationPitch);
+        this.shoot(this.motionX, this.motionY, this.motionZ, getVelocity(), scatter);
     }
 
     protected float getGravityVelocity() {
         return 0.0F;
     }
 
-    protected float lolreplace() {
+    protected float getVelocity() {
         return 1.0F;
     }
 
-
-    public void onEntityUpdate() {
+    @Override
+    public void onUpdate() {
         if (this.ticksExisted > this.duration) {
             setDead();
         }
@@ -61,7 +59,7 @@ public class EntityEmber extends EntityThrowable implements IEntityAdditionalSpa
             this.motionY *= 0.66D;
             this.motionZ *= 0.66D;
         }
-        super.onEntityUpdate();
+        super.onUpdate();
     }
 
 
@@ -74,44 +72,24 @@ public class EntityEmber extends EntityThrowable implements IEntityAdditionalSpa
         this.duration = data.readByte();
     }
 
-
     protected void onImpact(RayTraceResult mop) {
         if (!this.world.isRemote) {
             if (mop.entityHit != null) {
-                if (!mop.entityHit.isImmuneToFire()) if (mop.entityHit.attackEntityFrom((new EntityDamageSourceIndirect("fireball", (Entity)this, (Entity)
-                        getThrower())).setFireDamage(), this.damage)) {
+                if (!mop.entityHit.isImmuneToFire() && mop.entityHit.attackEntityFrom(new EntityDamageSourceIndirect("fireball", (Entity)this, (Entity)this.getThrower()).setFireDamage(), this.damage)) {
                     mop.entityHit.setFire(3 + this.firey);
                 }
-            } else if (this.rand.nextFloat() < 0.025F * this.firey) {
-                double i = mop.entityHit.posX;
-                double j = mop.entityHit.posY;
-                double k = mop.entityHit.posZ;
-                switch (mop.sideHit.getIndex()) {
-                    case 0:
-                        j--;
-                        break;
-                        case 1:
-                            j++;
-                            break;
-                            case 2:
-                                k--;
-                                break;
-                                case 3:
-                                    k++;
-                                    break;
-                                    case 4:
-                                        i--;
-                                        break;
-                                        case 5:
-                                            i++;
-                                            break;
+            } else if (this.rand.nextFloat() < 0.025f * (float)this.firey) {
+                BlockPos blockpos;
+                boolean flag = true;
+                if (this.getThrower() != null && this.getThrower() instanceof EntityLiving) {
+                    flag = this.world.getGameRules().getBoolean("mobGriefing");
                 }
-                if (this.world.isAirBlock(new BlockPos(i, j, k))) {
-                    this.world.setBlockState(new BlockPos(i, j, k), Blocks.FIRE.getDefaultState());
+                if (flag && this.world.isAirBlock(blockpos = mop.getBlockPos().offset(mop.sideHit))) {
+                    this.world.setBlockState(blockpos, Blocks.FIRE.getDefaultState());
                 }
             }
         }
-        setDead();
+        this.setDead();
     }
 
     protected boolean canTriggerWalking() {
