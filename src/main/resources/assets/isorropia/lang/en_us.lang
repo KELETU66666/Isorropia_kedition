@@ -15,12 +15,15 @@ ir.mirrorLink=Linked to %s, %s, %s in %s
 ##########################################
 # Blocks
 ##########################################
+tile.isorropia.curative_vat.name=Curative Vat
+tile.isorropia.curative_interior.name=Curative Interior
 tile.isorropia.modified_matrix.name=Modified Matrix
 tile.isorropia.chocolate.name=Chocolate
 
 ##########################################
 # Items
 ##########################################
+item.isorropia.cat.name=Placeholder
 item.isorropia.lens.name=Base Lens
 item.isorropia.lens_fire.name=Heinrich's Lens
 item.isorropia.lens_air.name=Kirlian Lens

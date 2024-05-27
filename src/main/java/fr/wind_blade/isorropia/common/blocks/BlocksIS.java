@@ -29,11 +29,11 @@ public class BlocksIS {
     }
 
     public static <T extends Block> T getBlock(T block, String name) {
-        return (T)BlocksIS.registry(((Block)((Object)block.setRegistryName(new ResourceLocation("isorropia", name)))).setTranslationKey("isorropia." + name));
+        return (T)BlocksIS.registry(block.setRegistryName(new ResourceLocation("isorropia", name)).setTranslationKey("isorropia." + name));
     }
 
     public static <T extends Block> T registry(T block) {
-        if (!(block instanceof IBlockRegistry) || ((IBlockRegistry)((Object)block)).isInCreativeTabs()) {
+        if (!(block instanceof IBlockRegistry) || ((IBlockRegistry) block).isInCreativeTabs()) {
             block.setCreativeTab(Common.isorropiaCreativeTabs);
         }
         blocks.add(block);
