@@ -33,10 +33,6 @@ public class BlockCurativeVat
         this.setHardness(2.0f);
     }
 
-    public boolean haveItemBlock() {
-        return false;
-    }
-
     public static TileVat getMaster(World world, BlockPos pos) {
         return BlockCurativeVat.getMaster(world, world.getBlockState(pos), pos);
     }

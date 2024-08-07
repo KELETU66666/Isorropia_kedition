@@ -16,7 +16,7 @@ ir.mirrorLink=Linked to %s, %s, %s in %s
 # Blocks
 ##########################################
 tile.isorropia.curative_vat.name=Curative Vat
-tile.isorropia.curative_interior.name=Curative Interior
+tile.isorropia.vat_interior.name=Vat Interior
 tile.isorropia.modified_matrix.name=Modified Matrix
 tile.isorropia.chocolate.name=Chocolate
 

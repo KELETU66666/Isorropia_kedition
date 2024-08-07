@@ -40,10 +40,6 @@ public class BlockLiquidVat
         super.breakBlock(worldIn, pos, state);
     }
 
-    public boolean haveItemBlock() {
-        return false;
-    }
-
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         TileVat vat = BlockCurativeVat.getMaster(worldIn, pos);
         if (vat != null && vat.getEntityContained() == playerIn) {

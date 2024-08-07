@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0487f38c-42ff-4f53-8da4-c5e9a0688d91" name="更改" comment="hell hound, portability, jar display">
+    <list default="true" id="0487f38c-42ff-4f53-8da4-c5e9a0688d91" name="更改" comment="fix some small bugs.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlockCurativeVat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlockCurativeVat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlockLiquidVat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlockLiquidVat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlocksIS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlocksIS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/blockstates/curative_vat.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/blockstates/curative_vat.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/blockstates/vat_interior.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/blockstates/vat_interior.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/lang/en_us.lang" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/lang/en_us.lang" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,13 +84,13 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/Isorropia_kedition/src/main/resources/assets/isorropia/textures/misc&quot;
+    &quot;last_opened_file_path&quot;: &quot;E:/Isorropia_kedition/src/main/resources/assets/isorropia/models/item&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\Isorropia_kedition\src\main\resources\assets\isorropia\textures\misc" />
       <recent name="E:\Isorropia_kedition\src\main\resources\assets\isorropia\models\item" />
+      <recent name="E:\Isorropia_kedition\src\main\resources\assets\isorropia\textures\misc" />
       <recent name="E:\Isorropia_kedition\src\main\resources\assets\isorropia\textures\research" />
       <recent name="E:\Isorropia_kedition\src\main\resources\assets\isorropia\textures\entity" />
       <recent name="E:\Isorropia_kedition\run\mods" />
@@ -165,7 +166,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714050875956</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fix some small bugs.">
+      <option name="closed" value="true" />
+      <created>1716809303679</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1716809303679</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -175,6 +184,7 @@
     <MESSAGE value="Fix a bug" />
     <MESSAGE value="Fix lots of bugs, added guardian panther" />
     <MESSAGE value="hell hound, portability, jar display" />
-    <option name="LAST_COMMIT_MESSAGE" value="hell hound, portability, jar display" />
+    <MESSAGE value="fix some small bugs." />
+    <option name="LAST_COMMIT_MESSAGE" value="fix some small bugs." />
   </component>
 </project>

@@ -22,7 +22,7 @@
 					"Solid":"isorropia:curative_vat#bottom_solid"
 				}
 			},
-       		"connector": {"model": "isorropia:placeholder"}
+       		"connector": {"model": "thaumcraft:empty"}
 		},
 		
 		"top_solid":{
@@ -39,6 +39,8 @@
 		
 		"bottom_translucent":{
 			"model":"isorropia:curative_vat_bottom_translucent"
-		}
+		},
+
+		"inventory": [{"model": "thaumcraft:empty"}]
 	}
 }

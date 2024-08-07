@@ -1,5 +1,9 @@
 {
-   "variants": {
-       "normal": { "model": "isorropia:placeHolder" }
-   }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "thaumcraft:empty", "transform": "forge:default-block"
+  },
+  "variants": {
+    "normal": [{}], "inventory": [{}]
+  }
 }
