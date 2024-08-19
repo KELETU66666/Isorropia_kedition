@@ -237,4 +237,4 @@ lens.ordo_lens=Scholar's Lens
 lens.envy_lens=Trickster's Lens
 
 isorropia.FOCUSCONTAINMENT.name=Containment
-isorropia.FOCUSCONTAINMENT.text=Has a chance to capture a creature into a Soul Jar if it is in your inventory, otherwise it does nothing. It's best to utilize this effect while the creature is severely weakened.
+isorropia.FOCUSCONTAINMENT.text=Has a chance to capture an entity (excluding players) into a Soul Jar if it is in your inventory, otherwise it does nothing. It's best to utilize this effect while the entity is severely weakened.
