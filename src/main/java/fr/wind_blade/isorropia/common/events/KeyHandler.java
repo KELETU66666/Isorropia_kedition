@@ -21,7 +21,7 @@ public class KeyHandler
     public static boolean radialLock;
 
     public KeyHandler() {
-        this.keyLens = new KeyBinding("Change Goggles Lens", 47, "key.categories.misc");
+        this.keyLens = new KeyBinding("Change Goggles Lens", 36, "key.categories.misc");
         ClientRegistry.registerKeyBinding(this.keyLens);
     }
 
