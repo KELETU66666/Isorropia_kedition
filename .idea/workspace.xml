@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0487f38c-42ff-4f53-8da4-c5e9a0688d91" name="更改" comment="fix some small bugs.">
+    <list default="true" id="0487f38c-42ff-4f53-8da4-c5e9a0688d91" name="更改" comment="small pr">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlockCurativeVat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlockCurativeVat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlockLiquidVat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlockLiquidVat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/blockstates/curative_vat.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/blockstates/curative_vat.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/blockstates/vat_interior.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/blockstates/vat_interior.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/lang/en_us.lang" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/lang/en_us.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mcmod.info" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mcmod.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,8 +171,27 @@
       <option name="project" value="LOCAL" />
       <updated>1716809303679</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="small pr">
+      <option name="closed" value="true" />
+      <created>1723043751328</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1723043751328</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
@@ -185,6 +201,7 @@
     <MESSAGE value="Fix lots of bugs, added guardian panther" />
     <MESSAGE value="hell hound, portability, jar display" />
     <MESSAGE value="fix some small bugs." />
-    <option name="LAST_COMMIT_MESSAGE" value="fix some small bugs." />
+    <MESSAGE value="small pr" />
+    <option name="LAST_COMMIT_MESSAGE" value="small pr" />
   </component>
 </project>
