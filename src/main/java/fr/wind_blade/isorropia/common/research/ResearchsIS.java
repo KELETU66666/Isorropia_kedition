@@ -113,7 +113,7 @@ public class ResearchsIS {
     }
 
     public static void init() {
-        ResearchCategories.registerCategory("ISORROPIA", null, null, new ResourceLocation("isorropia", "textures/misc/logo.png"), new ResourceLocation("isorropia", "textures/research/background.jpg"));
+        ResearchCategories.registerCategory("ISORROPIA", "HEDGEALCHEMY", null, new ResourceLocation("isorropia", "textures/misc/logo.png"), new ResourceLocation("isorropia", "textures/research/background.jpg"));
         ThaumcraftApi.registerResearchLocation(new ResourceLocation("isorropia", "research/isorropia.json"));
         Config.CRYSTALS.addAll(Aspect.aspects.values().stream().map(aspect -> ThaumcraftApiHelper.makeCrystal(aspect)).collect(Collectors.toList()));
         ThaumcraftApi.addCrucibleRecipe(new ResourceLocation("isorropia", "wheat_growth"), new CrucibleRecipe("CULTIVATION", new ItemStack(Items.WHEAT), new ItemStack(Items.WHEAT_SEEDS), new AspectList().add(Aspect.LIGHT, 2).add(Aspect.EARTH, 2).add(Aspect.WATER, 2)));
