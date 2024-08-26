@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MultiPartEntityPart;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -15,6 +16,7 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.casters.FocusEffect;
 import thaumcraft.api.casters.NodeSetting;
 import thaumcraft.api.casters.Trajectory;
+import thaumcraft.common.lib.SoundsTC;
 
 public class FocusEffectContainment extends FocusEffect {
     public String getResearch() {
@@ -38,17 +40,23 @@ public class FocusEffectContainment extends FocusEffect {
         if (trace.entityHit instanceof MultiPartEntityPart && ((MultiPartEntityPart) trace.entityHit).parent instanceof Entity) {
             trace.entityHit = (Entity) ((MultiPartEntityPart) trace.entityHit).parent;
         }
-        if (!(trace.entityHit instanceof EntityLiving) || !IsorropiaHelper.doPlayerHaveJar((EntityPlayer)base, false)) {
+        if (!(trace.entityHit instanceof EntityLiving) || !IsorropiaHelper.doPlayerHaveJar((EntityPlayer) base, false)) {
             return false;
         }
-        if (!IsorropiaHelper.canEntityBeJarred((EntityLiving)trace.entityHit)) {
+        if (!IsorropiaHelper.canEntityBeJarred((EntityLiving) trace.entityHit)) {
             base.sendMessage(new TextComponentString(String.valueOf(TextFormatting.ITALIC) + TextFormatting.GRAY + I18n.format("isorropia.containment.fail")));
             return false;
         }
-        if (IsorropiaHelper.containEntity(base, (EntityLivingBase)trace.entityHit, this.getSettingValue("power"))) {
-            IsorropiaHelper.playerJarEntity((EntityPlayer)base, (EntityLiving)trace.entityHit);
+        if (IsorropiaHelper.containEntity(base, (EntityLivingBase) trace.entityHit, this.getSettingValue("power"))) {
+            this.getPackage().world.playSound(null, trace.hitVec.x, trace.hitVec.y, trace.hitVec.z, SoundsTC.hhon, SoundCategory.PLAYERS, 0.8F, 0.85F + (float) (this.getPackage().getCaster().world.rand.nextGaussian() * 0.05F));
+            IsorropiaHelper.playerJarEntity((EntityPlayer) base, (EntityLiving) trace.entityHit);
         }
         return true;
+    }
+
+    @Override
+    public void onCast(Entity caster) {
+        caster.world.playSound(null, caster.getPosition().up(), SoundsTC.hhoff, SoundCategory.PLAYERS, 0.8F, 0.45F + (float) (caster.world.rand.nextGaussian() * 0.05F));
     }
 
     public void renderParticleFX(World var1, double var2, double var4, double var6, double var8, double var10, double var12) {
