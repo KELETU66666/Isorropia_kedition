@@ -1,7 +1,8 @@
 ##########################################
 # Aspects
 ##########################################
-tc.aspect.ira=Ira
+tc.aspect.corpus=Flesh
+tc.aspect.fames=Hunger
 
 itemGroup.isorropia=Thaumic Isorropia Kedtion
 
