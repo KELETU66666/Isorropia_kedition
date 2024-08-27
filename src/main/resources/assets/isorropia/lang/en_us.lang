@@ -74,7 +74,7 @@ entity.nether_hound.name=Nether Hound
 # Isorropia Research
 ##########################################
 tc.research_category.ISORROPIA=Thaumic Isorropia
-research.!scan.animal.text=Scan any animal to gain understanding of their biology 
+research.!scan.animal.text=Scan any animal to gain understanding of their biology
 research.!scan.chicken.text=Scan the most basic poultry
 research.!scan.cow.text=Scan a cow
 research.!scan.sheep.text=Scan a sheep
