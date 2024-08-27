@@ -150,7 +150,7 @@
             "stages":[
                 {
                     "text":"research.CURATIVEVAT.stage.1.text",
-                    "required_research":["!scan.taint", "!scan.corrupted"],
+                    "required_research":["!scan.taint"],
 					"required_knowledge":["OBSERVATION;ALCHEMY;1"]
                 },
 				{				
