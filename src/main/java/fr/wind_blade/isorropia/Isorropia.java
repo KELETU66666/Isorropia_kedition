@@ -12,11 +12,11 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 
 @EventBusSubscriber
-@Mod(modid = "isorropia", name = "isorropia", version = "0.1.13", acceptedMinecraftVersions = "[1.12.2]", dependencies = "required-after:thaumcraft@[6.1.BETA26]")
+@Mod(modid = Isorropia.MODID, name = Isorropia.NAME, version = Isorropia.VERSION, acceptedMinecraftVersions = "[1.12.2]", dependencies = "required-after:thaumcraft@[6.1.BETA26]")
 public class Isorropia {
     public static final String MODID = "isorropia";
     public static final String NAME = "isorropia";
-    public static final String VERSION = "0.1.13";
+    public static final String VERSION = "1.0.0";
     @Instance("isorropia")
     public static Isorropia instance;
     @SidedProxy(clientSide = "fr.wind_blade.isorropia.client.Client", serverSide = "fr.wind_blade.isorropia.server.Server")
