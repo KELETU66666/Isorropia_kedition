@@ -13,14 +13,12 @@ import fr.wind_blade.isorropia.common.research.recipes.CurativeInfusionRecipe;
 import fr.wind_blade.isorropia.common.research.recipes.OrganCurativeInfusionRecipe;
 import fr.wind_blade.isorropia.common.research.recipes.SpecieCurativeInfusionRecipe;
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.passive.*;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
@@ -29,12 +27,8 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.PotionType;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -51,7 +45,6 @@ import thaumcraft.api.crafting.ShapedArcaneRecipe;
 import thaumcraft.api.entities.ITaintedMob;
 import thaumcraft.api.items.ItemsTC;
 import thaumcraft.api.research.ResearchCategories;
-import thaumcraft.api.research.ScanEntity;
 import thaumcraft.api.research.ScanningManager;
 
 import java.util.Iterator;
@@ -59,7 +52,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class ResearchsIS {
-    private static void registerBatchAspect(AspectList aspects, Item ... items) {
+    private static void registerBatchAspect(AspectList aspects, Item... items) {
         for (Item item : items) {
             ThaumcraftApi.registerObjectTag(new ItemStack(item), aspects);
         }
@@ -87,9 +80,9 @@ public class ResearchsIS {
     public static void initAspects(FMLPostInitializationEvent event) {
         Iterator iterator = ForgeRegistries.ITEMS.iterator();
         while (iterator.hasNext()) {
-            Item item = (Item)iterator.next();
+            Item item = (Item) iterator.next();
             if (!(item instanceof ItemFood)) continue;
-            ItemFood food = (ItemFood)item;
+            ItemFood food = (ItemFood) item;
             ItemStack stack = new ItemStack(item);
             AspectList list = AspectHelper.getObjectAspects(stack);
             list = (list == null ? new AspectList() : list).add(IsorropiaAPI.HUNGER, Math.round(food.getHealAmount(stack)));
@@ -98,11 +91,11 @@ public class ResearchsIS {
                 list.add(IsorropiaAPI.FLESH, food.getHealAmount(stack));
                 break;
             }
-            if ((double)food.getSaturationModifier(stack) < 0.6) {
+            if ((double) food.getSaturationModifier(stack) < 0.6) {
                 ThaumcraftApi.registerObjectTag(stack, list);
                 continue;
             }
-            ThaumcraftApi.registerObjectTag(stack, list.add(IsorropiaAPI.GLUTTONY, Math.round(food.getSaturationModifier(stack) * (float)food.getHealAmount(stack))));
+            ThaumcraftApi.registerObjectTag(stack, list.add(IsorropiaAPI.GLUTTONY, Math.round(food.getSaturationModifier(stack) * (float) food.getHealAmount(stack))));
         }
         ResearchsIS.addAspects(Items.RABBIT, new AspectList().add(IsorropiaAPI.FLESH, 2));
         ResearchsIS.addAspects(Items.PORKCHOP, new AspectList().add(IsorropiaAPI.FLESH, 2));
@@ -146,11 +139,11 @@ public class ResearchsIS {
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "taintfeeder"),
                 ((SpecieCurativeInfusionRecipe.Builder) new SpecieCurativeInfusionRecipe.Builder().withAspects(
                                 new AspectList().add(IsorropiaAPI.HUNGER, 64).add(Aspect.PLANT, 16).add(Aspect.LIFE, 16).add(Aspect.FLUX, 12))
-                                .withComponents(Ingredient.fromItem(ItemsTC.bottleTaint),
-                                        Ingredient.fromItem(Item.getItemFromBlock(BlocksTC.logSilverwood)),
-                                        Ingredient.fromItem(Item.getItemFromBlock(BlocksTC.jarVoid)),
-                                        Ingredient.fromItem(Item.getItemFromBlock(BlocksTC.logSilverwood)))
-                                .withInstability(4).withKnowledgeRequirement("TAINTFEEDER"))
+                        .withComponents(Ingredient.fromItem(ItemsTC.bottleTaint),
+                                Ingredient.fromItem(Item.getItemFromBlock(BlocksTC.logSilverwood)),
+                                Ingredient.fromItem(Item.getItemFromBlock(BlocksTC.jarVoid)),
+                                Ingredient.fromItem(Item.getItemFromBlock(BlocksTC.logSilverwood)))
+                        .withInstability(4).withKnowledgeRequirement("TAINTFEEDER"))
                         .withResult(EntityTaintPig.class)
                         .withPredicate(entity -> entity.getClass() == EntityPig.class)
                         .withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.PIG, "Pig"))
@@ -244,13 +237,13 @@ public class ResearchsIS {
                                 , ItemCat.createCat(ItemCat.EnumCat.CHICKEN, "GoldChicken")).build());
 
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "guardian_panther"), ((SpecieCurativeInfusionRecipe.Builder) new SpecieCurativeInfusionRecipe.Builder()
-                        .withAspects(new AspectList().add(Aspect.BEAST, 8).add(Aspect.AVERSION, 8))
-                        .withComponents(Ingredient.fromStacks(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.STRONG_STRENGTH)), Ingredient.fromItem(Items.SADDLE))
-                        .withInstability(2).withKnowledgeRequirement("GUARDIAN_PANTHER"))
-                        .withResult(EntityGuardianPanther.class)
-                        .withPredicate(entity -> entity.getClass() == EntityOcelot.class)
-                        .withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.OCELOT, "Ocelot"))
-                                , ItemCat.createCat(ItemCat.EnumCat.OCELOT, "panther")).build());
+                .withAspects(new AspectList().add(Aspect.BEAST, 8).add(Aspect.AVERSION, 8))
+                .withComponents(Ingredient.fromStacks(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.STRONG_STRENGTH)), Ingredient.fromItem(Items.SADDLE))
+                .withInstability(2).withKnowledgeRequirement("GUARDIAN_PANTHER"))
+                .withResult(EntityGuardianPanther.class)
+                .withPredicate(entity -> entity.getClass() == EntityOcelot.class)
+                .withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.OCELOT, "Ocelot"))
+                        , ItemCat.createCat(ItemCat.EnumCat.OCELOT, "panther")).build());
 
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "nether_hound"), ((SpecieCurativeInfusionRecipe.Builder) new SpecieCurativeInfusionRecipe.Builder()
                 .withAspects(new AspectList().add(Aspect.FIRE, 30).add(Aspect.AVERSION, 30).add(Aspect.ALCHEMY, 30))
@@ -271,24 +264,11 @@ public class ResearchsIS {
         ScanningManager.addScannableThing(new ScanEntityResearch("!scan.pigman", EntityPigZombie.class, false, "SIMILITUDOINFUSIONS@2", "research.scan.pigman.text"));
         ScanningManager.addScannableThing(new ScanEntityResearch("!scan.enderman", EntityEnderman.class, false, "SIMILITUDOINFUSIONS@3", "research.scan.enderman.text"));
         ScanningManager.addScannableThing(new ScanEntityResearch("!scan.golem", EntityIronGolem.class, false, "SIMILITUDOINFUSIONS@3", "research.scan.golem.text"));
-        ScanningManager.addScannableThing(new ScanEntityResearch("!scan.villager", EntityVillager.class, false, "SELFSHEARING@3", "research.scan.villager.text"));
+        ScanningManager.addScannableThing(new ScanEntityResearch("!scan.villager", EntityVillager.class, false, "SIMILITUDOINFUSIONS@3", "research.scan.villager.text"));
         ScanningManager.addScannableThing(new ScanEntityResearch("!scan.sheep", EntitySheep.class, false, "SIMILITUDOINFUSIONS@3", "research.scan.sheep.text"));
         ScanningManager.addScannableThing(new ScanEntityResearch("!scan.slime", EntitySlime.class, false, "JELLYRABBIT@0", "research.scan.slime.text"));
         ScanningManager.addScannableThing(new ScanEntityResearch("!scan.rabbit", EntityRabbit.class, false, "JELLYRABBIT@0", "research.scan.rabbit.text"));
         ScanningManager.addScannableThing(new ScanFidelity());
         ScanningManager.addScannableThing(new ScanTameable());
-        ScanningManager.addScannableThing(new ScanEntity("!scan.corrupted", EntityLiving.class, true){
-
-            @Override
-            public boolean checkThing(EntityPlayer player, Object obj) {
-                return super.checkThing(player, obj) && obj instanceof EntityLiving && ((EntityLiving)obj).getEntityAttribute(ThaumcraftApiHelper.CHAMPION_MOD) != null && ((EntityLiving)obj).getEntityAttribute(ThaumcraftApiHelper.CHAMPION_MOD).getAttributeValue() == 13.0;
-            }
-
-            public void onSuccess(EntityPlayer player, Object object) {
-                super.onSuccess(player, object);
-                player.sendMessage(new TextComponentString(TextFormatting.DARK_PURPLE + new TextComponentTranslation("research.scan.corrupted.text").getFormattedText()));
-            }
-        });
-        ScanningManager.addScannableThing(new ScanSun());
     }
 }
