@@ -2,8 +2,8 @@
 {
   "modid": "isorropia",
   "name": "Thaumic Isorropia",
-  "description": "Example placeholder mod.",
-  "version": "1.12.2-1.0.0",
+  "description": "A partial port of Thaumic Horizons to Thaumcraft 6 and other in depth Thaumcraft mechanics.",
+  "version": "1.12.2-1.0.1",
   "mcversion": "1.12.2",
   "url": "",
   "updateUrl": "",
