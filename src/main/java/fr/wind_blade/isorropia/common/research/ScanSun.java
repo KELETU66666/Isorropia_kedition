@@ -37,7 +37,7 @@ public class ScanSun implements IScanThing {
 
 
     public void onSuccess(EntityPlayer player, Object object) {
-        player.sendMessage((ITextComponent)new TextComponentString(TextFormatting.DARK_PURPLE + (new TextComponentTranslation("research.scan.sun.text", new Object[0])).getFormattedText()));
+        player.sendMessage((ITextComponent)new TextComponentString(TextFormatting.DARK_PURPLE + (new TextComponentTranslation("research.scan.sun.text")).getFormattedText()));
     }
 
 

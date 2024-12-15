@@ -270,5 +270,6 @@ public class ResearchsIS {
         ScanningManager.addScannableThing(new ScanEntityResearch("!scan.rabbit", EntityRabbit.class, false, "JELLYRABBIT@0", "research.scan.rabbit.text"));
         ScanningManager.addScannableThing(new ScanFidelity());
         ScanningManager.addScannableThing(new ScanTameable());
+        ScanningManager.addScannableThing(new ScanSun());
     }
 }
