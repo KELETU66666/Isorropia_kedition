@@ -1,10 +1,11 @@
 package fr.wind_blade.isorropia.common.celestial;
 
 import fr.wind_blade.isorropia.common.IsorropiaAPI;
-import java.util.function.BiPredicate;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
+import java.util.function.BiPredicate;
 
 
 

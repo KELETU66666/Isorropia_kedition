@@ -4,7 +4,6 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import fr.wind_blade.isorropia.common.Common;
 import fr.wind_blade.isorropia.common.network.MirrorMessage;
-import java.util.List;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,10 +16,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.api.blocks.BlocksTC;
+
+import java.util.List;
 
 
 

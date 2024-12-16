@@ -1,5 +1,5 @@
  package fr.wind_blade.isorropia.common.items;
- 
+
  import net.minecraft.entity.player.EntityPlayer;
  import net.minecraft.item.ItemStack;
  

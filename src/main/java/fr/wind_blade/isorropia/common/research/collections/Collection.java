@@ -1,13 +1,14 @@
 package fr.wind_blade.isorropia.common.research.collections;
 
-import java.util.ArrayList;
-import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import thaumcraft.api.capabilities.IPlayerKnowledge;
 import thaumcraft.api.capabilities.ThaumcraftCapabilities;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Collection

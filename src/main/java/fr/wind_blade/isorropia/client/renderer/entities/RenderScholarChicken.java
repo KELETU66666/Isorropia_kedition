@@ -1,11 +1,10 @@
  package fr.wind_blade.isorropia.client.renderer.entities;
+
  import fr.wind_blade.isorropia.common.entities.EntityScholarChicken;
  import net.minecraft.client.model.ModelBase;
  import net.minecraft.client.model.ModelChicken;
  import net.minecraft.client.renderer.entity.RenderLiving;
  import net.minecraft.client.renderer.entity.RenderManager;
- import net.minecraft.entity.Entity;
- import net.minecraft.entity.EntityLivingBase;
  import net.minecraft.util.ResourceLocation;
  import net.minecraft.util.math.MathHelper;
  import net.minecraftforge.fml.relauncher.Side;

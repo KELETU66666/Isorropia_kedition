@@ -3,7 +3,6 @@ package fr.wind_blade.isorropia.common.items.misc;
 import fr.wind_blade.isorropia.common.entities.projectile.EntityIncubatedEgg;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemEgg;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;

@@ -1,7 +1,6 @@
 package fr.wind_blade.isorropia.common.curative;
 
 import fr.wind_blade.isorropia.common.IsorropiaAPI;
-import fr.wind_blade.isorropia.common.curative.ICurativeEffectProvider;
 import fr.wind_blade.isorropia.common.tiles.TileVat;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,8 +1,5 @@
 package fr.wind_blade.isorropia.client.libs;
 
-import java.awt.image.BufferedImage;
-import java.io.Closeable;
-import java.io.IOException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.client.renderer.texture.TextureUtil;
@@ -12,6 +9,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.io.IOUtils;
+
+import java.awt.image.BufferedImage;
+import java.io.Closeable;
+import java.io.IOException;
 
 
 @SideOnly(Side.CLIENT)

@@ -15,7 +15,6 @@ import fr.wind_blade.isorropia.common.events.KeyHandler;
 import fr.wind_blade.isorropia.common.items.ItemsIS;
 import fr.wind_blade.isorropia.common.tiles.TileJarSoul;
 import fr.wind_blade.isorropia.common.tiles.TileModifiedMatrix;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.entity.Render;
@@ -36,52 +35,52 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.IEssentiaContainerItem;
 
-@SideOnly(value=Side.CLIENT)
+@SideOnly(value = Side.CLIENT)
 public class Client
         extends Common {
- @Override
- public void preInit(FMLPreInitializationEvent event) {
-  super.preInit(event);
-  MinecraftForge.EVENT_BUS.register(RenderEventHandler.class);
-  RenderingRegistry.registerEntityRenderingHandler(EntityIncubatedEgg.class, renderManager -> new RenderSnowball(renderManager, ItemsIS.itemIncubatedEgg, Minecraft.getMinecraft().getRenderItem()));
-  ClientRegistry.bindTileEntitySpecialRenderer(TileJarSoul.class, new RenderJarSoul());
-  ClientRegistry.bindTileEntitySpecialRenderer(TileModifiedMatrix.class, new RenderModifiedMatrix());
-  RenderingRegistry.registerEntityRenderingHandler(EntitySaehrimnir.class, RenderSaehrimnir::new);
-  RenderingRegistry.registerEntityRenderingHandler(EntitySaehrimnirReborn.class, RenderSaehrimnirReborn::new);
-  RenderingRegistry.registerEntityRenderingHandler(EntityTaintPig.class, RenderTaintPig::new);
-  RenderingRegistry.registerEntityRenderingHandler(EntityGravekeeper.class, RenderOcelot::new);
-  RenderingRegistry.registerEntityRenderingHandler(EntitySheeder.class, RenderSheeder::new);
-  RenderingRegistry.registerEntityRenderingHandler(EntityOrePig.class, RenderOrePig::new);
-  RenderingRegistry.registerEntityRenderingHandler(EntityScholarChicken.class, RenderScholarChicken::new);
-  RenderingRegistry.registerEntityRenderingHandler(EntityJellyRabbit.class, RenderJellyRabbit::new);
-  RenderingRegistry.registerEntityRenderingHandler(EntityHangingLabel.class, RenderHangingLabel::new);
-  RenderingRegistry.registerEntityRenderingHandler(EntityHellHound.class, RenderHellHound::new);
-  RenderingRegistry.registerEntityRenderingHandler(EntityEmber.class, RenderEmber::new);
-  RenderingRegistry.registerEntityRenderingHandler(EntityGoldenChicken.class, RenderGoldChicken::new);
-  RenderingRegistry.registerEntityRenderingHandler(EntityChocow.class, RenderChocolateCow::new);
-  RenderingRegistry.registerEntityRenderingHandler(EntityGuardianPanther.class, RenderGuardianPanther::new);
-  OBJLoader.INSTANCE.addDomain("isorropia");
- }
+    @Override
+    public void preInit(FMLPreInitializationEvent event) {
+        super.preInit(event);
+        MinecraftForge.EVENT_BUS.register(RenderEventHandler.class);
+        RenderingRegistry.registerEntityRenderingHandler(EntityIncubatedEgg.class, renderManager -> new RenderSnowball(renderManager, ItemsIS.itemIncubatedEgg, Minecraft.getMinecraft().getRenderItem()));
+        ClientRegistry.bindTileEntitySpecialRenderer(TileJarSoul.class, new RenderJarSoul());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileModifiedMatrix.class, new RenderModifiedMatrix());
+        RenderingRegistry.registerEntityRenderingHandler(EntitySaehrimnir.class, RenderSaehrimnir::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntitySaehrimnirReborn.class, RenderSaehrimnirReborn::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTaintPig.class, RenderTaintPig::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityGravekeeper.class, RenderOcelot::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntitySheeder.class, RenderSheeder::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityOrePig.class, RenderOrePig::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityScholarChicken.class, RenderScholarChicken::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityJellyRabbit.class, RenderJellyRabbit::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHangingLabel.class, RenderHangingLabel::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHellHound.class, RenderHellHound::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityEmber.class, RenderEmber::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityGoldenChicken.class, RenderGoldChicken::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityChocow.class, RenderChocolateCow::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityGuardianPanther.class, RenderGuardianPanther::new);
+        OBJLoader.INSTANCE.addDomain("isorropia");
+    }
 
- @Override
- public void init(FMLInitializationEvent event) {
-  super.init(event);
-  ItemsIS.items.stream().filter(item -> item instanceof IItemStackRenderProvider).forEach(item -> item.setTileEntityItemStackRenderer(new RenderCustomItem()));
-  BlocksIS.blocks.stream().filter(block -> Item.getItemFromBlock((Block)block) instanceof IItemStackRenderProvider).forEach(block -> Item.getItemFromBlock((Block)block).setTileEntityItemStackRenderer(new RenderCustomItem()));
- }
+    @Override
+    public void init(FMLInitializationEvent event) {
+        super.init(event);
+        ItemsIS.items.stream().filter(item -> item instanceof IItemStackRenderProvider).forEach(item -> item.setTileEntityItemStackRenderer(new RenderCustomItem()));
+        BlocksIS.blocks.stream().filter(block -> Item.getItemFromBlock(block) instanceof IItemStackRenderProvider).forEach(block -> Item.getItemFromBlock(block).setTileEntityItemStackRenderer(new RenderCustomItem()));
+    }
 
- @Override
- public void postInit(FMLPostInitializationEvent event) {
-  super.postInit(event);
-  IItemColor itemEssentiaColourHandler = (stack, tintIndex) -> {
-   IEssentiaContainerItem item = (IEssentiaContainerItem)((Object)stack.getItem());
-   if (item != null && item.getAspects(stack) != null) {
-    return item.getAspects(stack).getAspects()[0].getColor();
-   }
-   return Aspect.SENSES.getColor();
-  };
-  Minecraft.getMinecraft().getItemColors().registerItemColorHandler(itemEssentiaColourHandler, new Item[]{ItemsIS.itemJelly});
-  MinecraftForge.EVENT_BUS.register(new KeyHandler());
-  RenderEventHandler.tip = ReflectionHelper.findMethod(Render.class, "getEntityTexture", "func_110775_a", new Class[]{Entity.class});
- }
+    @Override
+    public void postInit(FMLPostInitializationEvent event) {
+        super.postInit(event);
+        IItemColor itemEssentiaColourHandler = (stack, tintIndex) -> {
+            IEssentiaContainerItem item = (IEssentiaContainerItem) stack.getItem();
+            if (item != null && item.getAspects(stack) != null) {
+                return item.getAspects(stack).getAspects()[0].getColor();
+            }
+            return Aspect.SENSES.getColor();
+        };
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(itemEssentiaColourHandler, ItemsIS.itemJelly);
+        MinecraftForge.EVENT_BUS.register(new KeyHandler());
+        RenderEventHandler.tip = ReflectionHelper.findMethod(Render.class, "getEntityTexture", "func_110775_a", Entity.class);
+    }
 }

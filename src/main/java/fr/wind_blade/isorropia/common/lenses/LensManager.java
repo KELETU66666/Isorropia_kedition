@@ -1,15 +1,15 @@
 package fr.wind_blade.isorropia.common.lenses;
+
 import baubles.api.BaublesApi;
 import fr.wind_blade.isorropia.common.IsorropiaAPI;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import thaumcraft.api.items.IGoggles;
 import thaumcraft.api.items.IRevealer;
 
 public class LensManager {
@@ -18,17 +18,17 @@ public class LensManager {
         ItemStack revealer = getRevealer(player);
 
 
-        Lens old = revealer.hasTagCompound() ? (Lens)IsorropiaAPI.lensRegistry.getValue(new ResourceLocation(revealer.getTagCompound().getString(type.getName()))) : null;
+        Lens old = revealer.hasTagCompound() ? IsorropiaAPI.lensRegistry.getValue(new ResourceLocation(revealer.getTagCompound().getString(type.getName()))) : null;
 
 
         if (old != null)
             old.handleRemoval(player.world, player);
-        setLens(getRevealer((EntityPlayer)(Minecraft.getMinecraft()).player), lens, type);
+        setLens(getRevealer((Minecraft.getMinecraft()).player), lens, type);
     }
 
     public static Lens getLens(ItemStack revealer, LENSSLOT type) {
         if (revealer.hasTagCompound() && revealer.getTagCompound().hasKey(type.getName()))
-            return (Lens)IsorropiaAPI.lensRegistry
+            return IsorropiaAPI.lensRegistry
                     .getValue(new ResourceLocation(revealer.getTagCompound().getString(type.getName())));
         return null;
     }
@@ -47,10 +47,10 @@ public class LensManager {
         if (revealer.hasTagCompound() && revealer.getTagCompound().hasKey(type.getName())) {
             String oldLens = revealer.getTagCompound().getString(type.getName());
             if (!oldLens.isEmpty()) {
-                Lens lens2 = (Lens)IsorropiaAPI.lensRegistry.getValue(new ResourceLocation(oldLens));
+                Lens lens2 = IsorropiaAPI.lensRegistry.getValue(new ResourceLocation(oldLens));
                 lens2.handleRemoval(player.world, player);
-                if (!player.inventory.addItemStackToInventory(new ItemStack((Item)lens2.getItemLens())))
-                    player.dropItem(new ItemStack((Item)lens2.getItemLens()), false);
+                if (!player.inventory.addItemStackToInventory(new ItemStack(lens2.getItemLens())))
+                    player.dropItem(new ItemStack(lens2.getItemLens()), false);
                 revealer.getTagCompound().removeTag(type.getName());
             }
         }
@@ -67,20 +67,43 @@ public class LensManager {
         return false;
     }
 
-    public static ItemStack getRevealer(EntityPlayer player) {
+    public static ItemStack getGoggles(EntityPlayer player) {
         boolean find = false;
-        ItemStack revealer = ItemStack.EMPTY;
-        for (int i = 0; i < 7; i++) {
-            revealer = BaublesApi.getBaubles(player).getStackInSlot(i);
-            if (revealer.getItem() instanceof IRevealer && ((IRevealer)revealer
-                    .getItem()).showNodes(revealer, (EntityLivingBase)player)) {
+        ItemStack goggles = ItemStack.EMPTY;
+        for (int i = 0; i < BaublesApi.getBaublesHandler(player).getSlots(); i++) {
+            goggles = BaublesApi.getBaubles(player).getStackInSlot(i);
+            if (goggles.getItem() instanceof IGoggles && ((IGoggles)goggles.getItem()).showIngamePopups(goggles, player)) {
                 find = true;
                 break;
             }
         }
         if (!find) {
             for (ItemStack stack : player.getArmorInventoryList()) {
-                if (stack.getItem() instanceof IRevealer && ((IRevealer)stack.getItem()).showNodes(stack, (EntityLivingBase)player)) {
+                if (stack.getItem() instanceof IGoggles && ((IGoggles)stack.getItem()).showIngamePopups(stack, player)) {
+                    goggles = stack;
+                    break;
+                }
+            }
+        }
+        return goggles;
+    }
+
+    public static ItemStack getRevealer(EntityPlayer player) {
+        if(!getGoggles(player).isEmpty())
+            return getGoggles(player);
+
+        boolean find = false;
+        ItemStack revealer = ItemStack.EMPTY;
+        for (int i = 0; i < BaublesApi.getBaublesHandler(player).getSlots(); i++) {
+            revealer = BaublesApi.getBaubles(player).getStackInSlot(i);
+            if (revealer.getItem() instanceof IRevealer && ((IRevealer)revealer.getItem()).showNodes(revealer, player)) {
+                find = true;
+                break;
+            }
+        }
+        if (!find) {
+            for (ItemStack stack : player.getArmorInventoryList()) {
+                if (stack.getItem() instanceof IRevealer && ((IRevealer)stack.getItem()).showNodes(stack, player)) {
                     revealer = stack;
                     break;
                 }

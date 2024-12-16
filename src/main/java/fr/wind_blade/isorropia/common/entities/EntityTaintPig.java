@@ -1,22 +1,10 @@
  package fr.wind_blade.isorropia.common.entities;
- 
+
  import com.google.common.collect.Sets;
  import fr.wind_blade.isorropia.common.entities.ai.EntityAIEatTaint;
  import fr.wind_blade.isorropia.common.entities.ai.EntityAITaintTempt;
- import java.util.Set;
- import net.minecraft.entity.Entity;
- import net.minecraft.entity.EntityCreature;
- import net.minecraft.entity.EntityLiving;
- import net.minecraft.entity.EntityLivingBase;
- import net.minecraft.entity.SharedMonsterAttributes;
- import net.minecraft.entity.ai.EntityAIAttackMelee;
- import net.minecraft.entity.ai.EntityAIBase;
- import net.minecraft.entity.ai.EntityAILookIdle;
- import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
- import net.minecraft.entity.ai.EntityAIPanic;
- import net.minecraft.entity.ai.EntityAISwimming;
- import net.minecraft.entity.ai.EntityAIWander;
- import net.minecraft.entity.ai.EntityAIWatchClosest;
+ import net.minecraft.entity.*;
+ import net.minecraft.entity.ai.*;
  import net.minecraft.entity.passive.EntityPig;
  import net.minecraft.entity.player.EntityPlayer;
  import net.minecraft.item.Item;
@@ -30,6 +18,8 @@
  import thaumcraft.api.potions.PotionVisExhaust;
  import thaumcraft.common.entities.monster.tainted.EntityTaintCrawler;
  import thaumcraft.common.lib.potions.PotionInfectiousVisExhaust;
+
+ import java.util.Set;
  
  
  

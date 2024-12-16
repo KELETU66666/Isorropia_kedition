@@ -1,5 +1,5 @@
  package fr.wind_blade.isorropia.common.entities;
- 
+
  import io.netty.buffer.ByteBuf;
  import net.minecraft.block.state.IBlockState;
  import net.minecraft.entity.Entity;

@@ -2,8 +2,6 @@ package fr.wind_blade.isorropia.common.blocks;
 
 import fr.wind_blade.isorropia.common.libs.helpers.IsorropiaHelper;
 import fr.wind_blade.isorropia.common.tiles.TileJarSoul;
-import java.util.ArrayList;
-import java.util.List;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -27,6 +25,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.api.casters.ICaster;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockJarSoul
         extends BlockContainer

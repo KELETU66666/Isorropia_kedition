@@ -55,7 +55,7 @@ public class LivingCapability extends LivingBaseCapability {
     public static class Factory
             implements Callable<LivingCapability> {
         @Override
-        public LivingCapability call() throws Exception {
+        public LivingCapability call() {
             return null;
         }
     }

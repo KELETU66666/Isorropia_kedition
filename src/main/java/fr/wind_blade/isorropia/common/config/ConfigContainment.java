@@ -1,8 +1,9 @@
 package fr.wind_blade.isorropia.common.config;
 
+import net.minecraft.entity.Entity;
+
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.entity.Entity;
 
 
 public class ConfigContainment

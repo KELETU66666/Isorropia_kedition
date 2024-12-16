@@ -3,7 +3,6 @@ package fr.wind_blade.isorropia.common.entities;
 import fr.wind_blade.isorropia.common.items.ItemsIS;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 

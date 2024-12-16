@@ -4,8 +4,6 @@
 
 package fr.wind_blade.isorropia.common.entities;
 
-import java.util.ArrayList;
-
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -20,6 +18,8 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
 
 public class EntityGuardianPanther extends EntityOcelot {
 

@@ -271,7 +271,7 @@
         	"stages":[
         		{
         			"text":"research.TAINTFEEDER.stage.1.text",
-        			"required_item":["thaumcraft:taint_fibre;15", "thaumcraft:taint_crust;10", "thaumcraft:taint_soil;20", "thaumcraft:taint_rock:20", "thaumcraft:taint_log;20"],
+        			"required_item":["thaumcraft:taint_log;5"],
         			"required_knowledge":["!scan.taintsrc", "THEORY;ALCHEMY;1"]
         		},
         		{

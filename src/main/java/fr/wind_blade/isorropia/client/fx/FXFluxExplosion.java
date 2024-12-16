@@ -1,6 +1,5 @@
 package fr.wind_blade.isorropia.client.fx;
 
-import java.util.Random;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.entity.Entity;
@@ -10,6 +9,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.client.fx.ParticleEngine;
 import thaumcraft.client.fx.particles.FXGeneric;
+
+import java.util.Random;
 
 @SideOnly(value=Side.CLIENT)
 public class FXFluxExplosion

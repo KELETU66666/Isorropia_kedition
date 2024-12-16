@@ -8,17 +8,9 @@ import fr.wind_blade.isorropia.common.blocks.IBlockRegistry;
 import fr.wind_blade.isorropia.common.blocks.IItemBlockProvider;
 import fr.wind_blade.isorropia.common.items.ItemsIS;
 import fr.wind_blade.isorropia.common.items.misc.ItemCat;
-import fr.wind_blade.isorropia.common.lenses.AirLens;
-import fr.wind_blade.isorropia.common.lenses.EnvyLens;
-import fr.wind_blade.isorropia.common.lenses.FireLens;
-import fr.wind_blade.isorropia.common.lenses.Lens;
-import fr.wind_blade.isorropia.common.lenses.OrdoLens;
-import java.util.HashMap;
-import java.util.Map;
+import fr.wind_blade.isorropia.common.lenses.*;
 import net.minecraft.block.Block;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
@@ -32,8 +24,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.ForgeRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryBuilder;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @EventBusSubscriber(modid = "isorropia")
 public class RegistryEventHandler {

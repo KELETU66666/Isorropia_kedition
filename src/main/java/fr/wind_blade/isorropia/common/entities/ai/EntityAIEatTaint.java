@@ -3,8 +3,6 @@ package fr.wind_blade.isorropia.common.entities.ai;
 import fr.wind_blade.isorropia.common.Common;
 import fr.wind_blade.isorropia.common.config.Config;
 import fr.wind_blade.isorropia.common.network.ParticuleDestroyMessage;
-import java.util.HashMap;
-import java.util.Map;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.BlockPlanks;
@@ -23,6 +21,9 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import thaumcraft.api.ThaumcraftMaterials;
 import thaumcraft.api.blocks.BlocksTC;
 import thaumcraft.common.blocks.world.taint.BlockTaintLog;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 

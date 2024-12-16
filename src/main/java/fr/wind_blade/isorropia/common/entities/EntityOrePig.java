@@ -5,8 +5,6 @@ import fr.wind_blade.isorropia.common.config.DuoWeightedRandom;
 import fr.wind_blade.isorropia.common.config.OrePigEntry;
 import fr.wind_blade.isorropia.common.entities.ai.EntityAIEatStone;
 import fr.wind_blade.isorropia.common.entities.ai.IEatStone;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

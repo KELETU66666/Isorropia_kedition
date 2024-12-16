@@ -4,7 +4,6 @@ import fr.wind_blade.isorropia.Isorropia;
 import fr.wind_blade.isorropia.common.Common;
 import fr.wind_blade.isorropia.common.IsorropiaAPI;
 import fr.wind_blade.isorropia.common.capabilities.LivingBaseCapability;
-import fr.wind_blade.isorropia.common.research.recipes.CurativeInfusionRecipe;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;

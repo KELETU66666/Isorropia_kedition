@@ -2,7 +2,6 @@ package fr.wind_blade.isorropia.client.renderer.tiles;
 
 import fr.wind_blade.isorropia.common.tiles.TileModifiedMatrix;
 import fr.wind_blade.isorropia.common.tiles.TileVat;
-import java.util.Random;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -22,6 +21,8 @@ import thaumcraft.api.blocks.BlocksTC;
 import thaumcraft.client.fx.ParticleEngine;
 import thaumcraft.client.fx.particles.FXGeneric;
 import thaumcraft.client.renderers.models.ModelCube;
+
+import java.util.Random;
 
 @SideOnly(value=Side.CLIENT)
 public class RenderModifiedMatrix

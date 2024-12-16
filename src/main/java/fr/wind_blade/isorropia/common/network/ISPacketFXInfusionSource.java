@@ -2,7 +2,6 @@ package fr.wind_blade.isorropia.common.network;
 
 import fr.wind_blade.isorropia.common.tiles.TileVat;
 import io.netty.buffer.ByteBuf;
-import java.util.Map;
 import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -11,6 +10,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import thaumcraft.Thaumcraft;
 import thaumcraft.common.tiles.crafting.TilePedestal;
+
+import java.util.Map;
 
 public class ISPacketFXInfusionSource
         implements IMessage,

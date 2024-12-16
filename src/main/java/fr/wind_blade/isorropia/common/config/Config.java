@@ -1,10 +1,5 @@
  package fr.wind_blade.isorropia.common.config;
- 
- import java.io.File;
- import java.util.ArrayList;
- import java.util.HashMap;
- import java.util.List;
- import java.util.Map;
+
  import net.minecraft.item.ItemStack;
  import net.minecraft.item.crafting.Ingredient;
  import net.minecraft.util.NonNullList;
@@ -12,6 +7,12 @@
  import net.minecraftforge.common.config.Property;
  import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
  import net.minecraftforge.oredict.OreDictionary;
+
+ import java.io.File;
+ import java.util.ArrayList;
+ import java.util.HashMap;
+ import java.util.List;
+ import java.util.Map;
  
  
  

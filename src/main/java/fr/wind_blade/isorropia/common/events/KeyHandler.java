@@ -6,12 +6,10 @@ import fr.wind_blade.isorropia.common.network.LensRemoveMessageSP;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class KeyHandler
 {
@@ -32,12 +30,12 @@ public class KeyHandler
                 EntityPlayerSP entityPlayerSP = (Minecraft.getMinecraft()).player;
                 if (entityPlayerSP != null) {
                     if (entityPlayerSP.isSneaking()) {
-                        Common.INSTANCE.sendToServer((IMessage)new LensRemoveMessageSP());
+                        Common.INSTANCE.sendToServer(new LensRemoveMessageSP());
                         return;
                     }
                     lastPressV = System.currentTimeMillis();
                     radialLock = false;
-                    if (!radialLock && !LensManager.getRevealer((EntityPlayer)entityPlayerSP).isEmpty()) {
+                    if (!radialLock && !LensManager.getRevealer(entityPlayerSP).isEmpty()) {
                         radialActive = true;
                     }
                 }

@@ -1,11 +1,10 @@
  package fr.wind_blade.isorropia.client.renderer.entities.layers;
- 
+
  import fr.wind_blade.isorropia.client.renderer.entities.RenderSheeder;
  import fr.wind_blade.isorropia.common.entities.EntitySheeder;
  import net.minecraft.client.renderer.GlStateManager;
  import net.minecraft.client.renderer.entity.layers.LayerRenderer;
  import net.minecraft.entity.Entity;
- import net.minecraft.entity.EntityLivingBase;
  import net.minecraft.util.ResourceLocation;
  import net.minecraftforge.fml.relauncher.Side;
  import net.minecraftforge.fml.relauncher.SideOnly;

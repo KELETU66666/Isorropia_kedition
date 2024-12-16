@@ -1,13 +1,13 @@
 package fr.wind_blade.isorropia.common.research.recipes;
 
-import fr.wind_blade.isorropia.common.research.recipes.CurativeInfusionRecipe;
-import java.util.List;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.world.World;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+
+import java.util.List;
 
 public class CurativePetrificationInfusionRecipe
         extends CurativeInfusionRecipe {

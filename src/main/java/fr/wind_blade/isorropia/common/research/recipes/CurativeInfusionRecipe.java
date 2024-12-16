@@ -8,12 +8,6 @@ import fr.wind_blade.isorropia.common.celestial.CelestialBody;
 import fr.wind_blade.isorropia.common.celestial.ICelestialBody;
 import fr.wind_blade.isorropia.common.items.ItemsIS;
 import fr.wind_blade.isorropia.common.tiles.TileVat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
-import java.util.function.Predicate;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -31,6 +25,9 @@ import thaumcraft.api.ThaumcraftInvHelper;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.capabilities.ThaumcraftCapabilities;
 import thaumcraft.api.crafting.InfusionRecipe;
+
+import java.util.*;
+import java.util.function.Predicate;
 
 public class CurativeInfusionRecipe extends InfusionRecipe {
     protected final Predicate<EntityLivingBase> predicate;

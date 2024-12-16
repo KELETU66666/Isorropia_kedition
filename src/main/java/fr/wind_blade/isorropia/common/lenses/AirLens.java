@@ -2,7 +2,6 @@ package fr.wind_blade.isorropia.common.lenses;
 
 import fr.wind_blade.isorropia.common.items.misc.ItemLens;
 import fr.wind_blade.isorropia.common.libs.helpers.IRMathHelper;
-import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
@@ -14,6 +13,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 import thaumcraft.client.lib.UtilsFX;
+
+import java.util.List;
 
 
 

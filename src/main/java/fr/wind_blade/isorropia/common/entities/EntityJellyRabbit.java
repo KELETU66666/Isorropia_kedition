@@ -1,9 +1,6 @@
 package fr.wind_blade.isorropia.common.entities;
 
 import fr.wind_blade.isorropia.common.items.ItemsIS;
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -11,7 +8,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.passive.EntityRabbit;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -27,6 +23,10 @@ import net.minecraftforge.common.IShearable;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aura.AuraHelper;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EntityJellyRabbit
         extends EntityRabbit implements IShearable {

@@ -1,10 +1,10 @@
  package fr.wind_blade.isorropia.client.renderer.entities;
+
  import fr.wind_blade.isorropia.common.entities.EntitySaehrimnir;
  import net.minecraft.client.model.ModelBase;
  import net.minecraft.client.model.ModelPig;
  import net.minecraft.client.renderer.entity.RenderLiving;
  import net.minecraft.client.renderer.entity.RenderManager;
- import net.minecraft.entity.Entity;
  import net.minecraft.util.ResourceLocation;
  import net.minecraftforge.fml.relauncher.Side;
  import net.minecraftforge.fml.relauncher.SideOnly;

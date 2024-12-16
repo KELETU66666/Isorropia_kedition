@@ -1,6 +1,7 @@
 package fr.wind_blade.isorropia.common.config;
 
 import io.netty.util.internal.ThreadLocalRandom;
+
 import java.util.List;
 import java.util.Random;
 

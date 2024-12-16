@@ -8,14 +8,8 @@ import fr.wind_blade.isorropia.common.items.ItemsIS;
 import fr.wind_blade.isorropia.common.lenses.Lens;
 import fr.wind_blade.isorropia.common.research.recipes.CurativeInfusionRecipe;
 import fr.wind_blade.isorropia.common.tiles.TileVat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
@@ -24,11 +18,13 @@ import net.minecraftforge.registries.ForgeRegistry;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 
+import java.util.*;
+
 public class IsorropiaAPI {
-    public static final Ingredient DEFAULT_INFUSION_FAKE = Ingredient.fromItem((Item)ItemsIS.itemCat);
+    public static final Ingredient DEFAULT_INFUSION_FAKE = Ingredient.fromItem(ItemsIS.itemCat);
     public static final Aspect HUNGER = new Aspect("fames", 10093317, new Aspect[]{Aspect.LIFE, Aspect.VOID}, new ResourceLocation("isorropia", "textures/aspects/fames.png"), 1);
     public static final Aspect FLESH = new Aspect("corpus", 15615885, new Aspect[]{Aspect.DEATH, Aspect.BEAST}, new ResourceLocation("isorropia", "textures/aspects/corpus.png"), 1);
-    public static final Aspect ENVY = new Aspect("invidia", 47616, new Aspect[]{Aspect.SENSES, HUNGER}, new ResourceLocation("isorropia", "textures/aspects/invidia.png"), 1);
+    public static final Aspect ENVY = new Aspect("invidia", 0x00ba00, new Aspect[]{Aspect.SENSES, HUNGER}, new ResourceLocation("isorropia", "textures/aspects/invidia.png"), 1);
     public static final Aspect GLUTTONY = new Aspect("gula", 13999174, new Aspect[]{HUNGER, Aspect.VOID}, new ResourceLocation("isorropia", "textures/aspects/gula.png"), 1);
     public static final Aspect LUST = new Aspect("luxuria", 16761294, new Aspect[]{FLESH, HUNGER}, new ResourceLocation("isorropia", "textures/aspects/luxuria.png"), 1);
     public static final Aspect NETHER = new Aspect("infernus", 0xFF0000, new Aspect[]{Aspect.FIRE, Aspect.MAGIC}, new ResourceLocation("isorropia", "textures/aspects/infernus.png"), 771);

@@ -7,7 +7,6 @@ package fr.wind_blade.isorropia.client.renderer.entities;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderOcelot;
 import net.minecraft.entity.passive.EntityOcelot;
-
 import org.lwjgl.opengl.GL11;
 
 public class RenderGuardianPanther extends RenderOcelot {

@@ -1,8 +1,6 @@
 package fr.wind_blade.isorropia.client.model;
 
 import fr.wind_blade.isorropia.client.renderer.RenderCustomItem;
-import java.util.List;
-import javax.vecmath.Matrix4f;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
@@ -14,6 +12,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.tuple.Pair;
+
+import javax.vecmath.Matrix4f;
+import java.util.List;
 
 
 

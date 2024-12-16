@@ -11,45 +11,24 @@ import fr.wind_blade.isorropia.common.lenses.Lens;
 import fr.wind_blade.isorropia.common.lenses.LensManager;
 import fr.wind_blade.isorropia.common.network.LensChangeMessage;
 import fr.wind_blade.isorropia.common.research.recipes.CurativeInfusionRecipe;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.TreeMap;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.RenderItem;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
-import net.minecraftforge.client.event.GuiScreenEvent;
-import net.minecraftforge.client.event.ModelBakeEvent;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.client.event.RenderHandEvent;
-import net.minecraftforge.client.event.RenderLivingEvent;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -60,18 +39,21 @@ import thaumcraft.client.gui.GuiResearchBrowser;
 import thaumcraft.client.gui.GuiResearchPage;
 import thaumcraft.client.lib.UtilsFX;
 
-
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.*;
 
 
 @SideOnly(Side.CLIENT)
-public class RenderEventHandler
-{
+public class RenderEventHandler {
     public static final ResourceLocation LIGO_TEX = new ResourceLocation("isorropia", "textures/misc/ligo.png");
 
     public static IBakedModel jar_soul = null;
 
     private static Lens theRightLens;
-    private static final fociHUD fociLeft = new fociHUD(LensManager.LENSSLOT.LEFT); private static Lens theLeftLens; private static float radialHudScale;
+    private static final fociHUD fociLeft = new fociHUD(LensManager.LENSSLOT.LEFT);
+    private static Lens theLeftLens;
+    private static float radialHudScale;
     private static final fociHUD fociRight = new fociHUD(LensManager.LENSSLOT.RIGHT);
 
     public static ResourceLocation TEX_VIS = new ResourceLocation("thaumcraft", "textures/gui/gui_researchbook_overlay.png");
@@ -116,15 +98,14 @@ public class RenderEventHandler
             LivingBaseCapability cap = Common.getCap(entityPlayerSP);
             if (cap.petrification > 0) {
                 float flag = 1.0F - (100.0F - cap.petrification) / 100.0F;
-                float width = (float)event.getResolution().getScaledWidth_double();
-                float height = (float)event.getResolution().getScaledHeight_double();
+                float width = (float) event.getResolution().getScaledWidth_double();
+                float height = (float) event.getResolution().getScaledHeight_double();
                 float f2 = height / 34.0F;
                 float f3 = width / 34.0F;
                 GlStateManager.pushMatrix();
                 GlStateManager.blendFunc(770, 771);
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, flag);
-                (Minecraft.getMinecraft()).renderEngine
-                        .bindTexture(new ResourceLocation("textures/blocks/cobblestone.png"));
+                (Minecraft.getMinecraft()).renderEngine.bindTexture(new ResourceLocation("textures/blocks/cobblestone.png"));
                 Tessellator tessellator = Tessellator.getInstance();
                 BufferBuilder buffer = tessellator.getBuffer();
                 buffer.begin(7, DefaultVertexFormats.POSITION_TEX);
@@ -150,24 +131,24 @@ public class RenderEventHandler
             Field shown = ReflectionHelper.findField(GuiResearchPage.class, "shownRecipe");
 
             try {
-                int recipePage = ((Integer)index.get(screen)).intValue();
-                LinkedHashMap maps = (LinkedHashMap)recipes.get(screen);
-                ResourceLocation loc = (ResourceLocation)shown.get(screen);
+                int recipePage = ((Integer) index.get(screen)).intValue();
+                LinkedHashMap maps = (LinkedHashMap) recipes.get(screen);
+                ResourceLocation loc = (ResourceLocation) shown.get(screen);
 
                 if (maps == null || loc == null) {
                     return;
                 }
-                List<Object> list = (List<Object>)maps.get(loc);
+                List<Object> list = (List<Object>) maps.get(loc);
 
                 if (list != null && !list.isEmpty()) {
                     Object recipe = list.get(recipePage % list.size());
 
                     if (recipe instanceof CurativeInfusionRecipe) {
-                        drawCurativeInfusionRecipe((CurativeInfusionRecipe)recipe, event);
+                        drawCurativeInfusionRecipe((CurativeInfusionRecipe) recipe, event);
                     }
                 }
 
-            } catch (IllegalArgumentException|IllegalAccessException e) {
+            } catch (IllegalArgumentException | IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
@@ -175,22 +156,20 @@ public class RenderEventHandler
 
     @SubscribeEvent
     public static void onToolTip(ItemTooltipEvent event) {
-        ArrayList<String> tooltip = (ArrayList<String>)event.getToolTip();
+        ArrayList<String> tooltip = (ArrayList<String>) event.getToolTip();
         ItemStack stack = event.getItemStack();
 
         if (stack.hasTagCompound() && (stack.getItem() instanceof thaumcraft.api.items.IGoggles || stack.getItem() instanceof thaumcraft.api.items.IRevealer)) {
             String lens = stack.getTagCompound().getString(LensManager.LENSSLOT.LEFT.getName());
 
             if (!lens.isEmpty()) {
-                tooltip.add(1, "§a" + I18n.format("lens." + IsorropiaAPI.lensRegistry
-                        .getValue(new ResourceLocation(lens)).getTranslationKey()));
+                tooltip.add(1, "§a" + I18n.format("lens." + IsorropiaAPI.lensRegistry.getValue(new ResourceLocation(lens)).getTranslationKey()));
             }
 
             lens = stack.getTagCompound().getString(LensManager.LENSSLOT.RIGHT.getName());
 
             if (!lens.isEmpty()) {
-                tooltip.add(1, "§a" + I18n.format("lens." + IsorropiaAPI.lensRegistry
-                        .getValue(new ResourceLocation(lens)).getTranslationKey()));
+                tooltip.add(1, "§a" + I18n.format("lens." + IsorropiaAPI.lensRegistry.getValue(new ResourceLocation(lens)).getTranslationKey()));
             }
         }
     }
@@ -253,19 +232,22 @@ public class RenderEventHandler
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public static void renderPlayerEvent(RenderHandEvent event) {}
+    public static void renderPlayerEvent(RenderHandEvent event) {
+    }
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public static void preRenderLiving(RenderLivingEvent.Pre<EntityLivingBase> event) {}
+    public static void preRenderLiving(RenderLivingEvent.Pre<EntityLivingBase> event) {
+    }
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public static void postRenderLiving(RenderLivingEvent.Post<EntityLivingBase> event) {}
+    public static void postRenderLiving(RenderLivingEvent.Post<EntityLivingBase> event) {
+    }
 
     protected static float interpolateRotation(float prevYawOffset, float yawOffset, float partialTicks) {
         float f;
-        for (f = yawOffset - prevYawOffset; f < -180.0F; f += 360.0F);
+        for (f = yawOffset - prevYawOffset; f < -180.0F; f += 360.0F) ;
         while (f >= 180.0F) {
             f -= 360.0F;
         }
@@ -273,8 +255,7 @@ public class RenderEventHandler
         return prevYawOffset + partialTicks * f;
     }
 
-    public static class fociHUD
-    {
+    public static class fociHUD {
         private static final ResourceLocation radial = new ResourceLocation("thaumcraft", "textures/misc/radial.png");
         private static final ResourceLocation radial2 = new ResourceLocation("thaumcraft", "textures/misc/radial2.png");
         static final TreeMap<ResourceLocation, Integer> foci = new TreeMap<>();
@@ -314,7 +295,7 @@ public class RenderEventHandler
                         for (int a = 0; a < mc.player.inventory.mainInventory.size(); a++) {
                             item = mc.player.inventory.mainInventory.get(a);
                             if (!item.isEmpty() && item.getItem() instanceof ItemLens) {
-                                ItemLens lens = (ItemLens)item.getItem();
+                                ItemLens lens = (ItemLens) item.getItem();
                                 foci.put(lens.getLens().getRegistryName(), Integer.valueOf(a));
                                 lensStack.put(lens.getLens().getRegistryName(), item.copy());
                                 this.fociScale.put(lens.getLens().getRegistryName(), Float.valueOf(1.0F));
@@ -351,7 +332,8 @@ public class RenderEventHandler
                             if (this.fociScale.get(key).floatValue() >= 1.3F) {
                                 continue;
                             }
-                            this.fociScale.put(key, Float.valueOf(this.fociScale.get(key).floatValue() + 0.025F)); continue;
+                            this.fociScale.put(key, Float.valueOf(this.fociScale.get(key).floatValue() + 0.025F));
+                            continue;
                         }
                         if (this.fociScale.get(key).floatValue() <= 1.0F) {
                             continue;
@@ -382,11 +364,11 @@ public class RenderEventHandler
             if (goggles == null)
                 return;
             Lens lens = null;
-            if (goggles.getTagCompound() != null)
-            {
-                lens = IsorropiaAPI.lensRegistry.getValue(new ResourceLocation(goggles.getTagCompound().getString(this.type.getName()))); }
-            int i = (int)(Mouse.getEventX() * sw / mc.displayWidth);
-            int j = (int)(sh - Mouse.getEventY() * sh / mc.displayHeight - 1.0D);
+            if (goggles.getTagCompound() != null) {
+                lens = IsorropiaAPI.lensRegistry.getValue(new ResourceLocation(goggles.getTagCompound().getString(this.type.getName())));
+            }
+            int i = (int) (Mouse.getEventX() * sw / mc.displayWidth);
+            int j = (int) (sh - Mouse.getEventY() * sh / mc.displayHeight - 1.0D);
             int k = Mouse.getEventButton();
             if (lensStack.size() == 0) {
                 return;
@@ -412,7 +394,8 @@ public class RenderEventHandler
                 GL11.glRotatef(-(partialTicks + (mc.player.ticksExisted % 720) / 2.0F), 0.0F, 0.0F, 1.0F);
             } else {
                 GL11.glRotatef(partialTicks + (mc.player.ticksExisted % 720) / 2.0F, 0.0F, 0.0F, 1.0F);
-            }  GL11.glAlphaFunc(516, 0.003921569F);
+            }
+            GL11.glAlphaFunc(516, 0.003921569F);
             GL11.glEnable(3042);
             GL11.glBlendFunc(770, 771);
             UtilsFX.renderQuadCentered(1, 1, 0, width * 2.75F * RenderEventHandler.radialHudScale, 0.5F, 0.5F, 0.5F, 200, 771, 0.5F);
@@ -425,7 +408,8 @@ public class RenderEventHandler
                 GL11.glRotatef(partialTicks + (mc.player.ticksExisted % 720) / 2.0F, 0.0F, 0.0F, 1.0F);
             } else {
                 GL11.glRotatef(-(partialTicks + (mc.player.ticksExisted % 720) / 2.0F), 0.0F, 0.0F, 1.0F);
-            }  GL11.glAlphaFunc(516, 0.003921569F);
+            }
+            GL11.glAlphaFunc(516, 0.003921569F);
             GL11.glEnable(3042);
             GL11.glBlendFunc(770, 771);
             UtilsFX.renderQuadCentered(1, 1, 0, width * 2.55F * RenderEventHandler.radialHudScale, 0.5F, 0.5F, 0.5F, 200, 771, 0.5F);
@@ -443,8 +427,8 @@ public class RenderEventHandler
                 RenderHelper.disableStandardItemLighting();
                 GL11.glDisable(32826);
                 GL11.glPopMatrix();
-                int mx = (int)(i - sw / 2.0D);
-                int my = (int)(j - sh / 2.0D);
+                int mx = (int) (i - sw / 2.0D);
+                int my = (int) (j - sh / 2.0D);
                 if (mx >= -10 && mx <= 10 && my >= -10 && my <= 10) {
                     tt = new ItemStack(lens.getItemLens());
                 }
@@ -463,7 +447,8 @@ public class RenderEventHandler
                     GL11.glTranslated(xx, yy, 100.0D);
                 } else {
                     GL11.glTranslated(-xx, yy, 100.0D);
-                }  if (this.fociScale.get(key) == null)
+                }
+                if (this.fociScale.get(key) == null)
                     this.fociScale.put(key, Float.valueOf(1.0F));
                 GL11.glScalef(this.fociScale.get(key).floatValue(), this.fociScale.get(key).floatValue(), this.fociScale.get(key).floatValue());
                 GL11.glEnable(32826);
@@ -478,10 +463,11 @@ public class RenderEventHandler
                     int mx2;
 
                     if (this.type.equals(LensManager.LENSSLOT.LEFT)) {
-                        mx2 = (int)(i - sw / 2.0D - xx + -this.type.getAngle());
+                        mx2 = (int) (i - sw / 2.0D - xx + -this.type.getAngle());
                     } else {
-                        mx2 = (int)(i - sw / 2.0D - -xx + -this.type.getAngle());
-                    }  int my2 = (int)(j - sh / 2.0D - yy);
+                        mx2 = (int) (i - sw / 2.0D - -xx + -this.type.getAngle());
+                    }
+                    int my2 = (int) (j - sh / 2.0D - yy);
                     if (mx2 >= -10 && mx2 <= 10 && my2 >= -10 && my2 <= 10) {
                         this.lensHover.put(key, Boolean.valueOf(true));
                         tt = lensStack.get(key);
@@ -499,7 +485,8 @@ public class RenderEventHandler
                     } else {
                         this.lensHover.put(key, Boolean.valueOf(false));
                     }
-                }  key = foci.higherKey(key);
+                }
+                key = foci.higherKey(key);
             }
             GL11.glPopMatrix();
             if (tt != null)

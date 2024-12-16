@@ -1,6 +1,5 @@
  package fr.wind_blade.isorropia.common.entities.ai;
- 
- import java.util.Random;
+
  import net.minecraft.block.state.BlockFaceShape;
  import net.minecraft.block.state.IBlockState;
  import net.minecraft.entity.Entity;
@@ -16,6 +15,8 @@
  import thaumcraft.common.lib.SoundsTC;
  import thaumcraft.common.lib.network.PacketHandler;
  import thaumcraft.common.lib.network.fx.PacketFXBlockArc;
+
+ import java.util.Random;
  
  public class EntityAILigo
    extends EntityAIBase {

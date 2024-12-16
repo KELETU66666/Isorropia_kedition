@@ -1,5 +1,5 @@
  package fr.wind_blade.isorropia.client.renderer;
- 
+
  import fr.wind_blade.isorropia.client.libs.RenderEventHandler;
  import fr.wind_blade.isorropia.common.blocks.BlocksIS;
  import net.minecraft.block.Block;

@@ -1,9 +1,5 @@
 package fr.wind_blade.isorropia.common.tiles;
 
-import fr.wind_blade.isorropia.common.tiles.TileVat;
-import java.awt.Color;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -18,6 +14,10 @@ import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.IAspectContainer;
 import thaumcraft.api.casters.IInteractWithCaster;
 import thaumcraft.api.items.IGogglesDisplayExtended;
+
+import java.awt.*;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class TileModifiedMatrix extends TileEntity implements IInteractWithCaster, IAspectContainer, IGogglesDisplayExtended {
     static DecimalFormat myFormatter = new DecimalFormat("#######.##");

@@ -10,8 +10,6 @@ import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import thaumcraft.common.lib.SoundsTC;
 
 public class EntityHellHound extends EntityWolf {

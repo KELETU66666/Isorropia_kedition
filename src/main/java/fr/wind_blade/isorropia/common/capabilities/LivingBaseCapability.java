@@ -4,9 +4,6 @@ import fr.wind_blade.isorropia.common.Common;
 import fr.wind_blade.isorropia.common.network.CapabilityMessage;
 import fr.wind_blade.isorropia.common.network.TrackingCapabilityMessage;
 import fr.wind_blade.isorropia.common.research.recipes.OrganCurativeInfusionRecipe;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.Callable;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTBase;
@@ -16,6 +13,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.INBTSerializable;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.Callable;
 
 public class LivingBaseCapability implements ICapabilityProvider, INBTSerializable<NBTTagCompound> {
     public EntityLivingBase entity = null;

@@ -1,15 +1,15 @@
 package fr.wind_blade.isorropia.common.research;
 
-import java.util.HashMap;
-import java.util.UUID;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import thaumcraft.api.capabilities.ThaumcraftCapabilities;
 import thaumcraft.api.research.IScanThing;
+
+import java.util.HashMap;
+import java.util.UUID;
 
 public class ScanFidelity
         implements IScanThing {

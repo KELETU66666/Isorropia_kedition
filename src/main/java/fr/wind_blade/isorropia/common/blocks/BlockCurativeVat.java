@@ -2,7 +2,6 @@ package fr.wind_blade.isorropia.common.blocks;
 
 import fr.wind_blade.isorropia.common.tiles.TileVat;
 import fr.wind_blade.isorropia.common.tiles.TileVatConnector;
-import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -20,6 +19,8 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockCurativeVat
         extends Block

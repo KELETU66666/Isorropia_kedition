@@ -4,7 +4,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
-import net.minecraft.world.World;
 import thaumcraft.common.tiles.TileThaumcraft;
 
 public class TileJarSoul extends TileThaumcraft implements ITickable {

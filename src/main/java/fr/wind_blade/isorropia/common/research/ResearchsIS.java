@@ -249,7 +249,7 @@ public class ResearchsIS {
                 .withAspects(new AspectList().add(Aspect.FIRE, 30).add(Aspect.AVERSION, 30).add(Aspect.ALCHEMY, 30))
                 .withComponents(Ingredient.fromItem(Items.LAVA_BUCKET), Ingredient.fromItem(Items.BLAZE_ROD), Ingredient.fromStacks(ThaumcraftApiHelper.makeCrystal(Aspect.FIRE)), Ingredient.fromItem(Items.BLAZE_ROD))
                 .withInstability(2).withKnowledgeRequirement("NETHER_HOUND"))
-                .withResult(EntityGuardianPanther.class)
+                .withResult(EntityHellHound.class)
                 .withPredicate(entity -> entity.getClass() == EntityWolf.class)
                 .withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.WOLF, "Dog"))
                         , ItemCat.createCat(ItemCat.EnumCat.WOLF, "hellhound")).build());

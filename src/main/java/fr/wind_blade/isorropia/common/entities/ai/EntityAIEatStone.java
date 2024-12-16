@@ -1,6 +1,5 @@
 package fr.wind_blade.isorropia.common.entities.ai;
 
-import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -11,6 +10,8 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
+
+import java.util.List;
 
 public class EntityAIEatStone<T extends EntityLiving & IEatStone> extends EntityAIBase
 {

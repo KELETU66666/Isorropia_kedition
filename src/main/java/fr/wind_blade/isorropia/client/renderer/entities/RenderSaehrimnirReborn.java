@@ -1,5 +1,5 @@
  package fr.wind_blade.isorropia.client.renderer.entities;
- 
+
  import fr.wind_blade.isorropia.client.model.ModelSaehrimnirReborn;
  import fr.wind_blade.isorropia.client.renderer.RenderEntity;
  import fr.wind_blade.isorropia.common.entities.EntitySaehrimnirReborn;

@@ -3,7 +3,6 @@ package fr.wind_blade.isorropia.common.research.recipes;
 import fr.wind_blade.isorropia.Isorropia;
 import fr.wind_blade.isorropia.common.Common;
 import fr.wind_blade.isorropia.common.capabilities.LivingCapability;
-import fr.wind_blade.isorropia.common.research.recipes.CurativeInfusionRecipe;
 import fr.wind_blade.isorropia.common.tiles.TileVat;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
