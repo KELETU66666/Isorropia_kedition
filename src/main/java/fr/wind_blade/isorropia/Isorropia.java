@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
 public class Isorropia {
     public static final String MODID = "isorropia";
     public static final String NAME = "isorropia";
-    public static final String VERSION = "1.0.0";
+    public static final String VERSION = "1.0.3";
     @Instance("isorropia")
     public static Isorropia instance;
     @SidedProxy(clientSide = "fr.wind_blade.isorropia.client.Client", serverSide = "fr.wind_blade.isorropia.server.Server")

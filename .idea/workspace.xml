@@ -4,17 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0487f38c-42ff-4f53-8da4-c5e9a0688d91" name="更改" comment="fix a silliest bug, version bump">
+    <list default="true" id="0487f38c-42ff-4f53-8da4-c5e9a0688d91" name="更改" comment="version burmp lol">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/libs/RenderEventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/libs/RenderEventHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/IsorropiaAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/IsorropiaAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/capabilities/LivingCapability.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/capabilities/LivingCapability.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/events/KeyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/events/KeyHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/lenses/EnvyLens.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/lenses/EnvyLens.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/lenses/LensManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/lenses/LensManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/RenderCustomItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/RenderCustomItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/entities/RenderSaehrimnir.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/entities/RenderSaehrimnir.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/entities/RenderSaehrimnirReborn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/entities/RenderSaehrimnirReborn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/entities/RenderScholarChicken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/entities/RenderScholarChicken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/entities/RenderTaintPig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/entities/RenderTaintPig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/entities/layers/LayerSheederWool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/entities/layers/LayerSheederWool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlockCurativeVat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlockCurativeVat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/config/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/config/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityGravekeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityGravekeeper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityHangingLabel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityHangingLabel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityJellyRabbit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityJellyRabbit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntitySaehrimnirReborn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntitySaehrimnirReborn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityTaintPig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityTaintPig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/ai/EntityAILigo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/ai/EntityAILigo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/ai/EntityAITaintTempt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/ai/EntityAITaintTempt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/ai/IEatStone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/ai/IEatStone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/events/SoundsIR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/events/SoundsIR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/items/IJellyAspectEffectProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/items/IJellyAspectEffectProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/items/ItemsIS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/items/ItemsIS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/items/misc/ItemJelly.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/items/misc/ItemJelly.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/research/ResearchsIS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/research/ResearchsIS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/research/isorropia.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/research/isorropia.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/research/recipes/CurativePetrificationInfusionRecipe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/tiles/TileModifiedMatrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/tiles/TileModifiedMatrix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/tiles/TileVat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/tiles/TileVat.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,7 +241,23 @@
       <option name="project" value="LOCAL" />
       <updated>1734275746195</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="fix several bugs.">
+      <option name="closed" value="true" />
+      <created>1734330251283</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1734330251283</updated>
+    </task>
+    <task id="LOCAL-00013" summary="version burmp lol">
+      <option name="closed" value="true" />
+      <created>1734330481195</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1734330481195</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -254,6 +285,8 @@
     <MESSAGE value="update 1.0.0" />
     <MESSAGE value="version bump" />
     <MESSAGE value="fix a silliest bug, version bump" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix a silliest bug, version bump" />
+    <MESSAGE value="fix several bugs." />
+    <MESSAGE value="version burmp lol" />
+    <option name="LAST_COMMIT_MESSAGE" value="version burmp lol" />
   </component>
 </project>

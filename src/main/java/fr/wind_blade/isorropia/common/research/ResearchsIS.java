@@ -138,7 +138,7 @@ public class ResearchsIS {
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "ore_boar"), new OreBoarRecipe());
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "taintfeeder"),
                 ((SpecieCurativeInfusionRecipe.Builder) new SpecieCurativeInfusionRecipe.Builder().withAspects(
-                                new AspectList().add(IsorropiaAPI.HUNGER, 64).add(Aspect.PLANT, 16).add(Aspect.LIFE, 16).add(Aspect.FLUX, 12))
+                                new AspectList().add(IsorropiaAPI.HUNGER, 100).add(Aspect.PLANT, 50).add(Aspect.LIFE, 50).add(Aspect.FLUX, 45))
                         .withComponents(Ingredient.fromItem(ItemsTC.bottleTaint),
                                 Ingredient.fromItem(Item.getItemFromBlock(BlocksTC.logSilverwood)),
                                 Ingredient.fromItem(Item.getItemFromBlock(BlocksTC.jarVoid)),
@@ -149,13 +149,13 @@ public class ResearchsIS {
                         .withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.PIG, "Pig"))
                                 , ItemCat.createCat(ItemCat.EnumCat.PIG, "Taintfeeder")).build());
 
-        IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "selfshearing"), new CurativeInfusionRecipe.Builder().withAspects(new AspectList().add(Aspect.TOOL, 16).add(Aspect.MECHANISM, 8)).withComponents(Ingredient.fromItem(Items.SHEARS), Ingredient.fromItem(Items.COMPARATOR)).withInstability(2).withKnowledgeRequirement("SELFSHEARING").withPredicate(entity -> entity instanceof IShearable).withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.SHEEP, "Shearable Mob")), ItemCat.createCat(ItemCat.EnumCat.SELFSHEARING, "Self Shearing Mob")).withInformationNBT(new NBTTagCompound()).build());
-        IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "scholarschicken"), ((SpecieCurativeInfusionRecipe.Builder) new SpecieCurativeInfusionRecipe.Builder().withAspects(new AspectList().add(Aspect.SENSES, 16).add(Aspect.EXCHANGE, 8).add(Aspect.DARKNESS, 16)).withComponents(Ingredient.fromStacks(new ItemStack(Items.DYE, 1, 0)), Ingredient.fromItem(Items.SHEARS)).withInstability(2)).withResult(EntityScholarChicken.class).withKnowledgeRequirement("SCHOLARSCHICKEN").withPredicate(entity -> entity.getClass() == EntityChicken.class).withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.CHICKEN, "Chicken")), ItemCat.createCat(ItemCat.EnumCat.CHICKEN, "Scholar's Chicken")).build());
-        IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "chromaticsheep"), ((SpecieCurativeInfusionRecipe.Builder) new SpecieCurativeInfusionRecipe.Builder().withAspects(new AspectList().add(Aspect.SENSES, 16).add(Aspect.EXCHANGE, 8).add(Aspect.DARKNESS, 16)).withComponents(Ingredient.fromStacks(new ItemStack(Items.DYE, 1, 1)), Ingredient.fromStacks(new ItemStack(Items.DYE, 1, 2)), Ingredient.fromStacks(new ItemStack(Items.DYE, 1, 4))).withInstability(2)).withResult(EntityChromaticSheep.class).withKnowledgeRequirement("CHROMATICSHEEP").withPredicate(entity -> entity.getClass() == EntitySheep.class).withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.SHEEP, "Sheep")), ItemCat.createCat(ItemCat.EnumCat.SHEEP, "Chromatic Sheep")).build());
-        IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "gravekeeper"), ((SpecieCurativeInfusionRecipe.Builder) new SpecieCurativeInfusionRecipe.Builder().withAspects(new AspectList().add(Aspect.LIGHT, 64).add(Aspect.UNDEAD, 16).add(Aspect.ORDER, 32)).withComponents(Ingredient.fromItem(Items.BONE), Ingredient.fromItem(Item.getItemFromBlock(Blocks.GOLD_BLOCK)), Ingredient.fromItem(ItemsTC.amber), Ingredient.fromItem(Item.getItemFromBlock(BlocksTC.logSilverwood))).withInstability(6)).withResult(EntityGravekeeper.class).withKnowledgeRequirement("GRAVEKEEPERINFUSION").withCelestialAura(CelestialBody.SUN, 50).withPredicate(entity -> entity.getClass() == EntityOcelot.class).withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.OCELOT, "Feline")), ItemCat.createCat(ItemCat.EnumCat.OCELOT, "Gravekeeper")).build());
+        IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "selfshearing"), new CurativeInfusionRecipe.Builder().withAspects(new AspectList().add(Aspect.TOOL, 60).add(Aspect.MECHANISM, 30)).withComponents(Ingredient.fromItem(Items.SHEARS), Ingredient.fromItem(Items.COMPARATOR)).withInstability(2).withKnowledgeRequirement("SELFSHEARING").withPredicate(entity -> entity instanceof IShearable).withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.SHEEP, "Shearable Mob")), ItemCat.createCat(ItemCat.EnumCat.SELFSHEARING, "Self Shearing Mob")).withInformationNBT(new NBTTagCompound()).build());
+        IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "scholarschicken"), ((SpecieCurativeInfusionRecipe.Builder) new SpecieCurativeInfusionRecipe.Builder().withAspects(new AspectList().add(Aspect.SENSES, 60).add(Aspect.EXCHANGE, 30).add(Aspect.DARKNESS, 60)).withComponents(Ingredient.fromStacks(new ItemStack(Items.DYE, 1, 0)), Ingredient.fromItem(Items.SHEARS)).withInstability(2)).withResult(EntityScholarChicken.class).withKnowledgeRequirement("SCHOLARSCHICKEN").withPredicate(entity -> entity.getClass() == EntityChicken.class).withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.CHICKEN, "Chicken")), ItemCat.createCat(ItemCat.EnumCat.CHICKEN, "Scholar's Chicken")).build());
+        IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "chromaticsheep"), ((SpecieCurativeInfusionRecipe.Builder) new SpecieCurativeInfusionRecipe.Builder().withAspects(new AspectList().add(Aspect.SENSES, 60).add(Aspect.EXCHANGE, 30).add(Aspect.DARKNESS, 60)).withComponents(Ingredient.fromStacks(new ItemStack(Items.DYE, 1, 1)), Ingredient.fromStacks(new ItemStack(Items.DYE, 1, 2)), Ingredient.fromStacks(new ItemStack(Items.DYE, 1, 4))).withInstability(2)).withResult(EntityChromaticSheep.class).withKnowledgeRequirement("CHROMATICSHEEP").withPredicate(entity -> entity.getClass() == EntitySheep.class).withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.SHEEP, "Sheep")), ItemCat.createCat(ItemCat.EnumCat.SHEEP, "Chromatic Sheep")).build());
+        IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "gravekeeper"), ((SpecieCurativeInfusionRecipe.Builder) new SpecieCurativeInfusionRecipe.Builder().withAspects(new AspectList().add(Aspect.LIGHT, 100).add(Aspect.UNDEAD, 60).add(Aspect.ORDER, 80)).withComponents(Ingredient.fromItem(Items.BONE), Ingredient.fromItem(Item.getItemFromBlock(Blocks.GOLD_BLOCK)), Ingredient.fromItem(ItemsTC.amber), Ingredient.fromItem(Item.getItemFromBlock(BlocksTC.logSilverwood))).withInstability(6)).withResult(EntityGravekeeper.class).withKnowledgeRequirement("GRAVEKEEPERINFUSION").withCelestialAura(CelestialBody.SUN, 50).withPredicate(entity -> entity.getClass() == EntityOcelot.class).withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.OCELOT, "Feline")), ItemCat.createCat(ItemCat.EnumCat.OCELOT, "Gravekeeper")).build());
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "enderheart"), (new OrganCurativeInfusionRecipe.Builder())
                 .withOrganTarget(OrganCurativeInfusionRecipe.Organ.HEART)
-                .withAspects((new AspectList()).add(IsorropiaAPI.FLESH, 16).add(Aspect.MOTION, 16).add(Aspect.ELDRITCH, 16))
+                .withAspects((new AspectList()).add(IsorropiaAPI.FLESH, 60).add(Aspect.MOTION, 60).add(Aspect.ELDRITCH, 60))
                 .withComponents(Ingredient.fromItem(Items.EGG),
                         Ingredient.fromItem(Items.EGG),
                         Ingredient.fromItem(Items.ENDER_PEARL))
@@ -163,7 +163,7 @@ public class ResearchsIS {
                 .build());
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "shockskin"), (new OrganCurativeInfusionRecipe.Builder())
                 .withOrganTarget(OrganCurativeInfusionRecipe.Organ.SKIN)
-                .withAspects((new AspectList()).add(Aspect.ENERGY, 16).add(Aspect.AVERSION, 11).add(Aspect.AIR, 4))
+                .withAspects((new AspectList()).add(Aspect.ENERGY, 30).add(Aspect.AVERSION, 30).add(Aspect.AIR, 5))
                 .withComponents(Ingredient.fromItem(Items.QUARTZ),
                         Ingredient.fromItem(Items.REDSTONE),
                         Ingredient.fromItem(Items.QUARTZ),
@@ -172,7 +172,7 @@ public class ResearchsIS {
                 .build());
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "awakened_blood"), (new OrganCurativeInfusionRecipe.Builder())
                 .withOrganTarget(OrganCurativeInfusionRecipe.Organ.BLOOD)
-                .withAspects((new AspectList()).add(Aspect.LIFE, 32).add(Aspect.MIND, 32))
+                .withAspects((new AspectList()).add(Aspect.LIFE, 50).add(Aspect.MIND, 50))
                 .withComponents(Ingredient.fromItem(Items.SPECKLED_MELON),
                         Ingredient.fromItem(Items.SPECKLED_MELON),
                         Ingredient.fromStacks(new ItemStack(Items.GOLDEN_APPLE)),
@@ -181,7 +181,7 @@ public class ResearchsIS {
                 .build());
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "portability"), (new OrganCurativeInfusionRecipe.Builder())
                 .withOrganTarget(OrganCurativeInfusionRecipe.Organ.VOID)
-                .withAspects((new AspectList()).add(Aspect.VOID, 32).add(Aspect.MOTION, 32))
+                .withAspects((new AspectList()).add(Aspect.VOID, 50).add(Aspect.MOTION, 50))
                 .withComponents(Ingredient.fromItem(Items.ENDER_PEARL),
                         Ingredient.fromItem(Item.getItemFromBlock(BlocksTC.jarNormal)))
                 .withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.PIG, "Creature")), ItemCat.createCat(ItemCat.EnumCat.PORTABILITY, "Portability"))
@@ -191,7 +191,7 @@ public class ResearchsIS {
                 .withOrganTarget(OrganCurativeInfusionRecipe.Organ.SKIN)
                 .withModifier("generic.armor", new AttributeModifier(UUID.fromString("6bc2ebe8-2b1c-11eb-adc1-0242ac120002"), "DIAMOND_SKIN", 20.0D, 0))
                 .withModifier("generic.armorToughness", new AttributeModifier(UUID.fromString("21afc412-2b1d-11eb-adc1-0242ac120002"), "DIAMOND_SKIN_TOUGHNESS", 8.0D, 0))
-                .withAspects((new AspectList()).add(Aspect.BEAST, 8).add(Aspect.PROTECT, 16).add(Aspect.CRYSTAL, 16))
+                .withAspects((new AspectList()).add(Aspect.BEAST, 10).add(Aspect.PROTECT, 30).add(Aspect.CRYSTAL, 30))
                 .withComponents(Ingredient.fromItem(Items.DIAMOND),
                         Ingredient.fromItem(Items.DIAMOND),
                         Ingredient.fromItem(Items.LEATHER))
@@ -199,7 +199,7 @@ public class ResearchsIS {
                 .build());
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "mooshroom"),
                 ((SpecieCurativeInfusionRecipe.Builder) new SpecieCurativeInfusionRecipe.Builder()
-                        .withAspects(new AspectList().add(Aspect.BEAST, 4).add(Aspect.PLANT, 8))
+                        .withAspects(new AspectList().add(Aspect.BEAST, 10).add(Aspect.PLANT, 30))
                         .withComponents(Ingredient.fromStacks(new ItemStack(Blocks.BROWN_MUSHROOM)),
                                 Ingredient.fromItem(Item.getItemFromBlock(Blocks.RED_MUSHROOM)),
                                 Ingredient.fromItem(Item.getItemFromBlock(Blocks.BROWN_MUSHROOM)),
@@ -212,7 +212,7 @@ public class ResearchsIS {
 
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "chocow"),
                 ((SpecieCurativeInfusionRecipe.Builder) new SpecieCurativeInfusionRecipe.Builder()
-                        .withAspects(new AspectList().add(IsorropiaAPI.FLESH, 4).add(Aspect.EXCHANGE, 2))
+                        .withAspects(new AspectList().add(IsorropiaAPI.FLESH, 30).add(Aspect.EXCHANGE, 10))
                         .withComponents(Ingredient.fromStacks(new ItemStack(Items.DYE, 1, 3)),
                                 Ingredient.fromItem(Items.SUGAR),
                                 Ingredient.fromStacks(new ItemStack(Items.DYE, 1, 3)),
@@ -225,7 +225,7 @@ public class ResearchsIS {
 
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "goldchicken"),
                 ((SpecieCurativeInfusionRecipe.Builder) new SpecieCurativeInfusionRecipe.Builder()
-                        .withAspects(new AspectList().add(Aspect.CRAFT, 16).add(Aspect.DESIRE, 8).add(Aspect.METAL, 8))
+                        .withAspects(new AspectList().add(Aspect.CRAFT, 45).add(Aspect.DESIRE, 30).add(Aspect.METAL, 30))
                         .withComponents(Ingredient.fromItem(Items.GOLDEN_APPLE),
                                 Ingredient.fromStacks(new ItemStack(BlocksTC.crucible)),
                                 Ingredient.fromItem(Items.GOLDEN_APPLE),
@@ -237,7 +237,7 @@ public class ResearchsIS {
                                 , ItemCat.createCat(ItemCat.EnumCat.CHICKEN, "GoldChicken")).build());
 
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "guardian_panther"), ((SpecieCurativeInfusionRecipe.Builder) new SpecieCurativeInfusionRecipe.Builder()
-                .withAspects(new AspectList().add(Aspect.BEAST, 8).add(Aspect.AVERSION, 8))
+                .withAspects(new AspectList().add(Aspect.BEAST, 30).add(Aspect.AVERSION, 30))
                 .withComponents(Ingredient.fromStacks(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.STRONG_STRENGTH)), Ingredient.fromItem(Items.SADDLE))
                 .withInstability(2).withKnowledgeRequirement("GUARDIAN_PANTHER"))
                 .withResult(EntityGuardianPanther.class)
@@ -255,7 +255,7 @@ public class ResearchsIS {
                         , ItemCat.createCat(ItemCat.EnumCat.WOLF, "hellhound")).build());
 
         Ingredient food = Ingredient.fromItems(Items.CARROT, Items.POTATO, Items.BEETROOT, Items.WHEAT, Items.APPLE, Items.BONE, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.WHEAT_SEEDS);
-        IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "instilledfidelity"), new CurativeInfusionRecipe.Builder().withAspects(new AspectList().add(Aspect.BEAST, 16).add(Aspect.MIND, 16)).withComponents(food, food, food).withInstability(2).withKnowledgeRequirement("INSTILLEDFIDELITY").withPredicate(entity -> entity instanceof EntityTameable).withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.WOLF, "Tameable Mob")), ItemCat.createCat(ItemCat.EnumCat.LOVE, "Tamed Mob")).build());
+        IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "instilledfidelity"), new CurativeInfusionRecipe.Builder().withAspects(new AspectList().add(Aspect.BEAST, 30).add(Aspect.MIND, 30)).withComponents(food, food, food).withInstability(2).withKnowledgeRequirement("INSTILLEDFIDELITY").withPredicate(entity -> entity instanceof EntityTameable).withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.WOLF, "Tameable Mob")), ItemCat.createCat(ItemCat.EnumCat.LOVE, "Tamed Mob")).build());
         ScanningManager.addScannableThing(new ScanEntityResearch("!scan.animal", EntityAnimal.class, true, "CREATUREINFUSIONS@1", "research.scan.animal.text"));
         ScanningManager.addScannableThing(new ScanEntityResearch("!scan.taint", ITaintedMob.class, true, "CURATIVEVAT@1", "research.scan.taint.text"));
         ScanningManager.addScannableThing(new ScanEntityResearch("!scan.chicken", EntityChicken.class, false, "SIMILITUDOINFUSIONS@1", "research.scan.chicken.text"));

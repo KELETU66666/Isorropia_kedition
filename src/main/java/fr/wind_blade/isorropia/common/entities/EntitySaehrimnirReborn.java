@@ -30,7 +30,6 @@ public class EntitySaehrimnirReborn
 
 
     public void readEntityFromNBT(NBTTagCompound compound) {
-        /* 36 */
         this.ticksExisted = compound.getShort("ticksExisted");
     }
 

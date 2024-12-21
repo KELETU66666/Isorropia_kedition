@@ -75,22 +75,21 @@ public class TileModifiedMatrix extends TileEntity implements IInteractWithCaste
 
     public String[] getIGogglesText() {
         TileVat te = this.getMaster();
-        if (te instanceof TileVat) {
+        if (te != null) {
             float lpc;
-            TileVat master = te;
             ArrayList<String> strings = new ArrayList<String>();
-            strings.add(TextFormatting.BOLD + I18n.translateToLocal((String)("stability." + master.getStability().name())));
-            if (master.getFluxStocked() > 0.0f) {
-                strings.add(TextFormatting.DARK_PURPLE + "Flux : " + master.getFluxStocked());
+            strings.add(TextFormatting.BOLD + I18n.translateToLocal("stability." + te.getStability().name()));
+            if (te.getFluxStocked() > 0.0f) {
+                strings.add(TextFormatting.DARK_PURPLE + "Flux : " + te.getFluxStocked());
             }
-            if (master.getCelestialAura() > 0.0f || master.getCelestialAuraNeeded() > 0.0f) {
-                strings.add(TextFormatting.fromColorIndex((int)new Color(0.49019608f, 0.5568628f, 0.63529414f).getRGB()) + "Celestia Aura " + master.getCelestialAura() + "/" + master.getCelestialAuraNeeded());
+            if (te.getCelestialAura() > 0.0f || te.getCelestialAuraNeeded() > 0.0f) {
+                strings.add(TextFormatting.fromColorIndex(new Color(0.49019608f, 0.5568628f, 0.63529414f).getRGB()) + "Celestia Aura " + te.getCelestialAura() + "/" + te.getCelestialAuraNeeded());
             }
-            if ((lpc = master.getLossPerCycle()) != 0.0f) {
-                strings.add(TextFormatting.GOLD + "" + TextFormatting.ITALIC + myFormatter.format(master.getSymmetryStability()) + " " + I18n.translateToLocal((String)"stability.gain"));
-                strings.add(TextFormatting.RED + "" + I18n.translateToLocal((String)"stability.range") + TextFormatting.ITALIC + myFormatter.format(lpc) + " " + I18n.translateToLocal((String)"stability.loss"));
+            if ((lpc = te.getLossPerCycle()) != 0.0f) {
+                strings.add(String.valueOf(TextFormatting.GOLD) + TextFormatting.ITALIC + myFormatter.format(te.getSymmetryStability()) + " " + I18n.translateToLocal("stability.gain"));
+                strings.add(TextFormatting.RED + I18n.translateToLocal("stability.range") + TextFormatting.ITALIC + myFormatter.format(lpc) + " " + I18n.translateToLocal("stability.loss"));
             } else {
-                strings.add(TextFormatting.GOLD + "" + TextFormatting.ITALIC + myFormatter.format(master.getSymmetryStability()) + " " + I18n.translateToLocal((String)"stability.gain"));
+                strings.add(String.valueOf(TextFormatting.GOLD) + TextFormatting.ITALIC + myFormatter.format(te.getSymmetryStability()) + " " + I18n.translateToLocal("stability.gain"));
             }
             return strings.toArray(new String[0]);
         }

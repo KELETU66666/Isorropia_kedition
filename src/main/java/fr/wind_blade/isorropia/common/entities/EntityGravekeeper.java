@@ -14,10 +14,8 @@ import thaumcraft.client.fx.FXDispatcher;
 
 import java.util.List;
 
-public class EntityGravekeeper
-        extends EntityOcelot {
+public class EntityGravekeeper extends EntityOcelot {
     public EntityGravekeeper(World world) {
-        /* 33 */
         super(world);
     }
 

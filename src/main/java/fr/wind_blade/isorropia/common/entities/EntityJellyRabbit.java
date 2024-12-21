@@ -57,7 +57,7 @@ public class EntityJellyRabbit
 
 
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingdata) {
-        Aspect[] displayAspects = (Aspect[])Aspect.aspects.values().toArray((Object[])new Aspect[0]);
+        Aspect[] displayAspects = (Aspect[]) Aspect.aspects.values().toArray((Object[]) new Aspect[0]);
         setAspect(displayAspects[this.world.rand.nextInt(displayAspects.length)]);
         setJellySize(2);
         return super.onInitialSpawn(difficulty, livingdata);
@@ -98,16 +98,15 @@ public class EntityJellyRabbit
                 double d1 = entity.posX - this.posX;
 
                 double d0;
-                for (d0 = entity.posZ - this.posZ; d1 * d1 + d0 * d0 < 1.0E-4D; d0 = (Math.random() - Math.random()) * 0.01D)
-                {
+                for (d0 = entity.posZ - this.posZ; d1 * d1 + d0 * d0 < 1.0E-4D; d0 = (Math.random() - Math.random()) * 0.01D) {
                     d1 = (Math.random() - Math.random()) * 0.01D;
                 }
 
-                this.attackedAtYaw = (float)(MathHelper.atan2(d0, d1) * 57.29577951308232D - this.rotationYaw);
+                this.attackedAtYaw = (float) (MathHelper.atan2(d0, d1) * 57.29577951308232D - this.rotationYaw);
                 knockBack(entity, 0.4F, d1, d0);
 
                 if (entity instanceof EntityLivingBase) {
-                    setRevengeTarget((EntityLivingBase)entity);
+                    setRevengeTarget((EntityLivingBase) entity);
                 }
             }
             playSound((getJellySize() > 0) ? SoundEvents.ENTITY_SLIME_HURT : SoundEvents.ENTITY_RABBIT_HURT, 1.0F,
@@ -147,13 +146,12 @@ public class EntityJellyRabbit
             s = "generic";
         if (tag == null || tag.isEmpty()) {
             name = I18n.format("entity." + s + ".name");
-        }
-        else {
+        } else {
 
             name = I18n.hasKey("entity." + s + "." + tag + ".name") ? I18n.format("entity." + s + "." + tag + ".name") : I18n.format("entity." + s + ".aspect.name", tag);
-        }  return name;
+        }
+        return name;
     }
-
 
 
     public void writeEntityToNBT(NBTTagCompound compound) {
@@ -172,7 +170,7 @@ public class EntityJellyRabbit
 
 
     public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos) {
-        /* 175 */     return (getJellySize() > 0);
+        return (getJellySize() > 0);
     }
 
 
@@ -191,19 +189,19 @@ public class EntityJellyRabbit
     }
 
     public Aspect getAspect() {
-        /* 194 */     return Aspect.getAspect(this.dataManager.get(aspect));
+        return Aspect.getAspect(this.dataManager.get(aspect));
     }
 
     public int getJellySize() {
-        /* 198 */     return this.dataManager.get(jelly).intValue();
+        return this.dataManager.get(jelly).intValue();
     }
 
     public void setJellySize(int newJellySize) {
-        /* 202 */     this.dataManager.set(jelly, Integer.valueOf(newJellySize));
+        this.dataManager.set(jelly, Integer.valueOf(newJellySize));
     }
 
 
     public Color getColor() {
-        /* 207 */     return this.color;
+        return this.color;
     }
 }

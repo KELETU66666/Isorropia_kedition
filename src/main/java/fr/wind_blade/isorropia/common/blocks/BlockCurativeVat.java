@@ -114,6 +114,11 @@ public class BlockCurativeVat
         return layer == BlockRenderLayer.TRANSLUCENT || layer == BlockRenderLayer.SOLID;
     }
 
+    @Override
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.TRANSLUCENT;
+    }
+
     public boolean isFullyOpaque(IBlockState state) {
         return false;
     }
