@@ -22,7 +22,7 @@ public class IsorropiaCreativeTabs
     public void displayAllRelevantItems(NonNullList<ItemStack> items) {
         super.displayAllRelevantItems(items);
         for (String key : RegistryEventHandler.ENTITIES.keySet()) {
-            if (!EntityLiving.class.isAssignableFrom((Class)RegistryEventHandler.ENTITIES.get(key)))
+            if (!EntityLiving.class.isAssignableFrom(RegistryEventHandler.ENTITIES.get(key)))
                 continue;
             ItemStack stack = new ItemStack(Items.SPAWN_EGG);
             ItemMonsterPlacer.applyEntityIdToItemStack(stack, new ResourceLocation("isorropia", key));

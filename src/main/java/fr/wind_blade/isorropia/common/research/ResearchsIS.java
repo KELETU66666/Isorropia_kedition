@@ -30,6 +30,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.IShearable;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
@@ -256,6 +257,12 @@ public class ResearchsIS {
 
         Ingredient food = Ingredient.fromItems(Items.CARROT, Items.POTATO, Items.BEETROOT, Items.WHEAT, Items.APPLE, Items.BONE, Items.BEETROOT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.WHEAT_SEEDS);
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "instilledfidelity"), new CurativeInfusionRecipe.Builder().withAspects(new AspectList().add(Aspect.BEAST, 30).add(Aspect.MIND, 30)).withComponents(food, food, food).withInstability(2).withKnowledgeRequirement("INSTILLEDFIDELITY").withPredicate(entity -> entity instanceof EntityTameable).withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.WOLF, "Tameable Mob")), ItemCat.createCat(ItemCat.EnumCat.LOVE, "Tamed Mob")).build());
+
+        if (Loader.isModLoaded("thaumicbases")) {
+            ThaumcraftApi.registerResearchLocation(new ResourceLocation("isorropia", "research/tb_compat.json"));
+            EntityDopeSquid.makeDopeSquidRecipe();
+        }
+
         ScanningManager.addScannableThing(new ScanEntityResearch("!scan.animal", EntityAnimal.class, true, "CREATUREINFUSIONS@1", "research.scan.animal.text"));
         ScanningManager.addScannableThing(new ScanEntityResearch("!scan.taint", ITaintedMob.class, true, "CURATIVEVAT@1", "research.scan.taint.text"));
         ScanningManager.addScannableThing(new ScanEntityResearch("!scan.chicken", EntityChicken.class, false, "SIMILITUDOINFUSIONS@1", "research.scan.chicken.text"));

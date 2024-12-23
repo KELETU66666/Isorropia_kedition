@@ -38,6 +38,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -106,6 +107,9 @@ public class Common {
         registerEntity("guardian_panther", EntityGuardianPanther.class, 64, 3, true);
         registerEntity("nether_hound", EntityHellHound.class, 64, 3, true);
         registerEntity("ember", EntityEmber.class, 64, 1, true);
+
+        if(Loader.isModLoaded("thaumicbases"))
+            registerEntity("dope_squid", EntityDopeSquid.class, 64, 3, true);
     }
 
     public static void initProviders() {

@@ -52,14 +52,16 @@ public class ItemCat extends Item {
         CHICKEN(4, "chicken"),
         RABBIT(5, "rabbit"),
         WOLF(6, "wolf"),
-        LOVE(7, "love", "isorropia:instilledfidelity"),
-        SELFSHEARING(8, "selfshearing", "isorropia:selfshearing"),
-        ENDERHEART(9, "enderheart", "isorropia:enderheart"),
-        SHOCK(10, "shockskin", "isorropia:shockskin"),
-        AWAKENED_BLOOD(11, "awakened_blood", "isorropia:awakened_blood"),
-        DIAMOND_SKIN(12, "diamond_skin", "isorropia:diamond_skin"),
-        QUICKSILVER_LIMBS(13, "quicksilver_limbs", "isorropia:quicksilver_limbs"),
-        PORTABILITY(14, "portability", "isorropia:portability");
+        SPIDER(7, "spider"),
+        SQUID(8, "squid"),
+        LOVE(9, "love", "isorropia:instilledfidelity"),
+        SELFSHEARING(10, "selfshearing", "isorropia:selfshearing"),
+        ENDERHEART(11, "enderheart", "isorropia:enderheart"),
+        SHOCK(12, "shockskin", "isorropia:shockskin"),
+        AWAKENED_BLOOD(13, "awakened_blood", "isorropia:awakened_blood"),
+        DIAMOND_SKIN(14, "diamond_skin", "isorropia:diamond_skin"),
+        QUICKSILVER_LIMBS(15, "quicksilver_limbs", "isorropia:quicksilver_limbs"),
+        PORTABILITY(16, "portability", "isorropia:portability");
 
         private final int id;
         private final String name;

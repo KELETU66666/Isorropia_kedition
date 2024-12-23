@@ -26,6 +26,7 @@ import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -59,6 +60,10 @@ public class Client
         RenderingRegistry.registerEntityRenderingHandler(EntityGoldenChicken.class, RenderGoldChicken::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityChocow.class, RenderChocolateCow::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityGuardianPanther.class, RenderGuardianPanther::new);
+
+        if (Loader.isModLoaded("thaumicbases"))
+            RenderingRegistry.registerEntityRenderingHandler(EntityDopeSquid.class, RenderDopeSquid::new);
+
         OBJLoader.INSTANCE.addDomain("isorropia");
     }
 

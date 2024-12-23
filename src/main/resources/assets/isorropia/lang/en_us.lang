@@ -69,6 +69,7 @@ entity.chocolate_cow.name=Chocolate Cow
 entity.golden_chicken.name=Golden Chicken
 entity.guardian_panther.name=Guardian Panther
 entity.nether_hound.name=Nether Hound
+entity.dope_squid.name=Smoker Squid
 
 ##########################################
 # Isorropia Research
@@ -228,6 +229,10 @@ research.goldchicken.stage.1=More impressively, you have discovered a method of 
 research.NETHERHOUND.title=Nether Hound
 research.NETHERHOUND.stage.0=Finally, by infusing a tamed wolf with infernal energies, you can produce the deadly nether hound.
 research.NETHERHOUND.stage.1=Finally, by infusing a tamed wolf with infernal energies, you can produce the deadly nether hound. Not only does this guard dog possess a vicious bite and immunity to heat, but it is capable of exhaling a jet of primal fire upon its enemies.<BR>It remains surprisingly friendly.
+#
+research.DOPESQUID.title=Squid Smoker
+research.DOPESQUID.stage.0=You find it quite tedious to constantly fill a pipe with your own hands, but who will do it for you?
+research.DOPESQUID.stage.1=You find it quite tedious to constantly fill a pipe with your own hands, but who will do it for you? Squids that live in the ocean spend their lives filtering water, and they are clearly capable of more than that.<BR>The squid will swim after the one who gives him fresh tobacco leaves, accompanying the owner of carcinogenic smoke. The greedy animal will not share with you for nothing, for each dose the owner must give a part of his mental poison.<BR>You can give the squid samples of desired tobacco flavors.
 
 ##########################################
 # Misc

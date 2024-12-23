@@ -1,0 +1,43 @@
+{
+  "entries": [
+    {
+      "key": "DOPESQUIDINFUSION",
+      "name": "research.DOPESQUID.title",
+      "icons": [
+        "isorropia:textures/research/dope_squid.png"
+      ],
+      "category": "ISORROPIA",
+      "parents": [
+        "SPECIEINFUSIONS",
+        "TB.TOBACCO"
+      ],
+      "meta": [
+        "HIDDEN"
+      ],
+      "location": [
+        13,
+        -4
+      ],
+      "stages": [
+        {
+          "text": "research.DOPESQUID.stage.0",
+          "required_knowledge": [
+            "THEORY;ARTIFICE;1",
+            "THEORY;INFUSION;1"
+          ],
+          "required_item": [
+            "thaumicbases:greatwoodpipe",
+            "thaumicbases:tobacco_pile;3"
+          ],
+          "warp": 1
+        },
+        {
+          "text": "research.DOPESQUID.stage.1",
+          "recipes": [
+            "isorropia:dope_squid"
+          ]
+        }
+      ]
+    }
+  ]
+}

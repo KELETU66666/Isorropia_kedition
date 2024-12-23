@@ -1,7 +1,3 @@
-//
-// Decompiled by Procyon v0.5.30
-//
-
 package fr.wind_blade.isorropia.common.entities;
 
 import fr.wind_blade.isorropia.common.entities.projectile.EntityEmber;
