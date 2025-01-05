@@ -354,7 +354,7 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
             }
         }
         if (!world.isRemote && !this.active) {
-            world.playSound(null, pos, SoundsTC.craftstart, SoundCategory.BLOCKS, 0.5f, 1.0f);
+            world.playSound(null, pos, SoundsIR.curative_infusion_start, SoundCategory.BLOCKS, 0.5f, 1.0f);
             this.active = true;
             this.syncTile(false);
             this.markDirty();
@@ -435,7 +435,7 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
         this.celestialBody = this.recipe.getCelestialBody();
         this.recipePlayer = player;
         this.infusing = true;
-        this.world.playSound(null, this.pos, SoundsTC.craftstart, SoundCategory.BLOCKS, 0.5f, 1.0f);
+        this.world.playSound(null, this.pos, SoundsIR.curative_infusion_start, SoundCategory.BLOCKS, 0.5f, 1.0f);
         this.syncTile(false);
         this.markDirty();
         return true;
