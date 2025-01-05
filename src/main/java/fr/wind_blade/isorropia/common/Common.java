@@ -21,10 +21,7 @@ import fr.wind_blade.isorropia.common.lenses.FireLens;
 import fr.wind_blade.isorropia.common.lenses.OrdoLens;
 import fr.wind_blade.isorropia.common.network.*;
 import fr.wind_blade.isorropia.common.research.ResearchsIS;
-import fr.wind_blade.isorropia.common.tiles.TileJarSoul;
-import fr.wind_blade.isorropia.common.tiles.TileModifiedMatrix;
-import fr.wind_blade.isorropia.common.tiles.TileVat;
-import fr.wind_blade.isorropia.common.tiles.TileVatConnector;
+import fr.wind_blade.isorropia.common.tiles.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -87,6 +84,7 @@ public class Common {
 
     private static void initTileEntity() {
         GameRegistry.registerTileEntity(TileVat.class, new ResourceLocation("isorropia", "curative_vat"));
+        GameRegistry.registerTileEntity(TileVatBottom.class, new ResourceLocation("isorropia", "curative_bottom"));
         GameRegistry.registerTileEntity(TileVatConnector.class, new ResourceLocation("isorropia", "curative_connector"));
         GameRegistry.registerTileEntity(TileJarSoul.class, new ResourceLocation("isorropia", "soul_jar"));
         GameRegistry.registerTileEntity(TileModifiedMatrix.class, new ResourceLocation("isorropia", "modified_matrix"));

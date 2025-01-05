@@ -4,27 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0487f38c-42ff-4f53-8da4-c5e9a0688d91" name="更改" comment="lol misc fixes and textures update&#10;version burrrrp">
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/entities/RenderDopeSquid.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityDopeSquid.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/models/item/cat_spider.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/models/item/cat_squid.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/research/tb_compat.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/entity/dope_squid.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/research/cat_squid.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/research/dope_squid.png" afterDir="false" />
+    <list default="true" id="0487f38c-42ff-4f53-8da4-c5e9a0688d91" name="更改" comment="VERSION BUMP">
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/tiles/RenderTileVat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/tiles/TileVatBottom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/models/block/curative_vat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/models/block/vat_redo.mtl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/models/block/vat_redo.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/models/block/water_still.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/blocks/curative_vat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/blocks/water_still.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/entities/layers/LayerSheederWool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/entities/layers/LayerSheederWool.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/Common.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/Common.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/IsorropiaCreativeTabs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/IsorropiaCreativeTabs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/curative/OreBoarRecipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/curative/OreBoarRecipe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityGuardianPanther.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityGuardianPanther.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityHellHound.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/entities/EntityHellHound.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/items/misc/ItemCat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/items/misc/ItemCat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/research/ResearchsIS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/research/ResearchsIS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/lang/en_us.lang" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/lang/en_us.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlockCurativeVat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlockCurativeVat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/blockstates/curative_vat.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/blockstates/curative_vat.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/blocks/balanced_crystal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/blocks/balanced_crystal.png.mcmeta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/blocks/balanced_crystal_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/blocks/balanced_crystal_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/blocks/balanced_crystal_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/blocks/balanced_crystal_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/blocks/balanced_crystal_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/blocks/balanced_crystal_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/blocks/balanced_crystal_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/blocks/balanced_crystal_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/blocks/balanced_crystal_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/blocks/balanced_crystal_9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/blocks/crystal_planter.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +91,13 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -98,16 +111,21 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "E:/Isorropia_kedition/src/main/resources/assets/isorropia/textures/research"
+    "last_opened_file_path": "E:/Isorropia_kedition/src/main/resources/assets/isorropia/textures/blocks"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Isorropia_kedition\src\main\resources\assets\isorropia\textures\blocks" />
+      <recent name="E:\Isorropia_kedition\src\main\resources\assets\isorropia\models\block" />
+      <recent name="E:\Isorropia_kedition\src\main\resources\assets\isorropia\models" />
       <recent name="E:\Isorropia_kedition\src\main\resources\assets\isorropia\textures\research" />
       <recent name="E:\Isorropia_kedition\src\main\resources\assets\isorropia\models\item" />
-      <recent name="E:\Isorropia_kedition\src\main\resources\assets\isorropia\textures\entity" />
-      <recent name="E:\Isorropia_kedition\src\main\resources\assets\isorropia\textures\misc" />
-      <recent name="E:\Isorropia_kedition\run\mods" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Isorropia_kedition\src\main\resources\assets\isorropia\textures\blocks" />
+      <recent name="E:\Isorropia_kedition\src\main\resources\assets\isorropia\models\block" />
+      <recent name="E:\Isorropia_kedition\src\main\resources\assets\isorropia\models\obj" />
     </key>
   </component>
   <component name="RunManager">
@@ -260,7 +278,23 @@
       <option name="project" value="LOCAL" />
       <updated>1734785219001</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="added somker squid, a squid can smoke with u.">
+      <option name="closed" value="true" />
+      <created>1734947902413</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1734947902413</updated>
+    </task>
+    <task id="LOCAL-00016" summary="VERSION BUMP">
+      <option name="closed" value="true" />
+      <created>1734948149893</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1734948149893</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -291,7 +325,9 @@
     <MESSAGE value="fix several bugs." />
     <MESSAGE value="version burmp lol" />
     <MESSAGE value="lol misc fixes and textures update&#10;version burrrrp" />
-    <option name="LAST_COMMIT_MESSAGE" value="lol misc fixes and textures update&#10;version burrrrp" />
+    <MESSAGE value="added somker squid, a squid can smoke with u." />
+    <MESSAGE value="VERSION BUMP" />
+    <option name="LAST_COMMIT_MESSAGE" value="VERSION BUMP" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

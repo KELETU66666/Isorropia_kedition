@@ -1,6 +1,7 @@
 package fr.wind_blade.isorropia.common.research;
 
 import fr.wind_blade.isorropia.common.IsorropiaAPI;
+import static fr.wind_blade.isorropia.common.IsorropiaAPI.*;
 import fr.wind_blade.isorropia.common.blocks.BlocksIS;
 import fr.wind_blade.isorropia.common.celestial.CelestialBody;
 import fr.wind_blade.isorropia.common.config.Config;
@@ -104,6 +105,32 @@ public class ResearchsIS {
         ResearchsIS.addAspects(Items.CHICKEN, new AspectList().add(IsorropiaAPI.FLESH, 2));
         ResearchsIS.addAspects(Items.MUTTON, new AspectList().add(IsorropiaAPI.FLESH, 2));
         ResearchsIS.addAspects(Blocks.BED, new AspectList().add(IsorropiaAPI.SLOTH, 2));
+
+        if (!Loader.isModLoaded("forbiddenmagicre")) {
+            ResearchsIS.addAspects(new ItemStack(Items.GHAST_TEAR), AspectHelper.getObjectAspects(new ItemStack(Items.GHAST_TEAR)).add(ENVY, 5));
+            ResearchsIS.addAspects(new ItemStack(Blocks.TNT), AspectHelper.getObjectAspects(new ItemStack(Blocks.TNT)).add(WRATH, 15));
+            ResearchsIS.addAspects(new ItemStack(Items.FIRE_CHARGE), AspectHelper.getObjectAspects(new ItemStack(Items.FIRE_CHARGE)).add(WRATH, 2));
+            ResearchsIS.addAspects(new ItemStack(Items.SKULL, 1, 4), AspectHelper.getObjectAspects(new ItemStack(Items.SKULL, 1, 4)).add(WRATH, 5));
+            ResearchsIS.addAspects(new ItemStack(Items.SADDLE), AspectHelper.getObjectAspects(new ItemStack(Items.SADDLE)).add(LUST, 5));
+            ResearchsIS.addAspects(new ItemStack(Items.GOLDEN_SWORD, 1, 32767), AspectHelper.getObjectAspects(new ItemStack(Items.GOLDEN_SWORD, 1, 32767)).add(PRIDE, 8));
+            ResearchsIS.addAspects(new ItemStack(Items.GOLDEN_HELMET, 1, 32767), AspectHelper.getObjectAspects(new ItemStack(Items.GOLDEN_HELMET, 1, 32767)).add(PRIDE, 8));
+            ResearchsIS.addAspects(new ItemStack(Items.GOLDEN_CHESTPLATE, 1, 32767), AspectHelper.getObjectAspects(new ItemStack(Items.GOLDEN_CHESTPLATE, 1, 32767)).add(PRIDE, 4));
+            ResearchsIS.addAspects(new ItemStack(Items.GOLDEN_LEGGINGS, 1, 32767), AspectHelper.getObjectAspects(new ItemStack(Items.GOLDEN_LEGGINGS, 1, 32767)).add(PRIDE, 4));
+            ResearchsIS.addAspects(new ItemStack(Items.GOLDEN_BOOTS, 1, 32767), AspectHelper.getObjectAspects(new ItemStack(Items.GOLDEN_BOOTS, 1, 32767)).add(PRIDE, 4));
+            ResearchsIS.addAspects(new ItemStack(Items.NETHER_STAR), AspectHelper.getObjectAspects(new ItemStack(Items.NETHER_STAR)).add(PRIDE, 10).add(NETHER, 20));
+            ResearchsIS.addAspects(new ItemStack(Items.LEAD), AspectHelper.getObjectAspects(new ItemStack(Items.LEAD)).add(LUST, 5));
+            ResearchsIS.addAspects(new ItemStack(Items.BED, 1, 32767), AspectHelper.getObjectAspects(new ItemStack(Items.BED, 1, 32767)).add(SLOTH, 10));
+            ResearchsIS.addAspects(new ItemStack(Items.ENDER_PEARL), AspectHelper.getObjectAspects(new ItemStack(Items.ENDER_PEARL)).add(ENVY, 5));
+            ResearchsIS.addAspects(new ItemStack(Items.COMPARATOR), AspectHelper.getObjectAspects(new ItemStack(Items.COMPARATOR)).add(ENVY, 10));
+            ResearchsIS.addAspects(new ItemStack(Items.CAKE), AspectHelper.getObjectAspects(new ItemStack(Items.CAKE)).add(GLUTTONY, 10));
+            ResearchsIS.addAspects(new ItemStack(Items.COOKIE), AspectHelper.getObjectAspects(new ItemStack(Items.COOKIE)).add(GLUTTONY, 1));
+
+            ResearchsIS.addAspects(new ItemStack(Blocks.NETHERRACK), AspectHelper.getObjectAspects(new ItemStack(Blocks.NETHERRACK)).add(NETHER, 2));
+            ResearchsIS.addAspects(new ItemStack(Blocks.QUARTZ_ORE), AspectHelper.getObjectAspects(new ItemStack(Blocks.QUARTZ_ORE)).add(NETHER, 5));
+            ResearchsIS.addAspects(new ItemStack(Items.NETHER_WART), AspectHelper.getObjectAspects(new ItemStack(Items.NETHER_WART)).add(NETHER, 2));
+            ResearchsIS.addAspects(new ItemStack(Items.SKULL, 1, 1), AspectHelper.getObjectAspects(new ItemStack(Items.SKULL, 1, 1)).add(NETHER, 10));
+        }
+
     }
 
     public static void init() {
@@ -131,8 +158,8 @@ public class ResearchsIS {
         ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation("isorropia", "lens_fire"), new InfusionRecipe("FIRELENS", new ItemStack(ItemsIS.itemFireLens), 1, new AspectList().add(Aspect.LIGHT, 40).add(Aspect.ENERGY, 20).add(Aspect.SENSES, 30), new ItemStack(ItemsIS.itemBaseLens), ItemsTC.amber, ThaumcraftApiHelper.makeCrystal(Aspect.FIRE), ItemsTC.amber, ThaumcraftApiHelper.makeCrystal(Aspect.FIRE)));
         ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation("isorropia", "lens_air"), new InfusionRecipe("AIRLENS", new ItemStack(ItemsIS.itemAirLens), 1, new AspectList().add(Aspect.AURA, 15).add(Aspect.SENSES, 20), new ItemStack(ItemsIS.itemBaseLens), Items.GOLD_INGOT, ThaumcraftApiHelper.makeCrystal(Aspect.AIR), Items.GOLD_INGOT, ThaumcraftApiHelper.makeCrystal(Aspect.AIR)));
         ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation("isorropia", "lens_ordo"), new InfusionRecipe("ORDOLENS", new ItemStack(ItemsIS.itemOrdoLens), 1, new AspectList().add(Aspect.MIND, 32).add(Aspect.MAGIC, 32).add(Aspect.SENSES, 20), ItemsIS.itemBaseLens, ItemsTC.scribingTools, ThaumcraftApiHelper.makeCrystal(Aspect.ORDER), Items.BOOK, ThaumcraftApiHelper.makeCrystal(Aspect.ORDER)));
-        ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation("isorropia", "lens_envy"), new InfusionRecipe("ENVYLENS", new ItemStack(ItemsIS.itemEnvyLens), 6, new AspectList().add(Aspect.DESIRE, 32).add(IsorropiaAPI.HUNGER, 32).add(IsorropiaAPI.LUST, 32).add(IsorropiaAPI.ENVY, 64), ItemsIS.itemBaseLens, Items.DIAMOND, ThaumcraftApiHelper.makeCrystal(IsorropiaAPI.ENVY), Items.PAPER, ThaumcraftApiHelper.makeCrystal(IsorropiaAPI.ENVY)));
-        ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation("isorropia", "somatic_brain"), new InfusionRecipe("SOMATICBRAIN", new ItemStack(ItemsIS.itemSomaticBrain), 4, new AspectList().add(Aspect.MIND, 150).add(Aspect.DESIRE, 100).add(IsorropiaAPI.ENVY, 20), BlocksTC.jarBrain, new ItemStack(ItemsTC.plate), new ItemStack(ItemsTC.mind, 1, 1), Blocks.HOPPER, new ItemStack(ItemsTC.mind, 1, 1)));
+        ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation("isorropia", "lens_envy"), new InfusionRecipe("ENVYLENS", new ItemStack(ItemsIS.itemEnvyLens), 6, new AspectList().add(Aspect.DESIRE, 32).add(IsorropiaAPI.HUNGER, 32).add(LUST, 32).add(ENVY, 64), ItemsIS.itemBaseLens, Items.DIAMOND, ThaumcraftApiHelper.makeCrystal(ENVY), Items.PAPER, ThaumcraftApiHelper.makeCrystal(ENVY)));
+        ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation("isorropia", "somatic_brain"), new InfusionRecipe("SOMATICBRAIN", new ItemStack(ItemsIS.itemSomaticBrain), 4, new AspectList().add(Aspect.MIND, 150).add(Aspect.DESIRE, 100).add(ENVY, 20), BlocksTC.jarBrain, new ItemStack(ItemsTC.plate), new ItemStack(ItemsTC.mind, 1, 1), Blocks.HOPPER, new ItemStack(ItemsTC.mind, 1, 1)));
         ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation("isorropia", "modified_matrix"), new InfusionRecipe("CREATUREINFUSIONS@1", new ItemStack(BlocksIS.blockModifiedMatrix), 8, new AspectList().add(Aspect.LIFE, 500).add(Aspect.CRAFT, 500).add(Aspect.MAGIC, 500).add(Aspect.BEAST, 500), BlocksTC.infusionMatrix, ItemsTC.salisMundus, ItemsTC.visResonator, ItemsTC.salisMundus, ItemsTC.visResonator));
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "quicksilver_limbs"), new OrganCurativeInfusionRecipe.Builder().withOrganTarget(OrganCurativeInfusionRecipe.Organ.MUSCLE).withModifier("generic.movementSpeed", new AttributeModifier(UUID.fromString("b3f15142-2b27-11eb-adc1-0242ac120002"), "QUICKSILVER_SPEED", 0.08, 0)).withModifier("forge.swimSpeed", new AttributeModifier(UUID.fromString("c1719976-2b27-11eb-adc1-0242ac120002"), "QUICKSILVER_SWIM_SPEED", 0.2, 0)).build());
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "jelly_rabbit"), new JellyRabbitRecipe());

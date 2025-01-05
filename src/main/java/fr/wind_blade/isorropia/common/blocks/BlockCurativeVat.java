@@ -1,6 +1,7 @@
 package fr.wind_blade.isorropia.common.blocks;
 
 import fr.wind_blade.isorropia.common.tiles.TileVat;
+import fr.wind_blade.isorropia.common.tiles.TileVatBottom;
 import fr.wind_blade.isorropia.common.tiles.TileVatConnector;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -12,20 +13,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockCurativeVat
-        extends Block
-        implements ITileEntityProvider,
-        IBlockRegistry {
+public class BlockCurativeVat extends Block implements ITileEntityProvider, IBlockRegistry {
     public static final PropertyEnum<Type> VARIANT = PropertyEnum.create("variant", Type.class);
 
     public BlockCurativeVat() {
@@ -43,20 +38,20 @@ public class BlockCurativeVat
         switch (this.getMetaFromState(state)) {
             case 1: {
                 if (!(tile instanceof TileVat)) break;
-                ((TileVat)tile).destroyMultiBlock();
+                ((TileVat) tile).destroyMultiBlock();
                 break;
             }
             case 2: {
                 tile = worldIn.getTileEntity(pos.up(3));
                 if (!(tile instanceof TileVat)) break;
-                ((TileVat)tile).destroyMultiBlock();
+                ((TileVat) tile).destroyMultiBlock();
                 break;
             }
             default: {
                 tile = BlockCurativeVat.getMaster(worldIn, state, pos);
                 if (!(tile instanceof TileVat) || tile == null)
                     break;
-                ((TileVat)tile).destroyMultiBlock();
+                ((TileVat) tile).destroyMultiBlock();
             }
         }
         super.breakBlock(worldIn, pos, state);
@@ -68,7 +63,7 @@ public class BlockCurativeVat
         }
         TileEntity te = worldIn.getTileEntity(pos);
         if (te instanceof TileVat) {
-            TileVat vat = (TileVat)worldIn.getTileEntity(pos);
+            TileVat vat = (TileVat) worldIn.getTileEntity(pos);
             return vat.onBlockRigthClick(playerIn, facing, true);
         }
         TileVat vat = BlockCurativeVat.getMaster(worldIn, pos);
@@ -86,6 +81,9 @@ public class BlockCurativeVat
         switch (meta) {
             case 1: {
                 return new TileVat();
+            }
+            case 2: {
+                return new TileVatBottom();
             }
             case 3: {
                 return new TileVatConnector();
@@ -106,12 +104,19 @@ public class BlockCurativeVat
         return new BlockStateContainer(this, VARIANT);
     }
 
+    @Override
     public boolean shouldSideBeRendered(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-        return this.getMetaFromState(state) != Type.PLACEHOLDER.getMetadata() && this.getMetaFromState(state) != Type.CONNECTOR.getMetadata();
+        return this.getMetaFromState(state) == Type.BOTTOM.getMetadata();
     }
 
+    @Override
     public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
         return layer == BlockRenderLayer.TRANSLUCENT || layer == BlockRenderLayer.SOLID;
+    }
+
+    @Override
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
     }
 
     @Override
@@ -159,15 +164,16 @@ public class BlockCurativeVat
                 state2 = world.getBlockState(pos2.up());
                 te = world.getTileEntity(pos2.up());
                 if (te instanceof TileVat) {
-                    return (TileVat)te;
+                    return (TileVat) te;
                 }
                 state2 = world.getBlockState(pos2.up(2));
                 te = world.getTileEntity(pos2.up(2));
                 if (!(te instanceof TileVat)) continue;
-                return (TileVat)te;
+                return (TileVat) te;
             }
-            if (!(state2.getBlock() instanceof BlockCurativeVat) || !(state2.getBlock().getMetaFromState(state2) == 1 ? (te = world.getTileEntity(pos2)) instanceof TileVat : state2.getBlock().getMetaFromState(state2) == 2 && (te = world.getTileEntity(pos2.up(3))) instanceof TileVat)) continue;
-            return (TileVat)te;
+            if (!(state2.getBlock() instanceof BlockCurativeVat) || !(state2.getBlock().getMetaFromState(state2) == 1 ? (te = world.getTileEntity(pos2)) instanceof TileVat : state2.getBlock().getMetaFromState(state2) == 2 && (te = world.getTileEntity(pos2.up(3))) instanceof TileVat))
+                continue;
+            return (TileVat) te;
         }
         return null;
     }
@@ -177,8 +183,7 @@ public class BlockCurativeVat
         return false;
     }
 
-    public enum Type implements IStringSerializable
-    {
+    public enum Type implements IStringSerializable {
         PLACEHOLDER(0, "placeholder"),
         TOP(1, "top"),
         BOTTOM(2, "bottom"),
