@@ -52,7 +52,7 @@ public class Client
         RenderingRegistry.registerEntityRenderingHandler(EntitySaehrimnir.class, RenderSaehrimnir::new);
         RenderingRegistry.registerEntityRenderingHandler(EntitySaehrimnirReborn.class, RenderSaehrimnirReborn::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTaintPig.class, RenderTaintPig::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityGravekeeper.class, RenderOcelot::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityGravekeeper.class, RenderGraveKeeper::new);
         RenderingRegistry.registerEntityRenderingHandler(EntitySheeder.class, RenderSheeder::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityOrePig.class, RenderOrePig::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityScholarChicken.class, RenderScholarChicken::new);

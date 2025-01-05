@@ -3,7 +3,6 @@ package fr.wind_blade.isorropia.common.items;
 import fr.wind_blade.isorropia.common.Common;
 import fr.wind_blade.isorropia.common.items.baubles.ItemSomaticBrain;
 import fr.wind_blade.isorropia.common.items.misc.*;
-import fr.wind_blade.isorropia.common.items.tools.ItemPrimalWell;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucketMilk;
 import net.minecraft.util.ResourceLocation;
@@ -23,7 +22,6 @@ public class ItemsIS {
     public static ItemLens itemEnvyLens;
     public static ItemSomaticBrain itemSomaticBrain;
     public static Item itemIncubatedEgg;
-    public static Item itemPrimalWell;
     public static Item itemInkEgg;
     public static Item itemFlesh;
     public static Item itemCat;
@@ -41,7 +39,6 @@ public class ItemsIS {
         itemEnvyLens = getItem(new ItemLens(), "lens_envy");
         itemSomaticBrain = getItem(new ItemSomaticBrain(), "somatic_brain");
         itemIncubatedEgg = getItem(new ItemIncubatedEgg(), "incubated_egg");
-        itemPrimalWell = getItem(new ItemPrimalWell(), "primal_well");
         itemInkEgg = getItem("ink_egg");
         itemFlesh = getItem("flesh");
         itemCat = getItem(new ItemCat(), "cat");
