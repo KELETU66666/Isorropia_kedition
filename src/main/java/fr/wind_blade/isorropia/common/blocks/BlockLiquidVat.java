@@ -65,7 +65,7 @@ public class BlockLiquidVat
     }
 
     @SideOnly(value=Side.CLIENT)
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.TRANSLUCENT;
     }
 

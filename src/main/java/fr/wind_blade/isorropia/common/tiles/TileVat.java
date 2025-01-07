@@ -1119,6 +1119,7 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
             AuraHelper.polluteAura(this.world, this.pos, this.infusing ? 155.0f : 50.0f, true);
             if (this.getEntityContained() != null) {
                 this.entityContained.setHealth(0.0f);
+                //TODO: prevent entity dead when entity leave the vat
                 if (this.entityContained instanceof EntityLiving) {
                     this.entityContained.setDead();
                 }

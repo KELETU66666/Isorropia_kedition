@@ -20,7 +20,7 @@ import thaumcraft.api.aspects.AspectList;
 public class OreBoarRecipe
         extends SpecieCurativeInfusionRecipe {
     public OreBoarRecipe() {
-        super((SpecieCurativeInfusionRecipe.Builder) ((Builder) new Builder().withAspects(new AspectList().add(IsorropiaAPI.HUNGER, 32).add(Aspect.FIRE, 54).add(Aspect.METAL, 64).add(Aspect.EARTH, 32)).withComponents(Ingredient.fromItem(Item.getItemFromBlock(Blocks.FURNACE)), Config.orePig, Ingredient.fromStacks(ThaumcraftApiHelper.makeCrystal(Aspect.FIRE)), Ingredient.fromStacks(ThaumcraftApiHelper.makeCrystal(Aspect.EARTH))).withInstability(4).withKnowledgeRequirement("OREBOAR").withPredicate(entity -> entity.getClass() == EntityPig.class)).withResult(EntityOrePig.class).withVis(50.0f).withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.PIG, "Pig")), ItemCat.createCat(ItemCat.EnumCat.PIG, "Ore Boar")));
+        super((SpecieCurativeInfusionRecipe.Builder) ((Builder) new Builder().withAspects(new AspectList().add(IsorropiaAPI.HUNGER, 125).add(Aspect.FIRE, 250).add(Aspect.METAL, 250).add(Aspect.EARTH, 125)).withComponents(Ingredient.fromItem(Item.getItemFromBlock(Blocks.FURNACE)), Config.orePig, Ingredient.fromStacks(ThaumcraftApiHelper.makeCrystal(Aspect.FIRE)), Ingredient.fromStacks(ThaumcraftApiHelper.makeCrystal(Aspect.EARTH))).withInstability(4).withKnowledgeRequirement("OREBOAR").withPredicate(entity -> entity.getClass() == EntityPig.class)).withResult(EntityOrePig.class).withVis(50.0f).withFakeIngredients(Ingredient.fromStacks(ItemCat.createCat(ItemCat.EnumCat.PIG, "Pig")), ItemCat.createCat(ItemCat.EnumCat.PIG, "Ore Boar")));
     }
 
     @Override

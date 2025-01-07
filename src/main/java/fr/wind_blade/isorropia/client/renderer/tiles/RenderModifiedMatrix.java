@@ -1,8 +1,8 @@
 package fr.wind_blade.isorropia.client.renderer.tiles;
 
+import fr.wind_blade.isorropia.Isorropia;
 import fr.wind_blade.isorropia.common.tiles.TileModifiedMatrix;
 import fr.wind_blade.isorropia.common.tiles.TileVat;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -17,7 +17,6 @@ import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
-import thaumcraft.api.blocks.BlocksTC;
 import thaumcraft.client.fx.ParticleEngine;
 import thaumcraft.client.fx.particles.FXGeneric;
 import thaumcraft.client.renderers.models.ModelCube;
@@ -29,9 +28,7 @@ public class RenderModifiedMatrix
         extends TileEntitySpecialRenderer<TileModifiedMatrix> {
     private final ModelCube model = new ModelCube(0);
     private final ModelCube model_over = new ModelCube(32);
-    private static final ResourceLocation tex1 = new ResourceLocation("thaumcraft", "textures/blocks/infuser_normal.png");
-    private static final ResourceLocation tex2 = new ResourceLocation("thaumcraft", "textures/blocks/infuser_ancient.png");
-    private static final ResourceLocation tex3 = new ResourceLocation("thaumcraft", "textures/blocks/infuser_eldritch.png");
+    private static final ResourceLocation tex1 = new ResourceLocation(Isorropia.MODID, "textures/blocks/matrix_vat.png");
     float dt = 0.1f;
 
     private void drawHalo(TileEntity is, double x, double y, double z, float par8, int count) {
@@ -95,13 +92,6 @@ public class RenderModifiedMatrix
         boolean active = false;
         boolean infusing = false;
         if (te.getMaster() != null && te.getMaster().getWorld() != null) {
-            IBlockState bs = te.getMaster().getWorld().getBlockState(te.getMaster().getPos().add(-1, -2, -1));
-            if (bs.getBlock() == BlocksTC.pillarAncient) {
-                t = tex2;
-            }
-            if (bs.getBlock() == BlocksTC.pillarEldritch) {
-                t = tex3;
-            }
             TileVat curative = te.getMaster();
             inst = curative.getRawStability();
             craftcount = curative.getCraftCount();

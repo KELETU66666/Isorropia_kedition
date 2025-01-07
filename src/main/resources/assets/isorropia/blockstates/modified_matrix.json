@@ -1,10 +1,10 @@
 {
     "forge_marker": 1,
     "defaults": {
-        "model": "thaumcraft:infusion_matrix",
+        "model": "isorropia:modified_matrix",
         "textures": {
-            "particle": "thaumcraft:blocks/infuser_normal",
-            "side": "thaumcraft:blocks/infuser_normal"
+            "particle": "isorropia:blocks/matrix_vat",
+            "side": "isorropia:blocks/matrix_vat"
         },
         "transform": "forge:default-block"
      },

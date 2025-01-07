@@ -19,7 +19,7 @@ import thaumcraft.common.items.resources.ItemCrystalEssence;
 public class JellyRabbitRecipe
         extends SpecieCurativeInfusionRecipe {
     public JellyRabbitRecipe() {
-        super((SpecieCurativeInfusionRecipe.Builder) ((Builder) new Builder().withAspects(new AspectList().add(Aspect.AURA, 16).add(Aspect.EXCHANGE, 16)).withComponents(Ingredient.fromItem(Item.getItemFromBlock(Blocks.SLIME_BLOCK)), Ingredient.fromItem(ItemsTC.salisMundus), Ingredient.fromItem(ItemsTC.salisMundus), Ingredient.fromStacks(Config.CRYSTALS.toArray(new ItemStack[0]))).withInstability(2).withKnowledgeRequirement("JELLYRABBIT").withPredicate(entity -> entity.getClass() == EntityRabbit.class)).withResult(EntityJellyRabbit.class).withFakeIngredients(Ingredient.fromStacks(new ItemStack[]{ItemCat.createCat(ItemCat.EnumCat.RABBIT, "Rabbit")}), ItemCat.createCat(ItemCat.EnumCat.RABBIT, "Jelly Rabbit")).withVis(50.0f));
+        super((SpecieCurativeInfusionRecipe.Builder) ((Builder) new Builder().withAspects(new AspectList().add(Aspect.AURA, 30).add(Aspect.EXCHANGE, 30)).withComponents(Ingredient.fromItem(Item.getItemFromBlock(Blocks.SLIME_BLOCK)), Ingredient.fromItem(ItemsTC.salisMundus), Ingredient.fromItem(ItemsTC.salisMundus), Ingredient.fromStacks(Config.CRYSTALS.toArray(new ItemStack[0]))).withInstability(2).withKnowledgeRequirement("JELLYRABBIT").withPredicate(entity -> entity.getClass() == EntityRabbit.class)).withResult(EntityJellyRabbit.class).withFakeIngredients(Ingredient.fromStacks(new ItemStack[]{ItemCat.createCat(ItemCat.EnumCat.RABBIT, "Rabbit")}), ItemCat.createCat(ItemCat.EnumCat.RABBIT, "Jelly Rabbit")).withVis(50.0f));
     }
 
     @Override
