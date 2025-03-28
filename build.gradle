@@ -12,7 +12,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'com.wynprice.cursemaven'
 
-version = "1.12.2-kedition-1.1.0"
+version = "1.12.2-kedition-1.1.1"
 group = "fr.wind_blade.isorropia"
 archivesBaseName = "isorropia"
 
