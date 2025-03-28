@@ -8,18 +8,13 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class FireLens
-        extends Lens {
+public class FireLens extends Lens {
     public FireLens(ItemLens lensIn) {
         super(lensIn);
     }
 
-
-
-
-    public void handleTicks(World worldIn, EntityPlayer playerIn, boolean doubleLens) {}
-
-
+    public void handleTicks(World worldIn, EntityPlayer playerIn, boolean doubleLens) {
+    }
 
     public void handleRenderGameOverlay(World worldIn, EntityPlayer player, ScaledResolution resolution, boolean doubleLens, float partialTicks) {
         if (worldIn.isRemote) {
@@ -31,10 +26,8 @@ public class FireLens
         }
     }
 
-
-
-    public void handleRenderWorldLast(World worldIn, EntityPlayer playerIn, boolean doubleLens, float partialTicks) {}
-
+    public void handleRenderWorldLast(World worldIn, EntityPlayer playerIn, boolean doubleLens, float partialTicks) {
+    }
 
     public void handleRemoval(World worldIn, EntityPlayer playerIn) {
         playerIn.removePotionEffect(Potion.getPotionById(16));

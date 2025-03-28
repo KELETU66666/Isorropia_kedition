@@ -26,6 +26,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -163,13 +164,13 @@ public class RenderEventHandler {
             String lens = stack.getTagCompound().getString(LensManager.LENSSLOT.LEFT.getName());
 
             if (!lens.isEmpty()) {
-                tooltip.add(1, "§a" + I18n.format("lens." + IsorropiaAPI.lensRegistry.getValue(new ResourceLocation(lens)).getTranslationKey()));
+                tooltip.add(1, TextFormatting.YELLOW + I18n.format("lens." + IsorropiaAPI.lensRegistry.getValue(new ResourceLocation(lens)).getTranslationKey()));
             }
 
             lens = stack.getTagCompound().getString(LensManager.LENSSLOT.RIGHT.getName());
 
             if (!lens.isEmpty()) {
-                tooltip.add(1, "§a" + I18n.format("lens." + IsorropiaAPI.lensRegistry.getValue(new ResourceLocation(lens)).getTranslationKey()));
+                tooltip.add(1, TextFormatting.YELLOW + I18n.format("lens." + IsorropiaAPI.lensRegistry.getValue(new ResourceLocation(lens)).getTranslationKey()));
             }
         }
     }
@@ -214,8 +215,7 @@ public class RenderEventHandler {
         EntityPlayerSP player = (Minecraft.getMinecraft()).player;
         ItemStack revealer = LensManager.getRevealer(player);
 
-        if (!revealer.isEmpty() && revealer.hasTagCompound() && revealer
-                .getTagCompound().getString("LeftLens") != null) {
+        if (!revealer.isEmpty() && revealer.hasTagCompound() && revealer.getTagCompound().getString("LeftLens") != null) {
             theLeftLens = LensManager.getLens(revealer, LensManager.LENSSLOT.LEFT);
             theRightLens = LensManager.getLens(revealer, LensManager.LENSSLOT.RIGHT);
             boolean doubleLens = (theRightLens != null && theRightLens.equals(theLeftLens));

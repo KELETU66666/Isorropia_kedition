@@ -16,12 +16,7 @@ import thaumcraft.client.lib.UtilsFX;
 
 import java.util.List;
 
-
-
-
-public class AirLens
-        extends Lens
-{
+public class AirLens extends Lens {
     public static final byte AIR_LENS_DIST_CAP = 24;
     public static final ResourceLocation TEX = new ResourceLocation("isorropia", "textures/fx/ripple.png");
     public static final ResourceLocation TEX_UNDEAD = new ResourceLocation("isorropia", "textures/fx/vortex.png");
@@ -33,15 +28,12 @@ public class AirLens
     }
 
 
+    public void handleTicks(World worldIn, EntityPlayer playerIn, boolean doubleLens) {
+    }
 
 
-    public void handleTicks(World worldIn, EntityPlayer playerIn, boolean doubleLens) {}
-
-
-
-
-    public void handleRenderGameOverlay(World worldIn, EntityPlayer playerIn, ScaledResolution resolution, boolean doubleLens, float partialTicks) {}
-
+    public void handleRenderGameOverlay(World worldIn, EntityPlayer playerIn, ScaledResolution resolution, boolean doubleLens, float partialTicks) {
+    }
 
 
     public void handleRenderWorldLast(World worldIn, EntityPlayer playerIn, boolean doubleLens, float partialTicks) {
@@ -65,14 +57,14 @@ public class AirLens
             double scale = e.getPositionVector().subtract(playerIn.getPositionVector()).length();
             float sizeOffset = (e.ticksExisted % 16);
 
-            double cappedTchebychevDist = Math.min(IRMathHelper.getTchebychevDistance((Entity)e, (Entity)playerIn), 24.0D);
-            float alpha = (float)(1.0D - cappedTchebychevDist / 24.0D);
+            double cappedTchebychevDist = Math.min(IRMathHelper.getTchebychevDistance((Entity) e, (Entity) playerIn), 24.0D);
+            float alpha = (float) (1.0D - cappedTchebychevDist / 24.0D);
             float size = Math.min(e.height, e.width);
 
             if (e instanceof thaumcraft.api.entities.IEldritchMob) {
                 GlStateManager.pushMatrix();
                 GL11.glDisable(2929);
-                size = (float)(size * 0.8D);
+                size = (float) (size * 0.8D);
 
                 GlStateManager.translate(-playerOffX, -playerOffY, -playerOffZ);
                 GlStateManager.translate(eOffX, eOffY + (e.height / 2.0F), eOffZ);
@@ -86,10 +78,11 @@ public class AirLens
                 UtilsFX.renderQuadCentered(TEX_ELDRITCH, size, 1.0F, 1.0F, 1.0F, -99, 771, alpha);
 
                 GL11.glEnable(2929);
-                GlStateManager.popMatrix(); continue;
+                GlStateManager.popMatrix();
+                continue;
             }
             if (e.isEntityUndead()) {
-                size = (float)(size * 1.3D);
+                size = (float) (size * 1.3D);
                 GlStateManager.pushMatrix();
                 GL11.glDisable(2929);
 
@@ -105,12 +98,13 @@ public class AirLens
                 UtilsFX.renderQuadCentered(TEX_UNDEAD, size, 1.0F, 1.0F, 1.0F, -99, 771, alpha);
 
                 GL11.glEnable(2929);
-                GlStateManager.popMatrix(); continue;
+                GlStateManager.popMatrix();
+                continue;
             }
             double numbers = Math.min(48.0D / scale + 1.0D, 4.0D);
 
             for (int i = 0; i < numbers; i++) {
-                float numSize = (float)(((i * 16) / (numbers + 1.0D) + sizeOffset) % 16.0D / 12.0D) * size;
+                float numSize = (float) (((i * 16) / (numbers + 1.0D) + sizeOffset) % 16.0D / 12.0D) * size;
 
                 GlStateManager.pushMatrix();
                 GL11.glDisable(2929);
@@ -127,5 +121,6 @@ public class AirLens
         }
     }
 
-    public void handleRemoval(World worldIn, EntityPlayer playerIn) {}
+    public void handleRemoval(World worldIn, EntityPlayer playerIn) {
+    }
 }

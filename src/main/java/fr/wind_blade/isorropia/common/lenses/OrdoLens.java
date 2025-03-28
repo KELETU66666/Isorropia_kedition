@@ -41,30 +41,24 @@ public class OrdoLens extends Lens {
         if (worldIn.isRemote) {
             return;
         }
-        Entity target = EntityUtils.getPointedEntity(worldIn, (Entity)playerIn, 1.0D, 5.0D, 0.0F, true);
+        Entity target = EntityUtils.getPointedEntity(worldIn, playerIn, 1.0D, 5.0D, 0.0F, true);
 
         if (target != null && ScanningManager.isThingStillScannable(playerIn, target)) {
             ScanningManager.scanTheThing(playerIn, target);
         } else {
-
             RayTraceResult mop = rayTrace(worldIn, playerIn, true);
-            if (mop != null && mop.getBlockPos() != null &&
-                    ScanningManager.isThingStillScannable(playerIn, mop.getBlockPos())) {
+            if (mop != null && mop.getBlockPos() != null && ScanningManager.isThingStillScannable(playerIn, mop.getBlockPos())) {
                 ScanningManager.scanTheThing(playerIn, mop.getBlockPos());
             }
         }
     }
-
-
-
-
 
     @SideOnly(Side.CLIENT)
     public void handleRenderGameOverlay(World worldIn, EntityPlayer playerIn, ScaledResolution resolution, boolean doubleLens, float partialTicks) {
         if ((Minecraft.getMinecraft()).gameSettings.thirdPersonView != 0) {
             return;
         }
-        Entity target = EntityUtils.getPointedEntity(worldIn, (Entity)playerIn, 1.0D, 5.0D, 0.0F, true);
+        Entity target = EntityUtils.getPointedEntity(worldIn, playerIn, 1.0D, 5.0D, 0.0F, true);
         if (target != null) {
             Entity entity = RenderEventHandler.thaumTarget;
             if (entity == null || entity != target) {
@@ -80,30 +74,19 @@ public class OrdoLens extends Lens {
             return;
         }
         RayTraceResult mop = rayTrace(worldIn, playerIn, true);
-        if (mop != null && mop.getBlockPos() != null && mop.typeOfHit == RayTraceResult.Type.BLOCK) {
+        if (mop != null && mop.typeOfHit == RayTraceResult.Type.BLOCK) {
+            List<EntityItem> itemstacks = (Minecraft.getMinecraft()).world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(new BlockPos(mop.getBlockPos().getX(), mop.getBlockPos().getY() + 1, mop.getBlockPos().getZ())));
+            if (!itemstacks.isEmpty() && !itemstacks.get(0).getItem().isEmpty()) {
 
-
-
-
-
-            List<EntityItem> itemstacks = (Minecraft.getMinecraft()).world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(new BlockPos(mop
-                    .getBlockPos().getX(), mop.getBlockPos().getY() + 1, mop
-                    .getBlockPos().getZ())));
-            if (!itemstacks.isEmpty() && !((EntityItem)itemstacks.get(0)).getItem().isEmpty()) {
-                renderNameAndAspects(resolution, AspectHelper.getObjectAspects(((EntityItem)itemstacks.get(0)).getItem()), ((EntityItem)itemstacks
-                        .get(0)).getItem().getDisplayName());
-
+                renderNameAndAspects(resolution, AspectHelper.getObjectAspects(itemstacks.get(0).getItem()), itemstacks.get(0).getItem().getDisplayName());
                 if (ScanningManager.isThingStillScannable(playerIn, itemstacks.get(0))) {
-                    FXDispatcher.INSTANCE.scanHighlight((Entity)itemstacks.get(0));
+                    FXDispatcher.INSTANCE.scanHighlight(itemstacks.get(0));
                 }
-            }
-            else {
-
+            } else {
                 RayTraceResult mob = playerIn.rayTrace(5.0D, partialTicks);
-                if (mob != null && mop.getBlockPos() != null) {
+                if (mob != null) {
                     Block block = worldIn.getBlockState(mop.getBlockPos()).getBlock();
-                    renderNameAndAspects(resolution, AspectHelper.getObjectAspects(new ItemStack(block)), block
-                            .getLocalizedName());
+                    renderNameAndAspects(resolution, AspectHelper.getObjectAspects(new ItemStack(block)), block.getLocalizedName());
 
                     if (ScanningManager.isThingStillScannable(playerIn, mob.getBlockPos())) {
                         FXDispatcher.INSTANCE.scanHighlight(mop.getBlockPos());
@@ -112,9 +95,6 @@ public class OrdoLens extends Lens {
             }
         }
     }
-
-
-
 
     @SideOnly(Side.CLIENT)
     public void handleRenderWorldLast(World worldIn, EntityPlayer playerIn, boolean doubleLens, float partialTicks) {
@@ -150,7 +130,7 @@ public class OrdoLens extends Lens {
             GlStateManager.scale(size, size, size);
 
 
-            String name = (entity instanceof EntityItem) ? ((EntityItem)entity).getItem().getDisplayName() : entity.getName();
+            String name = (entity instanceof EntityItem) ? ((EntityItem) entity).getItem().getDisplayName() : entity.getName();
             (Minecraft.getMinecraft()).fontRenderer.drawString(name, 1 -
                     (Minecraft.getMinecraft()).fontRenderer.getStringWidth(name) / 2, 1, Color.WHITE.getRGB());
 
@@ -175,30 +155,28 @@ public class OrdoLens extends Lens {
             int yOff = 0;
             int thisRow = 0;
             int size = 18;
-            if (aspects.size() - num < 5) {
+            if (aspects.size() - num < Math.max(5, aspects.size())) {
                 thisRow = aspects.size() - num;
             } else {
-                thisRow = 5;
+                thisRow = Math.max(5, aspects.size());
             }
 
             for (Aspect aspect : aspects.getAspects()) {
-                yOff = num / 5 * size;
-                drawAspectTag(aspect, aspects.getAmount(aspect), w / 2 - size * thisRow / 2 + size * num % 5, h / 2 + 16 + yOff);
+                yOff = num / Math.max(5, aspects.size()) * size;
+                drawAspectTag(aspect, aspects.getAmount(aspect), w / 2 - size * thisRow / 2 + size * num, h / 2 + 16 + yOff);
 
-                if (++num % 5 == 0)
-                {
+                if (++num % Math.max(5, aspects.size()) == 0) {
 
-                    if (aspects.size() - num < 5) {
+                    if (aspects.size() - num < Math.max(5, aspects.size())) {
                         thisRow = aspects.size() - num;
                     } else {
-                        thisRow = 5;
+                        thisRow = Math.max(5, aspects.size());
                     }
                 }
             }
         }
         if (text.length() > 0) {
-            (Minecraft.getMinecraft()).ingameGUI.drawString((Minecraft.getMinecraft()).fontRenderer, text, w / 2 -
-                    (Minecraft.getMinecraft()).fontRenderer.getStringWidth(text) / 2, h / 2 - 16, 16777215);
+            Minecraft.getMinecraft().ingameGUI.drawString(Minecraft.getMinecraft().fontRenderer, text, w / 2 - Minecraft.getMinecraft().fontRenderer.getStringWidth(text) / 2, h / 2 - 16, 16777215);
         }
     }
 
@@ -229,8 +207,7 @@ public class OrdoLens extends Lens {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         DecimalFormat myFormatter = new DecimalFormat("#######.##");
         String am = myFormatter.format(amount);
-        (Minecraft.getMinecraft()).fontRenderer.drawString(am, 24 + x * 2, 32 -
-                (Minecraft.getMinecraft()).fontRenderer.FONT_HEIGHT + y * 2, 16777215);
+        Minecraft.getMinecraft().fontRenderer.drawString(am, 24 + x * 2, 32 - Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT + y * 2, 16777215);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glPopMatrix();
     }
