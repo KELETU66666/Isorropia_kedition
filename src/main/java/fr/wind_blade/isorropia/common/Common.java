@@ -133,14 +133,13 @@ public class Common {
     }
 
     private static void initNetwork() {
-        INSTANCE.registerMessage(MirrorMessage.MirrorMessageHandler.class, MirrorMessage.class, 0, Side.SERVER);
-        INSTANCE.registerMessage(LensChangeMessage.LensChangeMessageHandler.class, LensChangeMessage.class, 1, Side.SERVER);
-        INSTANCE.registerMessage(CapabilityMessage.ClientLivingBaseCapabilityHandler.class, CapabilityMessage.class, 2, Side.CLIENT);
-        INSTANCE.registerMessage(ISPacketFXInfusionSource.class, ISPacketFXInfusionSource.class, 4, Side.CLIENT);
-        INSTANCE.registerMessage(TrackingCapabilityMessage.ClientLivingBaseCapabilityHandler.class, TrackingCapabilityMessage.class, 5, Side.CLIENT);
-        INSTANCE.registerMessage(ParticuleDestroyMessage.Handler.class, ParticuleDestroyMessage.class, 6, Side.CLIENT);
-        INSTANCE.registerMessage(LensRemoveMessage.Handler.class, LensRemoveMessage.class, 7, Side.CLIENT);
-        INSTANCE.registerMessage(LensRemoveMessageSP.Handler.class, LensRemoveMessageSP.class, 8, Side.SERVER);
+        INSTANCE.registerMessage(LensChangeMessage.LensChangeMessageHandler.class, LensChangeMessage.class, 0, Side.SERVER);
+        INSTANCE.registerMessage(CapabilityMessage.ClientLivingBaseCapabilityHandler.class, CapabilityMessage.class, 1, Side.CLIENT);
+        INSTANCE.registerMessage(ISPacketFXInfusionSource.class, ISPacketFXInfusionSource.class, 2, Side.CLIENT);
+        INSTANCE.registerMessage(TrackingCapabilityMessage.ClientLivingBaseCapabilityHandler.class, TrackingCapabilityMessage.class, 3, Side.CLIENT);
+        INSTANCE.registerMessage(ParticuleDestroyMessage.Handler.class, ParticuleDestroyMessage.class, 4, Side.CLIENT);
+        INSTANCE.registerMessage(LensRemoveMessage.Handler.class, LensRemoveMessage.class, 5, Side.CLIENT);
+        INSTANCE.registerMessage(LensRemoveMessageSP.Handler.class, LensRemoveMessageSP.class, 6, Side.SERVER);
     }
 
     private static void initMultiBlocks() {

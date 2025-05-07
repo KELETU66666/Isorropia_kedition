@@ -205,7 +205,7 @@
         	"stages":[
 				{
 					"text":"research.CREATUREINFUSIONS.stage.1.text",
-					"required_knowledge":["OBSERVATION;ISORROPIA;1"],
+					"required_knowledge":["OBSERVATION;INFUSION;1"],
 					"required_research":["!scan.animal;isorropia:textures/research/cat_cow.png"]
 				},
 				{

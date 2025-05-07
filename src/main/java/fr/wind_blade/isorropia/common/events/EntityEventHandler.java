@@ -284,6 +284,8 @@ public class EntityEventHandler {
                     return;
                 }
                 IsorropiaHelper.playerJarEntity(event.getEntityPlayer(), (EntityLiving) target);
+
+                event.setCanceled(true);
             }
         }
     }

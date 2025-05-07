@@ -29,9 +29,7 @@ import thaumcraft.api.casters.ICaster;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BlockJarSoul
-        extends BlockContainer
-        implements IItemBlockProvider {
+public class BlockJarSoul extends BlockContainer implements IItemBlockProvider {
     public static PropertyDirection FACING = BlockHorizontal.FACING;
 
     public BlockJarSoul() {
@@ -47,7 +45,7 @@ public class BlockJarSoul
         }
         TileEntity te = worldIn.getTileEntity(pos);
         if (te instanceof TileJarSoul) {
-            IsorropiaHelper.nbtToLiving(((TileJarSoul)te).entityData, worldIn, pos).setNoAI(false);
+            IsorropiaHelper.nbtToLiving(((TileJarSoul)te).entityData, worldIn, pos);
             worldIn.destroyBlock(pos, false);
         }
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);

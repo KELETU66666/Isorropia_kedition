@@ -13,9 +13,7 @@ import thaumcraft.common.tiles.crafting.TilePedestal;
 
 import java.util.Map;
 
-public class ISPacketFXInfusionSource
-        implements IMessage,
-        IMessageHandler<ISPacketFXInfusionSource, IMessage> {
+public class ISPacketFXInfusionSource implements IMessage, IMessageHandler<ISPacketFXInfusionSource, IMessage> {
     private long p1;
     private long p2;
     private int color;
@@ -50,9 +48,9 @@ public class ISPacketFXInfusionSource
     }
 
     public IMessage onMessage(ISPacketFXInfusionSource message, MessageContext ctx) {
-        BlockPos p1 = BlockPos.fromLong((long)message.p1);
-        BlockPos p2 = BlockPos.fromLong((long)message.p2);
-        String key = "" + p2.getX() + ":" + p2.getY() + ":" + p2.getZ() + ":" + message.color;
+        BlockPos p1 = BlockPos.fromLong(message.p1);
+        BlockPos p2 = BlockPos.fromLong(message.p2);
+        String key = p2.getX() + ":" + p2.getY() + ":" + p2.getZ() + ":" + message.color;
         TileEntity tile = Thaumcraft.proxy.getClientWorld().getTileEntity(p1);
         if (tile instanceof TileVat) {
             TileVat is;
@@ -61,7 +59,7 @@ public class ISPacketFXInfusionSource
             if (te instanceof TilePedestal) {
                 count = 60;
             }
-            if ((is = (TileVat)tile).getSourceFX().containsKey(key)) {
+            if ((is = (TileVat) tile).getSourceFX().containsKey(key)) {
                 TileVat.SourceFX sf = is.getSourceFX().get(key);
                 sf.ticks = count;
                 is.getSourceFX().put(key, sf);

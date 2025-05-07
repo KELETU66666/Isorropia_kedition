@@ -50,6 +50,7 @@ public class FocusEffectContainment extends FocusEffect {
         if (IsorropiaHelper.containEntity(base, (EntityLivingBase) trace.entityHit, this.getSettingValue("power"))) {
             this.getPackage().world.playSound(null, trace.hitVec.x, trace.hitVec.y, trace.hitVec.z, SoundsTC.hhon, SoundCategory.PLAYERS, 0.8F, 0.85F + (float) (this.getPackage().getCaster().world.rand.nextGaussian() * 0.05F));
             IsorropiaHelper.playerJarEntity((EntityPlayer) base, (EntityLiving) trace.entityHit);
+            IsorropiaHelper.contain.remove(trace.entityHit.getUniqueID());
         }
         return true;
     }
