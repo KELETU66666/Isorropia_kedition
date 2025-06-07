@@ -35,7 +35,11 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -72,12 +76,7 @@ import thaumcraft.common.world.aura.AuraHandler;
 import java.util.*;
 
 public class TileVat extends TileThaumcraft implements IAspectContainer, ITickable, IStabilizable {
-    private static final int X_RANGE = 12;
-    private static final int Y_RANGE = 10;
-    private static final int Z_RANGE = 12;
-    private static final short MIN_FLUX_PRESSURE = 30;
-    private static final short MAX_FLUX_PRESSURE = 300;
-    private static final byte FLUX_EXPUNGE_SECOND = 2;
+    public static final String NBT_TAG_PREVENT_DESPAWN = "PreventDespawn";
     private int mode = 0;
     private int stabilityCap = 25;
     private float stability = 0.0f;
@@ -118,6 +117,9 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
     private List<ItemStack> loots = new ArrayList<ItemStack>();
     public boolean checkSurroundings = true;
 
+    public TileVat(){
+        MinecraftForge.EVENT_BUS.register(this);
+    }
     public IStabilizable.EnumStability getStability() {
         if (this.stability <= -25.0f) {
             return IStabilizable.EnumStability.VERY_UNSTABLE;
@@ -1159,6 +1161,10 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
                 }
                 this.entityContained.rotationYaw = rotation;
                 this.entityContained.setPositionAndUpdate((double) this.pos.getX() + 0.5, this.pos.getY() - 2, (double) this.pos.getZ() + 0.5);
+
+                NBTTagCompound entityForgeData = this.entityContained.getEntityData();
+                entityForgeData.setBoolean(NBT_TAG_PREVENT_DESPAWN, true);
+
             }
             if (old instanceof EntityLiving) {
                 ((EntityLiving) old).setNoAI(false);
@@ -1166,6 +1172,9 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
                 old.setRotationYawHead(0.0f);
                 old.rotationPitch = 0.0f;
                 old.setPositionAndUpdate((double) this.pos.getX() + 0.5, this.pos.getY() + 2, (double) this.pos.getZ() + 0.5);
+                NBTTagCompound oldEntityForgeData = old.getEntityData();
+                oldEntityForgeData.setBoolean(NBT_TAG_PREVENT_DESPAWN, false);
+
             }
         }
         return old;
@@ -1539,6 +1548,20 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
             this.loc = loc;
             this.ticks = ticks;
             this.color = color;
+        }
+    }
+
+
+    @SubscribeEvent
+    public void onLivingAllowDespawn(LivingSpawnEvent.AllowDespawn event) {
+        if (event.getEntityLiving() instanceof EntityLiving) {
+            EntityLiving entity = (EntityLiving) event.getEntityLiving();
+
+            NBTTagCompound entityForgeData = entity.getEntityData();
+
+            if (entityForgeData.hasKey(NBT_TAG_PREVENT_DESPAWN) && entityForgeData.getBoolean(NBT_TAG_PREVENT_DESPAWN)) {
+                event.setResult(Event.Result.DENY);
+            }
         }
     }
 }

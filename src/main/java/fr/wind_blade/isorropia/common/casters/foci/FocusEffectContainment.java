@@ -43,6 +43,9 @@ public class FocusEffectContainment extends FocusEffect {
         if (!(trace.entityHit instanceof EntityLiving) || !IsorropiaHelper.doPlayerHaveJar((EntityPlayer) base, false)) {
             return false;
         }
+        if(((EntityLiving) trace.entityHit).getHealth() <= 0){
+            return false;
+        }
         if (!IsorropiaHelper.canEntityBeJarred((EntityLiving) trace.entityHit)) {
             base.sendMessage(new TextComponentString(String.valueOf(TextFormatting.ITALIC) + TextFormatting.GRAY + I18n.format("isorropia.containment.fail")));
             return false;
