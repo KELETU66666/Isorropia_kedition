@@ -77,6 +77,11 @@ public class BlockCurativeVat extends Block implements ITileEntityProvider, IBlo
         return Items.AIR;
     }
 
+    @Override
+    public boolean hasTileEntity(IBlockState state) {
+        return state.getValue(VARIANT) != Type.PLACEHOLDER;
+    }
+
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         switch (meta) {
             case 1: {
