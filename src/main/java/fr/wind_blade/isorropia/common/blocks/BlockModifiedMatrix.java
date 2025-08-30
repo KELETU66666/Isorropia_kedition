@@ -48,7 +48,7 @@ public class BlockModifiedMatrix
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         TileEntity te = worldIn.getTileEntity(pos.down());
         if (te instanceof TileVat) {
-            TileVat vat = (TileVat)te;
+            TileVat vat = (TileVat) te;
             if (vat.isInfusing()) {
                 vat.destroyMultiBlock();
             }

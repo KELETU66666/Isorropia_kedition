@@ -17,10 +17,8 @@ import thaumcraft.api.aspects.Aspect;
 import java.awt.*;
 
 @SideOnly(Side.CLIENT)
-public class RenderJellyRabbit
-        extends RenderLiving<EntityJellyRabbit>
-{
-    public static ResourceLocation TEXTURE = new ResourceLocation("isorropia", "textures/entity/white.png");
+public class RenderJellyRabbit extends RenderLiving<EntityJellyRabbit> {
+    public static ResourceLocation TEXTURE = new ResourceLocation("minecraft", "textures/entity/rabbit/white.png");
     public static final float MC_HEIGHT = 1.5F;
 
     public RenderJellyRabbit(RenderManager renderManagerIn) {
@@ -68,11 +66,10 @@ public class RenderJellyRabbit
         }
 
 
-
-
         public void doRenderLayer(EntityJellyRabbit rabbit, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
             if (!rabbit.isInvisible()) {
-                Color color; GlStateManager.pushMatrix();
+                Color color;
+                GlStateManager.pushMatrix();
 
                 Aspect aspect = rabbit.getAspect();
 

@@ -1,10 +1,12 @@
 package fr.wind_blade.isorropia.common.tiles;
 
+import fr.wind_blade.isorropia.common.events.SoundsIR;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
@@ -59,18 +61,36 @@ public class TileModifiedMatrix extends TileEntity implements IInteractWithCaste
         return 0;
     }
 
-    public boolean onCasterRightClick(World paramWorld, ItemStack paramItemStack, EntityPlayer paramEntityPlayer, BlockPos paramBlockPos, EnumFacing paramEnumFacing, EnumHand paramEnumHand) {
+    public boolean onCasterRightClick(World world, ItemStack wandstack, EntityPlayer player, BlockPos pos, EnumFacing side, EnumHand hand) {
         TileVat vat = this.getMaster();
         if (vat != null) {
-            vat.onCasterRightClick(paramWorld, paramItemStack, paramEntityPlayer, paramBlockPos, paramEnumFacing, paramEnumHand);
-            return true;
+            if (world.isRemote && vat.isActive() && !vat.isInfusing() && !vat.isExpunging()) {
+                vat.checkSurroundings = true;
+            }
+
+            if (!world.isRemote && vat.isActive() && !vat.isInfusing() && !vat.isExpunging()) {
+                if (player.isSneaking() && vat.getFluxStocked() > 0.0F) {
+                    vat.setExpunge(true);
+                } else {
+                    vat.craftingStart(player);
+                    return false;
+                }
+            } else if (!world.isRemote && !vat.isActive()) {
+                world.playSound(null, pos, SoundsIR.curative_infusion_start, SoundCategory.BLOCKS, 0.5F, 1.0F);
+                vat.setActive(true);
+                vat.syncTile(false);
+                this.markDirty();
+                return false;
+            } else {
+                return false;
+            }
         }
         return false;
     }
 
     public TileVat getMaster() {
         TileEntity te = this.world.getTileEntity(this.getPos().down());
-        return te instanceof TileVat ? (TileVat)te : null;
+        return te instanceof TileVat ? (TileVat) te : null;
     }
 
     public String[] getIGogglesText() {

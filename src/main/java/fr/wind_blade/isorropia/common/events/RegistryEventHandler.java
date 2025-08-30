@@ -55,7 +55,7 @@ public class RegistryEventHandler {
         lens_builder.setName(new ResourceLocation("isorropia", "lens"));
         lens_builder.setType(Lens.class);
         lens_builder.setIDRange(0, 255);
-        IsorropiaAPI.lensRegistry = (ForgeRegistry)lens_builder.create();
+        IsorropiaAPI.lensRegistry = (ForgeRegistry) lens_builder.create();
     }
 
     @SubscribeEvent
@@ -87,18 +87,18 @@ public class RegistryEventHandler {
 
 
         ModelLoader.setCustomStateMapper(BlocksIS.blockJarSoul, new StateMap.Builder().ignore(BlockJarSoul.FACING).build());
-        registerItemRenders((Block[])BlocksIS.blocks.toArray((Object[])new Block[0]));
+        registerItemRenders((Block[]) BlocksIS.blocks.toArray((Object[]) new Block[0]));
     }
 
     public static ItemBlock getItemBlock(Block block) {
-        return getItemBlock((block instanceof IItemBlockProvider) ? ((IItemBlockProvider)block).getItemBlock() : new ItemBlock(block));
+        return getItemBlock((block instanceof IItemBlockProvider) ? ((IItemBlockProvider) block).getItemBlock() : new ItemBlock(block));
     }
 
 
     public static <T extends ItemBlock> T getItemBlock(T itemBlock) {
         Block block = itemBlock.getBlock();
         itemBlock.setRegistryName(block.getRegistryName()).setTranslationKey(block.getTranslationKey());
-        if (!(block instanceof IBlockRegistry) || ((IBlockRegistry)block).isInCreativeTabs())
+        if (!(block instanceof IBlockRegistry) || ((IBlockRegistry) block).isInCreativeTabs())
             itemBlock.setCreativeTab(Common.isorropiaCreativeTabs);
         return itemBlock;
     }
@@ -115,7 +115,10 @@ public class RegistryEventHandler {
         String resourceName = item.getRegistryName().toString();
         if (metadata > 0)
             resourceName = resourceName + "_m" + metadata;
-        ModelLoader.setCustomModelResourceLocation(item, metadata, new ModelResourceLocation(resourceName, "inventory"));
+
+        //Already Registered!!!
+        if (item != ItemsIS.itemCat)
+            ModelLoader.setCustomModelResourceLocation(item, metadata, new ModelResourceLocation(resourceName, "inventory"));
     }
 
 

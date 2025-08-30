@@ -62,7 +62,6 @@ import thaumcraft.api.crafting.IStabilizable;
 import thaumcraft.api.potions.PotionFluxTaint;
 import thaumcraft.api.potions.PotionVisExhaust;
 import thaumcraft.client.fx.FXDispatcher;
-import thaumcraft.common.blocks.basic.BlockPillar;
 import thaumcraft.common.blocks.devices.BlockPedestal;
 import thaumcraft.common.lib.SoundsTC;
 import thaumcraft.common.lib.network.PacketHandler;
@@ -103,7 +102,7 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
     private float soundExpunge = 0.0f;
     private int countDelay = this.cycleTime / 2;
     private int itemCount = 0;
-    private ArrayList<BlockPos> problemBlocks = new ArrayList<BlockPos>();
+    private final ArrayList<BlockPos> problemBlocks = new ArrayList<BlockPos>();
     HashMap<Block, Integer> tempBlockCount = new HashMap<>();
     private boolean infusing = false;
     private CurativeInfusionRecipe recipe;
@@ -117,9 +116,10 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
     private List<ItemStack> loots = new ArrayList<ItemStack>();
     public boolean checkSurroundings = true;
 
-    public TileVat(){
+    public TileVat() {
         MinecraftForge.EVENT_BUS.register(this);
     }
+
     public IStabilizable.EnumStability getStability() {
         if (this.stability <= -25.0f) {
             return IStabilizable.EnumStability.VERY_UNSTABLE;
@@ -156,15 +156,18 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
 
     public void update() {
         ++this.count;
-        //if (checkSurroundings) {
-        //    checkSurroundings = false;
-            getSurroundings();
-        //}
+        if (this.checkSurroundings) {
+            this.checkSurroundings = false;
+            this.getSurroundings();
+        }
         if (this.fluxStocked > 300.0f) {
             if (this.infusing) {
                 this.infusingFinish(null, true);
             }
             this.destroyMultiBlock();
+
+            this.syncTile(false);
+            this.markDirty();
         }
 
         this.updateStartUp();
@@ -173,12 +176,18 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
         } else {
             if (this.getEntityContained() != null && this.entityContained.isDead) {
                 this.destroyMultiBlock();
+
+                this.syncTile(false);
+                this.markDirty();
             }
             if (!this.expunge && this.fluxStocked >= 30.0f) {
                 if (this.mode == 2) {
                     this.infusingFinish(this.recipe, true);
                 }
                 this.expunge = true;
+
+                this.syncTile(false);
+                this.markDirty();
             }
             if (this.expunge && this.count % this.countDelay * 2 == 0) {
                 this.fluxStocked -= 1.0f;
@@ -188,23 +197,27 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
                     this.fluxStocked = 0.0f;
                 }
                 this.syncTile(false);
+                this.markDirty();
                 return;
             }
             if (this.getEntityContained() != null) {
-                this.pedestals = this.getSurrondingPedestals();
                 if (this.getEntityContained() != null && this.getEntityContained().isBurning()) {
                     this.getEntityContained().extinguish();
                 }
                 if (this.mode == 0 && !this.expunge) {
                     this.curativeUpdate();
                     this.essentiaStep();
+
+                    this.syncTile(false);
+                    this.markDirty();
                 } else if (this.mode == 2 && this.active && this.count % this.countDelay == 0) {
                     this.infusionCycle();
+
+                    this.syncTile(false);
+                    this.markDirty();
                 }
             }
         }
-        this.world.notifyBlockUpdate(this.pos, this.getBlockType().getStateFromMeta(this.getBlockMetadata()), this.getBlockType().getStateFromMeta(this.getBlockMetadata()), 0);
-        this.markDirty();
     }
 
     private void updateStartUp() {
@@ -345,26 +358,6 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
         }
     }
 
-    public boolean onCasterRightClick(World world, ItemStack wandstack, EntityPlayer player, BlockPos pos, EnumFacing side, EnumHand hand) {
-        if (this.active && !this.infusing && !this.expunge) {
-            if (this.infusionStart(player)) {
-                this.mode = 2;
-                return false;
-            }
-            if (player.isSneaking() && !this.expunge && this.fluxStocked > 0.0f) {
-                this.expunge = true;
-            }
-        }
-        if (!world.isRemote && !this.active) {
-            world.playSound(null, pos, SoundsIR.curative_infusion_start, SoundCategory.BLOCKS, 0.5f, 1.0f);
-            this.active = true;
-            this.syncTile(false);
-            this.markDirty();
-            return true;
-        }
-        return false;
-    }
-
     public boolean onBlockRigthClick(EntityPlayer playerIn, EnumFacing facing, boolean master) {
         EntityLivingBase contained = this.getEntityContained();
         ItemStack stack = playerIn.getHeldItemMainhand();
@@ -375,8 +368,7 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
         if (block == BlocksIS.blockJarSoul && stack.hasTagCompound() && stack.getTagCompound().hasKey("ENTITY_DATA")) {
             if (contained == null && playerIn.inventory.addItemStackToInventory(new ItemStack(BlocksTC.jarNormal))) {
                 this.setEntityContained(IsorropiaHelper.nbtToLiving(stack.getTagCompound(), this.world, new BlockPos((double) this.pos.getX() + 0.5, this.pos.getY() - 2, (double) this.pos.getZ() + 0.5)), facing.getOpposite().getHorizontalAngle() - 90.0f);
-                ItemStack itemStack = stack;
-                itemStack.shrink(1);
+                stack.shrink(1);
                 return true;
             }
         } else if (contained instanceof EntityLiving) {
@@ -403,77 +395,55 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
         return false;
     }
 
-    public boolean infusionStart(EntityPlayer player) {
-        if (this.getEntityContained() == null) {
-            return false;
-        }
-        this.essentiaNeeded = new AspectList();
-        this.recipeIngredients.clear();
-        this.stacksUsed.clear();
-        this.pedestals.clear();
-        this.pedestals = this.getSurrondingPedestals();
-        this.optionalComponents.clear();
-        this.updateSurroundings();
-        for (TilePedestal ped : this.pedestals) {
-            if (ped.getStackInSlot(0).isEmpty()) continue;
-            this.recipeIngredients.add(ped.getStackInSlot(0).copy());
-        }
-        this.recipe = IsorropiaAPI.findMatchingCreatureInfusionRecipe(this.getEntityContained(), this.recipeIngredients, player, this);
-        if (this.recipe == null) {
-            this.infusing = false;
-            return false;
-        }
-        if ((double) this.costMult < 0.5) {
-            this.costMult = 0.5f;
-        }
-        AspectList al = this.recipe.getCurrentAspect(player, this.world, this.entityContained, this.stability, this.totalInstability, null);
-        AspectList al2 = new AspectList();
-        for (Aspect as : al.getAspects()) {
-            if (al.getAmount(as) * this.costMult <= 0) continue;
-            al2.add(as, (int) (al.getAmount(as) * this.costMult));
-        }
-        this.essentiaNeeded = al2;
-        this.celestialAuraNeeded = this.recipe.getCelestialAura();
-        this.celestialBody = this.recipe.getCelestialBody();
-        this.recipePlayer = player;
-        this.infusing = true;
-        this.world.playSound(null, this.pos, SoundsIR.curative_infusion_start, SoundCategory.BLOCKS, 0.5f, 1.0f);
-        this.syncTile(false);
-        this.markDirty();
-        return true;
-    }
+    public void craftingStart(EntityPlayer player) {
+        /*if (this.getEntityContained() != null) {
+            this.active = false;
+            this.markDirty();
+            this.syncTile(false);
+        } else {*/
+        this.getSurroundings();
 
-    public Set<TilePedestal> getSurrondingPedestals() {
-        return this.getSurrondingPedestals(12, 10, 12, 12, 10, 12);
-    }
+        if (this.getEntityContained() != null && this.getEntityContained().getHealth() > 0) {
+            ArrayList<ItemStack> components = new ArrayList();
 
-    public Set<TilePedestal> getSurrondingPedestals(int minX, int minY, int minZ, int maxX, int maxY, int maxZ) {
-        HashSet<TilePedestal> peds = new HashSet<>();
-        BlockPos vat_pos = this.getPos();
-        Iterable<BlockPos.MutableBlockPos> blocks = BlockPos.getAllInBoxMutable(vat_pos.getX() - minX, vat_pos.getY() - minY, vat_pos.getZ() - minZ, vat_pos.getX() + maxX, vat_pos.getY() + maxY, vat_pos.getZ() + maxZ);
-        for (BlockPos pos : blocks) {
-            TileEntity te = this.world.getTileEntity(pos);
-            if (!(te instanceof TilePedestal)) continue;
-            peds.add((TilePedestal) te);
+            for (TilePedestal ped : this.pedestals) {
+                if (ped != null) {
+                    if (!ped.getStackInSlot(0).isEmpty()) {
+                        components.add(ped.getStackInSlot(0).copy());
+                    }
+                }
+            }
+
+            if (components.size() != 0) {
+                this.recipe = IsorropiaAPI.findMatchingCreatureInfusionRecipe(this.getEntityContained(), components, player, this);
+                if ((double) this.costMult < 0.5) {
+                    this.costMult = 0.5F;
+                }
+
+                if (recipe != null) {
+                    this.mode = 2;
+                    this.recipeIngredients = components;
+
+                    AspectList al = this.recipe.getCurrentAspect(player, this.world, this.entityContained, this.stability, this.totalInstability, null);
+                    AspectList al2 = new AspectList();
+                    for (Aspect as : al.getAspects()) {
+                        if (al.getAmount(as) * this.costMult <= 0) continue;
+                        al2.add(as, (int) (al.getAmount(as) * this.costMult));
+                    }
+
+
+                    this.essentiaNeeded = al2;
+                    this.celestialAuraNeeded = this.recipe.getCelestialAura();
+                    this.celestialBody = this.recipe.getCelestialBody();
+                    this.recipePlayer = player;
+                    this.infusing = true;
+                    this.world.playSound(null, this.pos, SoundsIR.curative_infusion_start, SoundCategory.BLOCKS, 0.5f, 1.0f);
+                    this.syncTile(false);
+                    this.markDirty();
+                }
+            }
         }
-        return peds;
-    }
-
-    public Set<BlockPos> getSurroundingOccults() {
-        return this.getSurroundingOccults(12, 10, 12, 12, 10, 12);
-    }
-
-    public Set<BlockPos> getSurroundingOccults(int minX, int minY, int minZ, int maxX, int maxY, int maxZ) {
-        HashSet<BlockPos> occults = new HashSet<BlockPos>();
-        BlockPos curativePos = this.getPos();
-        Iterable<BlockPos.MutableBlockPos> blocks = BlockPos.getAllInBoxMutable(curativePos.getX() - minX, curativePos.getY() - minY, curativePos.getZ() - minZ, curativePos.getX() + maxX, curativePos.getY() + maxY, curativePos.getZ() + maxZ);
-        for (BlockPos pos : blocks) {
-            Block block = this.world.getBlockState(pos).getBlock();
-            if (block == null || block != Blocks.SKULL && (!(block instanceof IInfusionStabiliser) || !((IInfusionStabiliser) block).canStabaliseInfusion(this.getWorld(), pos)))
-                continue;
-            occults.add(pos);
-        }
-        return occults;
+        //}
     }
 
     private void getSurroundings() {
@@ -485,10 +455,9 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
         stabilityReplenish = 0.0f;
         costMult = 1.0f;
         try {
-            for (int xx = -8; xx <= 8; ++xx) {
-                for (int zz = -8; zz <= 8; ++zz) {
-                    boolean skip = false;
-                    for (int yy = -3; yy <= 7; ++yy) {
+            for (int xx = -12; xx <= 12; ++xx) {
+                for (int zz = -12; zz <= 12; ++zz) {
+                    for (int yy = -10; yy <= 10; ++yy) {
                         if (xx != 0 || zz != 0) {
                             int x = pos.getX() + xx;
                             int y = pos.getY() - yy;
@@ -552,22 +521,10 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
                 catch (Exception ex2) {}
                 stuff.remove(lp);
             }
-            if (world.getBlockState(pos.add(-1, -2, -1)).getBlock() instanceof BlockPillar && world.getBlockState(pos.add(1, -2, -1)).getBlock() instanceof BlockPillar && world.getBlockState(pos.add(1, -2, 1)).getBlock() instanceof BlockPillar && world.getBlockState(pos.add(-1, -2, 1)).getBlock() instanceof BlockPillar) {
-                if (world.getBlockState(pos.add(-1, -2, -1)).getBlock() == BlocksTC.pillarAncient && world.getBlockState(pos.add(1, -2, -1)).getBlock() == BlocksTC.pillarAncient && world.getBlockState(pos.add(1, -2, 1)).getBlock() == BlocksTC.pillarAncient && world.getBlockState(pos.add(-1, -2, 1)).getBlock() == BlocksTC.pillarAncient) {
-                    --cycleTime;
-                    costMult -= 0.1f;
-                    stabilityReplenish -= 0.1f;
-                }
-                if (world.getBlockState(pos.add(-1, -2, -1)).getBlock() == BlocksTC.pillarEldritch && world.getBlockState(pos.add(1, -2, -1)).getBlock() == BlocksTC.pillarEldritch && world.getBlockState(pos.add(1, -2, 1)).getBlock() == BlocksTC.pillarEldritch && world.getBlockState(pos.add(-1, -2, 1)).getBlock() == BlocksTC.pillarEldritch) {
-                    cycleTime -= 3;
-                    costMult += 0.05f;
-                    stabilityReplenish += 0.2f;
-                }
-            }
-            int[] xm = { -1, 1, 1, -1 };
-            int[] zm = { -1, -1, 1, 1 };
+            int[] xm = { -1, 0, 1, 0 };
+            int[] zm = { 0, -1, 0, 1 };
             for (int a = 0; a < 4; ++a) {
-                Block b = world.getBlockState(pos.add(xm[a], -3, zm[a])).getBlock();
+                Block b = world.getBlockState(pos.add(xm[a], -5, zm[a])).getBlock();
                 if (b == BlocksTC.matrixSpeed) {
                     --cycleTime;
                     costMult += 0.01f;
@@ -599,66 +556,10 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
         float bb = base;
         int c = tempBlockCount.containsKey(b) ? tempBlockCount.get(b) : 0;
         if (c > 0) {
-            bb *= (float)Math.pow(0.75, c);
+            bb *= (float) Math.pow(0.75, c);
         }
         tempBlockCount.put(b, c + 1);
         return bb;
-    }
-
-    private void updateSurroundings() {
-        if (!world.isAreaLoaded(pos.add(-12, -10, -12), pos.add(12, 10, 12))) {
-            return;
-        }
-
-        Set<BlockPos> occults = this.getSurroundingOccults();
-        this.cycleTime = Math.max(10, this.cycleTime);
-        this.stabilityReplenish = 0.0f;
-        this.costMult = 1.0f;
-        this.countDelay = this.cycleTime / 2;
-        int[] xm = new int[]{-1, 1, 1, -1};
-        int[] zm = new int[]{-1, -1, 1, 1};
-        for (int a = 0; a < 4; ++a) {
-            Block b = this.world.getBlockState(this.pos.add(xm[a], -3, zm[a])).getBlock();
-            if (b == BlocksTC.matrixSpeed) {
-                --this.cycleTime;
-                this.costMult += 0.01f;
-            }
-            if (b != BlocksTC.matrixCost) continue;
-            ++this.cycleTime;
-            this.costMult -= 0.02f;
-        }
-        for (TilePedestal tile : this.pedestals) {
-            Block bb = this.world.getBlockState(tile.getPos()).getBlock();
-            if (bb == BlocksTC.pedestalEldritch) {
-                this.costMult += 0.0025f;
-            }
-            if (bb != BlocksTC.pedestalAncient) continue;
-            this.costMult -= 0.01f;
-        }
-        for (BlockPos pos : occults) {
-            int x1 = this.pos.getX() - pos.getX();
-            int z1 = this.pos.getZ() - pos.getZ();
-            int x2 = this.pos.getX() + x1;
-            int z2 = this.pos.getZ() + z1;
-            BlockPos c2 = new BlockPos(x2, pos.getY(), z2);
-            Block sb1 = this.world.getBlockState(pos).getBlock();
-            Block sb2 = this.world.getBlockState(c2).getBlock();
-            float amt1 = 0.1f;
-            float amt2 = 0.1f;
-
-            if (sb1 instanceof IInfusionStabiliserExt) {
-                amt1 = ((IInfusionStabiliserExt) sb1).getStabilizationAmount(this.getWorld(), pos);
-            }
-            if (sb2 instanceof IInfusionStabiliserExt) {
-                amt2 = ((IInfusionStabiliserExt) sb2).getStabilizationAmount(this.getWorld(), c2);
-            }
-
-            if (sb1 == sb2 && amt1 == amt2) {
-                this.stabilityReplenish += amt1;
-            } else {
-                this.stabilityReplenish -= Math.max(amt1, amt2);
-            }
-        }
     }
 
     public void infusionCycle() {

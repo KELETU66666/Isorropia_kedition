@@ -143,7 +143,7 @@ public class IsorropiaHelper {
     public static EntityLiving nbtToLiving(NBTTagCompound nbt, World world, BlockPos pos) {
         EntityLiving living = (EntityLiving) EntityList.createEntityFromNBT(nbt.getCompoundTag(ENTITY_DATA), world);
         if (living != null && !living.isDead) {
-            living.setPosition(pos.getX(), pos.getY(), pos.getZ());
+            living.setPosition(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
             world.spawnEntity(living);
         }
         return living;

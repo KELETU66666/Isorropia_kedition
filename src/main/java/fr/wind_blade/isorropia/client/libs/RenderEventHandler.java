@@ -132,7 +132,7 @@ public class RenderEventHandler {
             Field shown = ReflectionHelper.findField(GuiResearchPage.class, "shownRecipe");
 
             try {
-                int recipePage = ((Integer) index.get(screen)).intValue();
+                int recipePage = (int) index.get(screen);
                 LinkedHashMap maps = (LinkedHashMap) recipes.get(screen);
                 ResourceLocation loc = (ResourceLocation) shown.get(screen);
 
@@ -296,11 +296,11 @@ public class RenderEventHandler {
                             item = mc.player.inventory.mainInventory.get(a);
                             if (!item.isEmpty() && item.getItem() instanceof ItemLens) {
                                 ItemLens lens = (ItemLens) item.getItem();
-                                foci.put(lens.getLens().getRegistryName(), Integer.valueOf(a));
+                                foci.put(lens.getLens().getRegistryName(), a);
                                 lensStack.put(lens.getLens().getRegistryName(), item.copy());
-                                this.fociScale.put(lens.getLens().getRegistryName(), Float.valueOf(1.0F));
-                                this.lensHover.put(lens.getLens().getRegistryName(), Boolean.valueOf(false));
-                                lensSlot.put(lens.getLens().getRegistryName(), Integer.valueOf(a));
+                                this.fociScale.put(lens.getLens().getRegistryName(), 1.0F);
+                                this.lensHover.put(lens.getLens().getRegistryName(), Boolean.FALSE);
+                                lensSlot.put(lens.getLens().getRegistryName(), a);
                             }
                             if (foci.size() > 0 && mc.inGameHasFocus) {
                                 mc.inGameHasFocus = false;
@@ -319,26 +319,26 @@ public class RenderEventHandler {
                         .getResolution().getScaledHeight_double(), time, event.getPartialTicks());
                 if (time > this.lastTime) {
                     for (ResourceLocation key : this.lensHover.keySet()) {
-                        if (this.lensHover.get(key).booleanValue()) {
+                        if (this.lensHover.get(key)) {
                             if (!KeyHandler.radialActive && !KeyHandler.radialLock) {
                                 if (lensSlot.containsKey(key)) {
                                     Lens lens = IsorropiaAPI.lensRegistry.getValue(key);
                                     LensManager.putLens((Minecraft.getMinecraft()).player, lens, this.type);
                                     Common.INSTANCE
-                                            .sendToServer(new LensChangeMessage(lens, lensSlot.get(key).intValue(), this.type));
+                                            .sendToServer(new LensChangeMessage(lens, lensSlot.get(key), this.type));
                                 }
                                 KeyHandler.radialLock = true;
                             }
-                            if (this.fociScale.get(key).floatValue() >= 1.3F) {
+                            if (this.fociScale.get(key) >= 1.3F) {
                                 continue;
                             }
-                            this.fociScale.put(key, Float.valueOf(this.fociScale.get(key).floatValue() + 0.025F));
+                            this.fociScale.put(key, this.fociScale.get(key) + 0.025F);
                             continue;
                         }
-                        if (this.fociScale.get(key).floatValue() <= 1.0F) {
+                        if (this.fociScale.get(key) <= 1.0F) {
                             continue;
                         }
-                        this.fociScale.put(key, Float.valueOf(this.fociScale.get(key).floatValue() - 0.025F));
+                        this.fociScale.put(key, this.fociScale.get(key) - 0.025F);
                     }
                     if (!KeyHandler.radialActive) {
                         RenderEventHandler.radialHudScale = RenderEventHandler.radialHudScale - 0.05F;
@@ -449,8 +449,8 @@ public class RenderEventHandler {
                     GL11.glTranslated(-xx, yy, 100.0D);
                 }
                 if (this.fociScale.get(key) == null)
-                    this.fociScale.put(key, Float.valueOf(1.0F));
-                GL11.glScalef(this.fociScale.get(key).floatValue(), this.fociScale.get(key).floatValue(), this.fociScale.get(key).floatValue());
+                    this.fociScale.put(key, 1.0F);
+                GL11.glScalef(this.fociScale.get(key), this.fociScale.get(key), this.fociScale.get(key));
                 GL11.glEnable(32826);
                 RenderHelper.enableGUIStandardItemLighting();
                 ItemStack item2 = lensStack.get(key).copy();
@@ -469,7 +469,7 @@ public class RenderEventHandler {
                     }
                     int my2 = (int) (j - sh / 2.0D - yy);
                     if (mx2 >= -10 && mx2 <= 10 && my2 >= -10 && my2 <= 10) {
-                        this.lensHover.put(key, Boolean.valueOf(true));
+                        this.lensHover.put(key, Boolean.TRUE);
                         tt = lensStack.get(key);
                         if (k == 0) {
                             KeyHandler.radialActive = false;
@@ -478,12 +478,12 @@ public class RenderEventHandler {
                                 Lens lens1 = IsorropiaAPI.lensRegistry.getValue(key);
                                 LensManager.putLens((Minecraft.getMinecraft()).player, lens1, this.type);
                                 Common.INSTANCE
-                                        .sendToServer(new LensChangeMessage(lens1, lensSlot.get(key).intValue(), this.type));
+                                        .sendToServer(new LensChangeMessage(lens1, lensSlot.get(key), this.type));
                             }
                             break;
                         }
                     } else {
-                        this.lensHover.put(key, Boolean.valueOf(false));
+                        this.lensHover.put(key, Boolean.FALSE);
                     }
                 }
                 key = foci.higherKey(key);
