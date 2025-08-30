@@ -18,9 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockLiquidVat
-        extends BlockLiquid
-        implements IBlockRegistry {
+public class BlockLiquidVat extends BlockLiquid implements IBlockRegistry {
     public BlockLiquidVat() {
         super(MaterialIR.LIQUID_VAT);
         this.setHardness(3.0f);
@@ -59,12 +57,12 @@ public class BlockLiquidVat
         for (int i = 1; i <= 2; ++i) {
             TileEntity te = worldIn.getTileEntity(pos.up(i));
             if (!(te instanceof TileVat)) continue;
-            return (TileVat)te;
+            return (TileVat) te;
         }
         return null;
     }
 
-    @SideOnly(value=Side.CLIENT)
+    @SideOnly(value = Side.CLIENT)
     public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.TRANSLUCENT;
     }

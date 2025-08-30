@@ -5,10 +5,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialLiquid;
 
 
-
-
-
-public class MaterialIR
-{
- public static final Material LIQUID_VAT = (Material)new MaterialLiquid(MapColor.WATER);
+public class MaterialIR {
+    public static final Material LIQUID_VAT = new MaterialLiquid(MapColor.WATER);
 }
