@@ -42,10 +42,12 @@ public class TrackingCapabilityMessage
             implements IMessageHandler<TrackingCapabilityMessage, IMessage> {
         public IMessage onMessage(TrackingCapabilityMessage message, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
-                EntityLivingBase ent = (EntityLivingBase)Minecraft.getMinecraft().world.getEntityByID(message.id);
-                LivingBaseCapability cap = Common.getCap(ent);
-                if (cap != null) {
-                    cap.startTrackDeserializeNBT(message.compound);
+                EntityLivingBase ent = (EntityLivingBase) Minecraft.getMinecraft().world.getEntityByID(message.id);
+                if (ent != null) {
+                    LivingBaseCapability cap = Common.getCap(ent);
+                    if (cap != null) {
+                        cap.startTrackDeserializeNBT(message.compound);
+                    }
                 }
             });
             return null;

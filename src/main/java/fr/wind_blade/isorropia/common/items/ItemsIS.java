@@ -10,8 +10,8 @@ import net.minecraft.util.ResourceLocation;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ItemsIS {
+
     public static final List<Item> items = new ArrayList<>();
     public static Item itemBaseLens;
     public static Item itemChocolateItem;
@@ -28,6 +28,7 @@ public class ItemsIS {
     public static ItemBucketMilk itemChocolateBucket;
     public static ItemChocolateCream ItemChocolateCream;
     public static ItemJelly itemJelly;
+    public static ItemCorpseEffigy corpseEffigy;
 
     public static void initItems() {
         itemBaseLens = getItem(new Item(), "lens");
@@ -45,6 +46,7 @@ public class ItemsIS {
         itemJelly = getItem(new ItemJelly(), "jelly");
         itemChocolateBucket = getItem(new ItemChocolateBucket(), "chocolate_milk_bucket");
         ItemChocolateCream = getItem(new ItemChocolateCream(), "chocolate_cream");
+        corpseEffigy = getItem(new ItemCorpseEffigy(), "corpse_effigy");
     }
 
     public static Item getItem(String name) {

@@ -8,9 +8,11 @@ import fr.wind_blade.isorropia.common.celestial.CelestialBody;
 import fr.wind_blade.isorropia.common.celestial.ICelestialBody;
 import fr.wind_blade.isorropia.common.curative.ICurativeEffectProvider;
 import fr.wind_blade.isorropia.common.events.SoundsIR;
+import fr.wind_blade.isorropia.common.items.ItemsIS;
 import fr.wind_blade.isorropia.common.libs.helpers.IsorropiaHelper;
 import fr.wind_blade.isorropia.common.network.ISPacketFXInfusionSource;
 import fr.wind_blade.isorropia.common.research.recipes.CurativeInfusionRecipe;
+import fr.wind_blade.isorropia.common.research.recipes.SelfInfusionRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -24,6 +26,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
@@ -84,7 +87,7 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
     private Map<String, SourceFX> sourceFX = new HashMap<String, SourceFX>();
     private EntityLivingBase entityContained;
     private Aspect currentlySucking;
-    private Set<TilePedestal> pedestals = new HashSet<TilePedestal>();
+    private final Set<TilePedestal> pedestals = new HashSet<TilePedestal>();
     private boolean active = false;
     private float costMult;
     private int cycleTime = 20;
@@ -106,6 +109,7 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
     HashMap<Block, Integer> tempBlockCount = new HashMap<>();
     private boolean infusing = false;
     private CurativeInfusionRecipe recipe;
+    private SelfInfusionRecipe recipe2;
     private ArrayList<ItemStack> recipeIngredients = new ArrayList();
     private NonNullList<ItemStack> stacksUsed = NonNullList.create();
     private float celestialAuraNeeded;
@@ -115,9 +119,21 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
     private ICurativeEffectProvider curativeEffect;
     private List<ItemStack> loots = new ArrayList<ItemStack>();
     public boolean checkSurroundings = true;
+    private boolean hasEffigy = false;
+    private float selfInfusionHealth = 20.0f;
+    private int myEssentia = 0;
+    public int[] selfInfusions = new int[12];
+    public int recipeType = 0;
+    private int recipeOutput = 0;
 
     public TileVat() {
         MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public AxisAlignedBB getRenderBoundingBox() {
+        return new AxisAlignedBB(pos.add(-3, -3, -3), pos.add(4, 4, 4));
     }
 
     public IStabilizable.EnumStability getStability() {
@@ -133,7 +149,7 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
     }
 
     public float getLossPerCycle() {
-        return this.recipe == null ? 0.0f : (float) this.recipe.getInstability() / this.getModFromCurrentStability();
+        return this.recipe == null ? this.recipe2 == null ? 0.0f : (float) this.recipe2.getInstability() / this.getModFromCurrentStability() : (float) this.recipe.getInstability() / this.getModFromCurrentStability();
     }
 
     public float getModFromCurrentStability() {
@@ -162,7 +178,7 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
         }
         if (this.fluxStocked > 300.0f) {
             if (this.infusing) {
-                this.infusingFinish(null, true);
+                this.infusingFinish(null, null, true);
             }
             this.destroyMultiBlock();
 
@@ -182,7 +198,7 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
             }
             if (!this.expunge && this.fluxStocked >= 30.0f) {
                 if (this.mode == 2) {
-                    this.infusingFinish(this.recipe, true);
+                    this.infusingFinish(this.recipe, this.recipe2, true);
                 }
                 this.expunge = true;
 
@@ -200,6 +216,13 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
                 this.markDirty();
                 return;
             }
+            if (this.hasEffigy && this.getEntityContained() == null && this.mode != 2 && this.mode != 4) {
+                this.mode = 3;
+                this.curativeUpdateEffigy();
+
+                this.markDirty();
+                this.syncTile(false);
+            }
             if (this.getEntityContained() != null) {
                 if (this.getEntityContained() != null && this.getEntityContained().isBurning()) {
                     this.getEntityContained().extinguish();
@@ -210,12 +233,13 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
 
                     this.syncTile(false);
                     this.markDirty();
-                } else if (this.mode == 2 && this.active && this.count % this.countDelay == 0) {
-                    this.infusionCycle();
-
-                    this.syncTile(false);
-                    this.markDirty();
                 }
+            }
+            if (this.mode == 2 && this.active && this.count % this.countDelay == 0) {
+                this.infusionCycle();
+
+                this.syncTile(false);
+                this.markDirty();
             }
         }
     }
@@ -252,6 +276,40 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
             this.curativeEffect = effect.get();
             this.essentiaNeeded.add(effect.get().getAspect(), 1);
         }
+        if (this.doNeedEssentia()) {
+            this.drawnAllEssentia();
+        }
+    }
+
+    private void curativeUpdateEffigy() {
+        int oldTotalNeeded = this.essentiaNeeded.getAmount(Aspect.LIFE);
+
+        this.essentiaNeeded = new AspectList();
+        if (this.world.isRemote || mode != 3) {
+            return;
+        }
+
+        if (this.myEssentia <= 30) {
+            this.essentiaNeeded = new AspectList().add(Aspect.LIFE, 1);
+        } else {
+            this.mode = 4;
+            this.selfInfusionHealth = 20.0f;
+            this.essentiaNeeded = new AspectList();
+
+            this.markDirty();
+            this.syncTile(false);
+        }
+
+        int newTotalNeeded = 0;
+        for (Aspect aspect : this.essentiaNeeded.getAspects()) {
+            newTotalNeeded += this.essentiaNeeded.getAmount(aspect);
+        }
+
+        int diff = newTotalNeeded - oldTotalNeeded;
+        if (diff > 0) {
+            this.myEssentia += diff;
+        }
+
         if (this.doNeedEssentia()) {
             this.drawnAllEssentia();
         }
@@ -371,6 +429,10 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
                 stack.shrink(1);
                 return true;
             }
+        } else if (stack.getItem() == ItemsIS.corpseEffigy && contained == null && !hasEffigy) {
+            this.hasEffigy = true;
+            stack.shrink(1);
+            return true;
         } else if (contained instanceof EntityLiving) {
             if (!this.loots.isEmpty()) {
                 this.loots.stream().filter(loot -> !playerIn.addItemStackToInventory(loot)).forEach(drop -> playerIn.dropItem(drop, false));
@@ -384,8 +446,21 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
         } else if (block == BlocksIS.blockModifiedMatrix) {
             return false;
         }
-        if (contained == null && master) {
-            this.setEntityContained(playerIn);
+        if (contained == null) {
+            if (!this.hasEffigy) {
+                if (master)
+                    this.setEntityContained(playerIn);
+            } else {
+                if(this.myEssentia > 30){
+                    return false;
+                }
+                else {
+                    playerIn.inventory.addItemStackToInventory(new ItemStack(ItemsIS.corpseEffigy));
+                    this.hasEffigy = false;
+                    this.myEssentia = 0;
+                    this.mode = 0;
+                }
+            }
             return true;
         }
         if (contained instanceof EntityPlayer && playerIn.equals(contained)) {
@@ -403,46 +478,80 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
         } else {*/
         this.getSurroundings();
 
-        if (this.getEntityContained() != null && this.getEntityContained().getHealth() > 0) {
-            ArrayList<ItemStack> components = new ArrayList();
+        ArrayList<ItemStack> components = new ArrayList();
 
-            for (TilePedestal ped : this.pedestals) {
-                if (ped != null) {
-                    if (!ped.getStackInSlot(0).isEmpty()) {
-                        components.add(ped.getStackInSlot(0).copy());
-                    }
-                }
-            }
-
-            if (components.size() != 0) {
-                this.recipe = IsorropiaAPI.findMatchingCreatureInfusionRecipe(this.getEntityContained(), components, player, this);
-                if ((double) this.costMult < 0.5) {
-                    this.costMult = 0.5F;
-                }
-
-                if (recipe != null) {
-                    this.mode = 2;
-                    this.recipeIngredients = components;
-
-                    AspectList al = this.recipe.getCurrentAspect(player, this.world, this.entityContained, this.stability, this.totalInstability, null);
-                    AspectList al2 = new AspectList();
-                    for (Aspect as : al.getAspects()) {
-                        if (al.getAmount(as) * this.costMult <= 0) continue;
-                        al2.add(as, (int) (al.getAmount(as) * this.costMult));
-                    }
-
-
-                    this.essentiaNeeded = al2;
-                    this.celestialAuraNeeded = this.recipe.getCelestialAura();
-                    this.celestialBody = this.recipe.getCelestialBody();
-                    this.recipePlayer = player;
-                    this.infusing = true;
-                    this.world.playSound(null, this.pos, SoundsIR.curative_infusion_start, SoundCategory.BLOCKS, 0.5f, 1.0f);
-                    this.syncTile(false);
-                    this.markDirty();
+        for (TilePedestal ped : this.pedestals) {
+            if (ped != null) {
+                if (!ped.getStackInSlot(0).isEmpty()) {
+                    components.add(ped.getStackInSlot(0).copy());
                 }
             }
         }
+
+        if (components.size() <= 0) {
+            return;
+        }
+
+        if (this.mode != 4) {
+            if (this.getEntityContained() == null || this.getEntityContained().getHealth() <= 0) {
+                return;
+            }
+            this.recipe = IsorropiaAPI.findMatchingCreatureInfusionRecipe(this.getEntityContained(), components, player);
+            if ((double) this.costMult < 0.5) {
+                this.costMult = 0.5F;
+            }
+
+            if (recipe == null) {
+                return;
+            }
+
+            AspectList al = this.recipe.getCurrentAspect(player, this.world, this.entityContained, this.stability, this.totalInstability, null);
+            AspectList al2 = new AspectList();
+            for (Aspect as : al.getAspects()) {
+                if (al.getAmount(as) * this.costMult <= 0) continue;
+                al2.add(as, (int) (al.getAmount(as) * this.costMult));
+            }
+
+            this.recipeType = 0;
+            this.essentiaNeeded = al2;
+            this.celestialAuraNeeded = this.recipe.getCelestialAura();
+            this.celestialBody = this.recipe.getCelestialBody();
+
+        } else {
+            this.recipe2 = IsorropiaAPI.findMatchingCSelfInfusionRecipe(components, player);
+            if ((double) this.costMult < 0.5) {
+                this.costMult = 0.5F;
+            }
+            if (recipe2 == null) {
+                return;
+            }
+
+            for (int selfInfusion : this.selfInfusions) {
+                if (selfInfusion == recipe2.getID()) {
+                    return;
+                }
+            }
+
+            AspectList al = this.recipe2.getAspects();
+            AspectList al2 = new AspectList();
+            for (Aspect as : al.getAspects()) {
+                if (al.getAmount(as) * this.costMult <= 0) continue;
+                al2.add(as, (int) (al.getAmount(as) * this.costMult));
+            }
+
+            this.recipeType = 1;
+            this.essentiaNeeded = al2;
+            this.recipeOutput = recipe2.getID();
+        }
+        this.mode = 2;
+        this.recipeIngredients = components;
+
+        this.recipePlayer = player;
+        this.infusing = true;
+
+        this.world.playSound(null, this.pos, SoundsIR.curative_infusion_start, SoundCategory.BLOCKS, 0.5f, 1.0f);
+        this.syncTile(false);
+        this.markDirty();
         //}
     }
 
@@ -468,11 +577,11 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
                                 pedestals.add((TilePedestal) world.getTileEntity(bp));
                             }
                             try {
-                                if (bi == Blocks.SKULL || (bi instanceof IInfusionStabiliser && ((IInfusionStabiliser)bi).canStabaliseInfusion(getWorld(), bp))) {
+                                if (bi == Blocks.SKULL || (bi instanceof IInfusionStabiliser && ((IInfusionStabiliser) bi).canStabaliseInfusion(getWorld(), bp))) {
                                     stuff.add(bp.toLong());
                                 }
+                            } catch (Exception ex) {
                             }
-                            catch (Exception ex) {}
                         }
                     }
                 }
@@ -498,33 +607,31 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
                     float amt1 = 0.1f;
                     float amt2 = 0.1f;
                     if (sb1 instanceof IInfusionStabiliserExt) {
-                        amt1 = ((IInfusionStabiliserExt)sb1).getStabilizationAmount(getWorld(), c1);
+                        amt1 = ((IInfusionStabiliserExt) sb1).getStabilizationAmount(getWorld(), c1);
                     }
                     if (sb2 instanceof IInfusionStabiliserExt) {
-                        amt2 = ((IInfusionStabiliserExt)sb2).getStabilizationAmount(getWorld(), c2);
+                        amt2 = ((IInfusionStabiliserExt) sb2).getStabilizationAmount(getWorld(), c2);
                     }
                     if (sb1 == sb2 && amt1 == amt2) {
-                        if (sb1 instanceof IInfusionStabiliserExt && ((IInfusionStabiliserExt)sb1).hasSymmetryPenalty(getWorld(), c1, c2)) {
-                            stabilityReplenish -= ((IInfusionStabiliserExt)sb1).getSymmetryPenalty(getWorld(), c1);
+                        if (sb1 instanceof IInfusionStabiliserExt && ((IInfusionStabiliserExt) sb1).hasSymmetryPenalty(getWorld(), c1, c2)) {
+                            stabilityReplenish -= ((IInfusionStabiliserExt) sb1).getSymmetryPenalty(getWorld(), c1);
                             problemBlocks.add(c1);
-                        }
-                        else {
+                        } else {
                             stabilityReplenish += calcDeminishingReturns(sb1, amt1);
                         }
-                    }
-                    else {
+                    } else {
                         stabilityReplenish -= Math.max(amt1, amt2);
                         problemBlocks.add(c1);
                     }
                     stuff.remove(c2.toLong());
+                } catch (Exception ex2) {
                 }
-                catch (Exception ex2) {}
                 stuff.remove(lp);
             }
-            int[] xm = { -1, 0, 1, 0 };
-            int[] zm = { 0, -1, 0, 1 };
+            int[] xm = {-1, 0, 1, 0};
+            int[] zm = {0, -1, 0, 1};
             for (int a = 0; a < 4; ++a) {
-                Block b = world.getBlockState(pos.add(xm[a], -5, zm[a])).getBlock();
+                Block b = world.getBlockState(pos.add(xm[a], -4, zm[a])).getBlock();
                 if (b == BlocksTC.matrixSpeed) {
                     --cycleTime;
                     costMult += 0.01f;
@@ -548,8 +655,8 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
                     costMult -= 0.01f;
                 }
             }
+        } catch (Exception ex3) {
         }
-        catch (Exception ex3) {}
     }
 
     private float calcDeminishingReturns(Block b, float base) {
@@ -563,14 +670,19 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
     }
 
     public void infusionCycle() {
-        if (this.recipe == null) {
-            this.infusingFinish(null, true);
+        if (this.recipeType == 0 && this.recipe == null) {
+            this.infusingFinish(null, null, true);
             return;
         }
-        if (this.getEntityContained() == null) {
+        if (this.recipeType == 1 && this.recipe2 == null) {
+            this.infusingFinish(null, null, true);
+            return;
+        }
+
+        if (this.recipeType == 0 && this.getEntityContained() == null) {
             this.destroyMultiBlock();
         }
-        boolean valid = this.getEntityContained() != null;
+        boolean valid = this.getEntityContained() != null || recipeType == 1;
         this.stability -= world.rand.nextFloat() * getLossPerCycle();
         this.stability += this.stabilityReplenish;
         this.stability = Math.min(Math.max(this.stability, -100.0f), (float) this.stabilityCap);
@@ -606,9 +718,9 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
         if (!this.visStep()) {
             return;
         }
-        this.fluxStocked += this.recipe.getFluxRejection();
+        this.fluxStocked += this.recipeType == 0 ? this.recipe.getFluxRejection() : 0;
         this.infusing = false;
-        this.infusingFinish(this.recipe, false);
+        this.infusingFinish(this.recipe, this.recipe2, false);
         this.syncTile(false);
         this.markDirty();
     }
@@ -642,7 +754,7 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
                     this.countDelay = this.cycleTime;
                     return false;
                 }
-                Aspect[] ingEss = this.recipe.getAspects().getAspects();
+                Aspect[] ingEss = this.recipeType == 0 ? this.recipe.getAspects().getAspects() : this.recipe2.getAspects().getAspects();
                 if (ingEss != null && ingEss.length > 0 && this.world.rand.nextInt(3) == 0) {
                     Aspect as = ingEss[this.world.rand.nextInt(ingEss.length)];
                     this.fluxStocked += 1.0f;
@@ -689,7 +801,7 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
                 }
                 return false;
             }
-            Aspect[] ingEss = this.recipe.getAspects().getAspects();
+            Aspect[] ingEss = this.recipeType == 0 ? this.recipe.getAspects().getAspects() : this.recipe2.getAspects().getAspects();
             if (ingEss == null || ingEss.length <= 0 || this.world.rand.nextInt(1 + a) != 0) continue;
             Aspect as = ingEss[this.world.rand.nextInt(ingEss.length)];
             this.fluxStocked += 1.0f;
@@ -703,6 +815,9 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
     }
 
     public boolean visStep() {
+        if (this.recipeType == 1) {
+            return true;
+        }
         if (this.getVis() < this.recipe.getVis()) {
             return false;
         }
@@ -900,11 +1015,22 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
         }
     }
 
-    public void infusingFinish(CurativeInfusionRecipe recipe, boolean fail) {
-        this.mode = 0;
-        if (!fail) {
-            recipe.onInfusionFinish(this);
+    public void infusingFinish(CurativeInfusionRecipe recipe, SelfInfusionRecipe recipe2, boolean fail) {
+        if (recipeType == 0) {
+            if (!fail) {
+                recipe.onInfusionFinish(this);
+            }
+            this.mode = 0;
+        } else {
+            for (int i = 0; i < this.selfInfusions.length; ++i) {
+                if (this.selfInfusions[i] == 0) {
+                    this.selfInfusions[i] = this.recipeOutput;
+                    break;
+                }
+            }
+            this.mode = 4;
         }
+
         this.infusing = false;
         this.essentiaNeeded = new AspectList();
         this.optionalComponents.clear();
@@ -1103,7 +1229,15 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
         if ((this.getEntityContained() == null || this.getEntityContained().getEntityId() != id) && id != 0 && this.world != null) {
             this.setEntityContained((EntityLivingBase) this.world.getEntityByID(id));
         }
+        this.hasEffigy = nbt.getBoolean("hasEffigy");
+        this.selfInfusionHealth = nbt.getFloat("selfInfusionHealth");
+        this.myEssentia = nbt.getInteger("myEssentia");
+        this.selfInfusions = nbt.getIntArray("selfInfusions");
+        if (this.selfInfusions.length == 0) {
+            this.selfInfusions = new int[12];
+        }
         this.essentiaNeeded.readFromNBT(nbt);
+        this.recipeType = nbt.getInteger("recipeType");
     }
 
     public NBTTagCompound writeSyncNBT(NBTTagCompound nbt) {
@@ -1120,6 +1254,11 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
         if (this.getEntityContained() != null) {
             nbt.setInteger("entityID", this.getEntityContained().getEntityId());
         }
+        nbt.setBoolean("hasEffigy", this.getHasEffigy());
+        nbt.setFloat("selfInfusionHealth", this.getSelfInfusionHealth());
+        nbt.setInteger("myEssentia", this.getMyEssentia());
+        nbt.setIntArray("selfInfusions", this.selfInfusions);
+        nbt.setInteger("recipeType", this.recipeType);
         this.essentiaNeeded.writeToNBT(nbt);
         return nbt;
     }
@@ -1161,6 +1300,12 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
             }
             if (nbt.hasKey("entity")) {
                 this.entityUUID = nbt.getCompoundTag("entity").getUniqueId("id");
+            }
+            if (nbt.hasKey("recipe2")) {
+                this.recipe2 = IsorropiaAPI.selfInfusionRecipes.get(new ResourceLocation(nbt.getString("recipe2")));
+            }
+            if (nbt.hasKey("recipeOutput")) {
+                this.recipeOutput = nbt.getInteger("recipeout");
             }
         } catch (Exception e) {
             //ThaumicHorizons.log.error("Error reading NBT data for TileVat", e);
@@ -1206,6 +1351,10 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
         if (this.recipe != null) {
             nbt.setString("recipe", IsorropiaAPI.creatureInfusionRecipes.entrySet().stream().filter(entry -> IsorropiaAPI.creatureInfusionRecipes.get(entry.getKey()) == this.recipe).findFirst().get().getKey().toString());
         }
+        if (this.recipe2 != null) {
+            nbt.setString("recipe2", IsorropiaAPI.selfInfusionRecipes.entrySet().stream().filter(entry -> IsorropiaAPI.selfInfusionRecipes.get(entry.getKey()) == this.recipe2).findFirst().get().getKey().toString());
+        }
+        nbt.setTag("recipeout", new NBTTagInt(this.recipeOutput));
         return nbt;
     }
 
@@ -1437,6 +1586,30 @@ public class TileVat extends TileThaumcraft implements IAspectContainer, ITickab
 
     public void setFluxStocked(float fluxStocked) {
         this.fluxStocked = fluxStocked;
+    }
+
+    public boolean getHasEffigy() {
+        return this.hasEffigy;
+    }
+
+    public void setHasEffigy(boolean effigy) {
+        this.hasEffigy = effigy;
+    }
+
+    public float getSelfInfusionHealth() {
+        return this.selfInfusionHealth;
+    }
+
+    public void setSelfInfusionHealth(float health) {
+        this.selfInfusionHealth = health;
+    }
+
+    public int getMyEssentia() {
+        return this.myEssentia;
+    }
+
+    public void setMyEssentia(int health) {
+        this.myEssentia = health;
     }
 
     public static class SourceFX {

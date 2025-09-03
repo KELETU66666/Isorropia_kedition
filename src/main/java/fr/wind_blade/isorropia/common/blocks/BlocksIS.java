@@ -15,6 +15,7 @@ public class BlocksIS {
     public static BlockModifiedMatrix blockModifiedMatrix;
     public static BlockJarSoul blockJarSoul;
     public static Chocolate blockChocolate;
+    public static BlockSoulBeacon blockSoulBeacon;
 
     public static void initBlocks() {
         blockCurativeVat = BlocksIS.getBlock(new BlockCurativeVat(), "curative_vat");
@@ -22,6 +23,7 @@ public class BlocksIS {
         blockJarSoul = BlocksIS.getBlock(new BlockJarSoul(), "jar_soul");
         blockChocolate = BlocksIS.getBlock(new Chocolate(), "chocolate");
         blockModifiedMatrix = BlocksIS.getBlock(new BlockModifiedMatrix(), "modified_matrix");
+        blockSoulBeacon = BlocksIS.getBlock(new BlockSoulBeacon(), "soul_beacon");
     }
 
     public static Block getBlock(String name, Material material) {

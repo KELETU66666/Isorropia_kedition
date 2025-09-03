@@ -20,6 +20,7 @@ tile.isorropia.curative_vat.name=Curative Vat
 tile.isorropia.vat_interior.name=Vat Interior
 tile.isorropia.modified_matrix.name=Modified Matrix
 tile.isorropia.chocolate.name=Chocolate
+tile.isorropia.soul_beacon.name=Soul Beacon
 
 ##########################################
 # Items
@@ -31,8 +32,6 @@ item.isorropia.lens_air.name=Kirlian Lens
 item.isorropia.lens_ordo.name=Scholar's Lens
 item.isorropia.lens_envy.name=Trickster's Lens
 item.isorropia.somatic_brain.name=Somatic Brain
-item.isorropia.mirror_amulet.name=Mirror Amulet
-item.isorropia.broken_mirror_pane.name=Broken Mirror Pane
 item.jarredSoul.jarred=Jarred %s
 item.jarredSoul.0.name=Soul Jar
 item.isorropia.jelly.default.name=Jelly
@@ -47,6 +46,7 @@ item.isorropia.chocolate_milk_bucket.name=Chocolate Bucket
 item.isorropia.chocolate_bar.name=Chocolate Bar
 item.isorropia.chocolate_cream.name=Chocolate Icecream
 item.isorropia.gold_egg.name=Gold Egg
+item.isorropia.corpse_effigy.name=Corpse Effigy
 
 ##########################################
 # Entities
@@ -229,6 +229,42 @@ research.goldchicken.stage.1=More impressively, you have discovered a method of 
 research.NETHERHOUND.title=Nether Hound
 research.NETHERHOUND.stage.0=Finally, by infusing a tamed wolf with infernal energies, you can produce the deadly nether hound.
 research.NETHERHOUND.stage.1=Finally, by infusing a tamed wolf with infernal energies, you can produce the deadly nether hound. Not only does this guard dog possess a vicious bite and immunity to heat, but it is capable of exhaling a jet of primal fire upon its enemies.<BR>It remains surprisingly friendly.
+#
+research.CLONESELF.title=Self-Reincarnation
+research.CLONESELF.stage.1.text=Sometimes you wish you hadn't delved so deeply into the nature of death. The villagers spend their lives in blissful ignorance, holding faith in higher powers, never suspecting that remorseless natural processes will grind their souls down into sand. No cosmic justice, nor cosmic malice... simply cosmic law.<BR>Yet you have heard tales - or perhaps experienced them, you can't quite remember - of deceased thaumaturges returning to life in the last place they slept, albeit with their life experiences drained. If there is an intelligence behind these interventions, you cannot discern rhyme or reason behind whom it chooses to save.<PAGE>You cannot afford to rely on external entities to rescue you from oblivion. You must conquer mortality on your own terms, or you will never feel safe again.<BR>And you are so close, so very close. If you could ensure that your soul returned to one of your curative vats where there was already a body waiting for it...
+research.CLONESELF.stage.2.text=When you first grasped the primordial pearl, you could not have guessed that it would be your salvation. It is nothing less than a loophole in the laws of magic, condensed into a physical form. With its power you can finally break free from the fate of mortal souls.<BR>The beacon you have designed should be able to mystically tether itself to your soul. The bond will be stronger than the pull of the Nether, quite literally tearing out your soul at the moment of death... but it will not last long once activated. You will need to ensure that the beacon is placed directly atop a curative vat, and that the vat already contains a revived corpse effigy.<PAGE>If all goes according to plan, upon your death your old body will explosively dissolve into flux and you will awaken in a new body with no loss of experience. No threat of eternal oblivion. No reliance on higher powers.<BR>Maybe now the nightmares will stop.
+#
+research.SELFINFUSION.title=Self-Infusion
+research.SELFINFUSION.stage.1.text=Once, you quaked in fear of your own mortality. Now you will harness it.<BR>All previous attempts at human infusion have met with failure, as the souls of sapient entities actively reject magical interference with their bodies. However, were you to infuse the soulless husk created during your reincarnation procedure, it is not inconceivable that you would then be able to reincarnate into an infused body.<BR>Lesser thaumaturges will certainly view this line of research as madness. Let them laugh. Soon you will inhabit a superhuman body of your own design.
+research.SELFINFUSION.stage.2.text=Once, you quaked in fear of your own mortality. Now you will harness it.<BR>All previous attempts at human infusion have met with failure, as the souls of sapient entities actively reject magical interference with their bodies. However, were you to infuse the soulless husk created during your reincarnation procedure, it is not inconceivable that you would then be able to reincarnate into an infused body.<BR>Lesser thaumaturges will certainly view this line of research as madness. Let them laugh. Soon you will inhabit a superhuman body of your own design.<PAGE>The corpse effigy to be infused must first be revived using §5Victus§0 essentia as usual. You must then place a modified runic matrix atop the vat, perform the desired infusions, and then replace the matrix with a soul beacon. Bind yourself to the beacon, take your own life, and if all goes as planned you will awaken in a glorious new form, having shattered the supposed limits of magic...<BR>Of course, thaumaturgy is seldom so simple in practice. Your new body will be damaged by the infusions like any other creature, and cannot be healed until you incarnate into it, so the number of infusions you can apply is limited by your vat's stability.<PAGE>Until then, the following infusions can be applied to your new body:<BR>§5Quicksilver Limbs§0 should easily translate to the human body, although you may need to reinforce your tendons with voidmetal.<PAGE>§5Thaumium Fists§0 will improve your unarmed damage significantly - comparable to wielding a thaumium sword - although the material cost is steep.<PAGE>§5Awakened Blood§0 is slightly more difficult to apply without compromising brain function, but infusing an additional brain into your bloodstream should do the trick.<PAGE>§5Diamondflesh§0 requires a good deal more material to overcome the relative thinness of human skin.
+#
+research.SILVERHEART.title=Silverwood Heart
+research.SILVERHEART.stage.1.text=Your research into taint reveals a strange duality: it exists simultaneously as an organic pathogen and a magical disturbance, allowing it to infect both living and nonliving (though magically active) matter. The only known defenses against this combined assault involve the silverwood tree and shimmerleaf, which seem to have evolved a natural resistance.<BR>Now you have discovered a way to imbue your new body with these protective qualities. By adding special membranes to your heart you can filter out and dispose of any taint which enters your bloodstream.
+research.SILVERHEART.stage.2.text=Your research into taint reveals a strange duality: it exists simultaneously as an organic pathogen and a magical disturbance, allowing it to infect both living and nonliving (though magically active) matter. The only known defenses against this combined assault involve the silverwood tree and shimmerleaf, which seem to have evolved a natural resistance.<BR>Now you have discovered a way to imbue your new body with these protective qualities. By adding special membranes to your heart you can filter out and dispose of any taint which enters your bloodstream.<PAGE>With this infusion, you will be immune to damage from taint, including both direct contact and lingering poison effects. Better still, your modified heart can also filter out other toxins, both mundane and magical. While the §5Silverwood Heart§0 does not grant complete immunity to poison, wither, and flux effects, it will reduce their severity.
+#
+research.SYNTHSKIN.title=Synthskin
+research.SYNTHSKIN.stage.1.text=It is a relatively simple task to imbue your new body's skin with a plant's photosynthetic abilities. While this source of nourishment cannot sustain heavy activity on its own, §5synthskin§0 can be a lifesaver when your expeditions take you far from home.
+research.SYNTHSKIN.stage.2.text=It is a relatively simple task to imbue your new body's skin with a plant's photosynthetic abilities. While this source of nourishment cannot sustain heavy activity on its own, §5synthskin§0 can be a lifesaver when your expeditions take you far from home.<BR>So long as you remain in direct sunlight, your hunger meter will slowly refill. Photosynthesis cannot provide hunger saturation, so you will begin to hunger again as soon as you leave the light.
+#
+research.AMPHIBIOUS.title=Amphibious Breath
+research.AMPHIBIOUS.stage.1.text=Being a dedicated air-breather is often inconveniently fatal. You can correct this design flaw by adding a set of gills to supplement your lungs, allowing your new body to breathe air and water with equal ease.
+research.AMPHIBIOUS.stage.2.text=Being a dedicated air-breather is often inconveniently fatal. You can correct this design flaw by adding a set of gills to supplement your lungs, allowing your new body to breathe air and water with equal ease.<BR>It should be noted that gills are a rather sensitive body part. Please do not poke or prod your new gills, no matter how unfamiliar they may feel at first.
+#
+tc.research_name.morphicFingers=Morphic Fingers
+tc.research_text.morphicFingers=A workbench in the palm of your hands
+morphicFingers1=As a crafter, you have often found yourself wishing you had just the right tool for a particular task. As a thaumaturge, you can now ensure that this tool will always be (literally) at hand.<BR>The §5Morphic Fingers§0 infusion allows your fingers to transform between an enormous number of different shapes, mimicking the form and strength of common crafting tools as well as the various charms and resonators used in arcane crafting. Activating this ability with the M key will open an interface similar to an arcane workbench, although it cannot store items.
+#
+research.SPIDERCLIMB.title=Spider Climb
+research.SPIDERCLIMB.stage.1.text=Have you ever envied a spider's ability to climb over walls and suck the juices from terrified miners? Now you can mimic the first of these, at least.
+research.SPIDERCLIMB.stage.2.text=Have you ever envied a spider's ability to climb over walls and suck the juices from terrified miners? Now you can mimic the first of these, at least.<BR>Your §5Spider Climb§0 infusion imbues the hands with special fibers which cling to walls, allowing you to climb any vertical surface as though it were a ladder. This ability can be toggled with the C key.<BR>Also like a spider, your progress will be stopped by an overhang, preventing you from sucking the juices from terrified miners. Not that you would ever do that.
+#
+research.WARPEDTUMOR.title=Warped Tumor
+research.WARPEDTUMOR.stage.1.text=Warp has proven to be frustratingly stubborn, following your soul from body to body. If you can't dispose of it altogether, the next best thing would be to keep your warp confined somewhere it can't do much harm.
+research.WARPEDTUMOR.stage.2.text=Warp has proven to be frustratingly stubborn, following your soul from body to body. If you can't dispose of it altogether, the next best thing would be to keep your warp confined somewhere it can't do much harm.<BR>By means of the §5Warped Tumor§0 infusion, you can produce an organ in your new body's abdomen with an exceptionally strong affinity for warp. It cannot confine all of the eldritch energies coursing through you, but the tumor does hold up to %d points of warp.<BR>Should you die, any warp contained in the tumor will likely return to your soul.
+#
+research.CHAMELEONSKIN.title=Chameleon Skin
+research.CHAMELEONSKIN.stage.1.text=Whether sneaking into a rival's laboratory or taking notes on the life cycle of the eldritch crab, there are times when you'd like to remain unobserved. Perhaps you can come up with a more permanent solution than chugging invisibility potions?
+research.CHAMELEONSKIN.stage.2.text=Whether sneaking into a rival's laboratory or taking notes on the life cycle of the eldritch crab, there are times when you'd like to remain unobserved. Perhaps you can come up with a more permanent solution than chugging invisibility potions?<BR>The §5Chameleon Skin§0 infusion implants magical pigments and microscopic eyes into your skin, reflexively altering its color to match objects on the opposite side. The effect is much like constant invisibility, including its inability to hide armor.<BR>This effect can be toggled using the X key.
 #
 research.DOPESQUID.title=Squid Smoker
 research.DOPESQUID.stage.0=You find it quite tedious to constantly fill a pipe with your own hands, but who will do it for you?

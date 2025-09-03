@@ -12,6 +12,7 @@ import fr.wind_blade.isorropia.common.items.ItemsIS;
 import fr.wind_blade.isorropia.common.items.misc.ItemCat;
 import fr.wind_blade.isorropia.common.research.recipes.CurativeInfusionRecipe;
 import fr.wind_blade.isorropia.common.research.recipes.OrganCurativeInfusionRecipe;
+import fr.wind_blade.isorropia.common.research.recipes.SelfInfusionRecipe;
 import fr.wind_blade.isorropia.common.research.recipes.SpecieCurativeInfusionRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -54,12 +55,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class ResearchsIS {
-    private static void registerBatchAspect(AspectList aspects, Item... items) {
-        for (Item item : items) {
-            ThaumcraftApi.registerObjectTag(new ItemStack(item), aspects);
-        }
-    }
-
     private static AspectList getAspects(ItemStack stack) {
         AspectList list = AspectHelper.getObjectAspects(stack);
         return list != null ? list : new AspectList();
@@ -160,7 +155,7 @@ public class ResearchsIS {
         ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation("isorropia", "lens_ordo"), new InfusionRecipe("ORDOLENS", new ItemStack(ItemsIS.itemOrdoLens), 1, new AspectList().add(Aspect.MIND, 32).add(Aspect.MAGIC, 32).add(Aspect.SENSES, 20), ItemsIS.itemBaseLens, ItemsTC.scribingTools, ThaumcraftApiHelper.makeCrystal(Aspect.ORDER), Items.BOOK, ThaumcraftApiHelper.makeCrystal(Aspect.ORDER)));
         ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation("isorropia", "lens_envy"), new InfusionRecipe("ENVYLENS", new ItemStack(ItemsIS.itemEnvyLens), 6, new AspectList().add(Aspect.DESIRE, 32).add(IsorropiaAPI.HUNGER, 32).add(LUST, 32).add(ENVY, 64), ItemsIS.itemBaseLens, Items.DIAMOND, ThaumcraftApiHelper.makeCrystal(ENVY), Items.PAPER, ThaumcraftApiHelper.makeCrystal(ENVY)));
         ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation("isorropia", "somatic_brain"), new InfusionRecipe("SOMATICBRAIN", new ItemStack(ItemsIS.itemSomaticBrain), 4, new AspectList().add(Aspect.MIND, 150).add(Aspect.DESIRE, 100).add(ENVY, 20), BlocksTC.jarBrain, new ItemStack(ItemsTC.plate), new ItemStack(ItemsTC.mind, 1, 1), Blocks.HOPPER, new ItemStack(ItemsTC.mind, 1, 1)));
-        ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation("isorropia", "modified_matrix"), new InfusionRecipe("CREATUREINFUSIONS@1", new ItemStack(BlocksIS.blockModifiedMatrix), 8, new AspectList().add(Aspect.LIFE, 500).add(Aspect.CRAFT, 500).add(Aspect.MAGIC, 500).add(Aspect.BEAST, 500), BlocksTC.infusionMatrix, ItemsTC.salisMundus, ItemsTC.visResonator, ItemsTC.salisMundus, ItemsTC.visResonator));
+        ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation("isorropia", "modified_matrix"), new InfusionRecipe("CREATUREINFUSIONS@1", new ItemStack(BlocksIS.blockModifiedMatrix), 8, new AspectList().add(Aspect.LIFE, 100).add(Aspect.CRAFT, 100).add(Aspect.MAGIC, 100).add(Aspect.BEAST, 100), BlocksTC.infusionMatrix, ItemsTC.salisMundus, ItemsTC.visResonator, ItemsTC.salisMundus, ItemsTC.visResonator));
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "quicksilver_limbs"), new OrganCurativeInfusionRecipe.Builder().withOrganTarget(OrganCurativeInfusionRecipe.Organ.MUSCLE).withModifier("generic.movementSpeed", new AttributeModifier(UUID.fromString("b3f15142-2b27-11eb-adc1-0242ac120002"), "QUICKSILVER_SPEED", 0.08, 0)).withModifier("forge.swimSpeed", new AttributeModifier(UUID.fromString("c1719976-2b27-11eb-adc1-0242ac120002"), "QUICKSILVER_SWIM_SPEED", 0.2, 0)).build());
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "jelly_rabbit"), new JellyRabbitRecipe());
         IsorropiaAPI.registerCreatureInfusionRecipe(new ResourceLocation("isorropia", "ore_boar"), new OreBoarRecipe());
@@ -289,6 +284,132 @@ public class ResearchsIS {
             ThaumcraftApi.registerResearchLocation(new ResourceLocation("isorropia", "research/tb_compat.json"));
             EntityDopeSquid.makeDopeSquidRecipe();
         }
+
+        ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation("isorropia", "corpse_effigy"),
+                new InfusionRecipe("CLONESELF@0", new ItemStack(ItemsIS.corpseEffigy), 3,
+                        new AspectList().add(Aspect.CRAFT, 30).add(Aspect.MAN, 30),
+                        ItemsTC.brain,
+                        Items.ROTTEN_FLESH,
+                        Items.BONE,
+                        Items.ROTTEN_FLESH,
+                        Items.BONE,
+                        Items.ROTTEN_FLESH,
+                        Items.BONE,
+                        Items.ROTTEN_FLESH,
+                        Items.BONE));
+
+        ThaumcraftApi.addInfusionCraftingRecipe(new ResourceLocation("isorropia", "soul_beacon"),
+                new InfusionRecipe("CLONESELF", new ItemStack(BlocksIS.blockSoulBeacon), 8,
+                        new AspectList().add(Aspect.MOTION, 100).add(Aspect.DEATH, 100).add(Aspect.SOUL, 50).add(Aspect.TRAP, 100),
+                        Ingredient.fromItem(ItemsTC.primordialPearl),
+                        Item.getItemFromBlock(BlocksTC.jarVoid),
+                        "ingotVoid",
+                        Items.ENDER_EYE,
+                        Item.getItemFromBlock(Blocks.BEACON),
+                        Items.ENDER_EYE,
+                        "ingotVoid"));
+
+        IsorropiaAPI.registerSelfInfusionRecipe(new ResourceLocation("isorropia", "selfInfusions.test"),
+                new SelfInfusionRecipe(
+                        /*"selfInfusion"*/"",
+                        1,
+                        (new AspectList()).add(Aspect.AIR, 1),
+                        new ItemStack[]{new ItemStack(Items.APPLE)},
+                        4), "test");
+
+        IsorropiaAPI.registerSelfInfusionRecipe(new ResourceLocation("isorropia", "selfInfusions.quicksilverLimb"),
+                new SelfInfusionRecipe(
+                        "SELFINFUSION",
+                        4,
+                        new AspectList().add(Aspect.MOTION, 100).add(Aspect.MECHANISM, 100).add(Aspect.FLIGHT, 100),
+                        new ItemStack[]{
+                                PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.STRONG_SWIFTNESS),
+                                new ItemStack(ItemsTC.ingots, 1, 1),
+                                new ItemStack(ItemsTC.quicksilver),
+                                PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.STRONG_SWIFTNESS),
+                                new ItemStack(ItemsTC.ingots, 1, 1),
+                                new ItemStack(ItemsTC.quicksilver)},
+                        1), "QuickSilver Limb");
+        IsorropiaAPI.registerSelfInfusionRecipe(new ResourceLocation("isorropia", "selfInfusions.awakenedBlood"),
+                new SelfInfusionRecipe(
+                        "SELFINFUSION",
+                        5,
+                        new AspectList().add(Aspect.LIFE, 100).add(Aspect.LIFE, 100).add(Aspect.MIND, 50),
+                        new ItemStack[]{new ItemStack(Items.GOLDEN_APPLE), new ItemStack(Items.SPECKLED_MELON),
+                                new ItemStack(Items.SPECKLED_MELON), new ItemStack(ItemsTC.brain),
+                                new ItemStack(Items.SPECKLED_MELON), new ItemStack(Items.SPECKLED_MELON)},
+                        3), "Awakened Blood");
+
+        IsorropiaAPI.registerSelfInfusionRecipe(new ResourceLocation("isorropia", "selfInfusions.diamondSkin"),
+                new SelfInfusionRecipe(
+                        "SELFINFUSION",
+                        6,
+                        new AspectList().add(Aspect.PROTECT, 30).add(Aspect.CRYSTAL, 30).add(Aspect.MAN, 30),
+                        new ItemStack[]{new ItemStack(Items.LEATHER_HELMET), new ItemStack(Items.DIAMOND),
+                                new ItemStack(Items.LEATHER_CHESTPLATE), new ItemStack(Blocks.DIAMOND_BLOCK),
+                                new ItemStack(Items.LEATHER_LEGGINGS), new ItemStack(Items.DIAMOND),
+                                new ItemStack(Items.LEATHER_BOOTS), new ItemStack(Blocks.DIAMOND_BLOCK)},
+                        4), "Diamond Skin");
+        IsorropiaAPI.registerSelfInfusionRecipe(new ResourceLocation("isorropia", "selfInfusions.silverHeart"),
+                new SelfInfusionRecipe(
+                        "SILVERHEART",
+                        7,
+                        (new AspectList()).add(Aspect.ORDER, 50).add(Aspect.LIFE, 50).add(Aspect.EXCHANGE, 30),
+                        new ItemStack[] { new ItemStack(BlocksTC.saplingSilverwood, 1, 0),
+                                new ItemStack(BlocksTC.logSilverwood, 1, 0),
+                                new ItemStack(BlocksTC.shimmerleaf, 1, 0),
+                                new ItemStack(BlocksTC.logSilverwood, 1, 0) },
+                        5), "silverHeart");
+        IsorropiaAPI.registerSelfInfusionRecipe(new ResourceLocation("isorropia", "selfInfusions.synthSkin"),
+                new SelfInfusionRecipe(
+                        "SYNTHSKIN",
+                        6,
+                        new AspectList().add(Aspect.PLANT, 100).add(IsorropiaAPI.HUNGER, 100).add(Aspect.LIGHT, 100)
+                                .add(Aspect.MAN, 16),
+                        new ItemStack[]{new ItemStack(Blocks.LEAVES, 1, 32767),
+                                new ItemStack(Blocks.SAPLING, 1, 32767), new ItemStack(Blocks.RED_FLOWER, 1, 32767),
+                                new ItemStack(Blocks.VINE)},
+                        6), "Sync Skin");
+        IsorropiaAPI.registerSelfInfusionRecipe(new ResourceLocation("isorropia", "selfInfusions.amphibious"),
+                new SelfInfusionRecipe(
+                        "AMPHIBIOUS",
+                        7,
+                        new AspectList().add(Aspect.WATER, 100).add(Aspect.AIR, 100).add(Aspect.LIFE, 50)
+                                .add(Aspect.EXCHANGE, 16),
+                        new ItemStack[]{new ItemStack(Items.FISH, 1, 32767), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.LONG_WATER_BREATHING),
+                                new ItemStack(Items.FISH, 1, 32767), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.LONG_WATER_BREATHING)},
+                        7), "amphibious");
+        IsorropiaAPI.registerSelfInfusionRecipe(new ResourceLocation("isorropia", "selfInfusions.warpedTumor"),
+                new SelfInfusionRecipe(
+                        "WARPEDTUMOR",
+                        12,
+                        new AspectList().add(Aspect.FLUX, 100).add(Aspect.ELDRITCH, 75).add(Aspect.TRAP, 50)
+                                .add(IsorropiaAPI.FLESH, 45).add(Aspect.EXCHANGE, 30),
+                        new ItemStack[]{new ItemStack(BlocksTC.fleshBlock),
+                                new ItemStack(ItemsTC.bathSalts, 1, 0), new ItemStack(Items.NETHER_STAR, 1, 0),
+                                new ItemStack(Blocks.OBSIDIAN, 1, 0),
+                                new ItemStack(Items.NETHER_STAR, 1, 0),
+                                new ItemStack(ItemsTC.bathSalts, 1, 0)},
+                        8), "warpedTumor");
+        IsorropiaAPI.registerSelfInfusionRecipe(new ResourceLocation("isorropia", "selfInfusions.spiderClimb"),
+                new SelfInfusionRecipe(
+                        "SPIDERCLIMB",
+                        8,
+                        new AspectList().add(Aspect.BEAST, 50).add(Aspect.MOTION, 75).add(Aspect.ALCHEMY, 50),
+                        new ItemStack[]{new ItemStack(Blocks.WEB), new ItemStack(ItemsTC.fabric),
+                                new ItemStack(Blocks.WEB), new ItemStack(Blocks.LADDER), new ItemStack(Blocks.WEB),
+                                new ItemStack(ItemsTC.fabric), new ItemStack(Blocks.WEB),
+                                new ItemStack(Blocks.LADDER)},
+                        9), "spiderClimb");
+        IsorropiaAPI.registerSelfInfusionRecipe(new ResourceLocation("isorropia", "selfInfusions.chameleonSkin"),
+                new SelfInfusionRecipe(
+                        "CHAMELEONSKIN",
+                        7,
+                        new AspectList().add(Aspect.SENSES, 75).add(Aspect.EXCHANGE, 50).add(Aspect.VOID, 50),
+                        new ItemStack[]{new ItemStack(Items.SPIDER_EYE), new ItemStack(Items.DYE, 1, 1),
+                                new ItemStack(Items.DYE, 1, 4), new ItemStack(Items.DYE, 1, 11),
+                                new ItemStack(Items.DYE, 1, 0), new ItemStack(Items.DYE, 1, 15)},
+                        10), "chameleonSkin");
 
         ScanningManager.addScannableThing(new ScanEntityResearch("!scan.animal", EntityAnimal.class, true, "CREATUREINFUSIONS@1", "research.scan.animal.text"));
         ScanningManager.addScannableThing(new ScanEntityResearch("!scan.taint", ITaintedMob.class, true, "CURATIVEVAT@1", "research.scan.taint.text"));

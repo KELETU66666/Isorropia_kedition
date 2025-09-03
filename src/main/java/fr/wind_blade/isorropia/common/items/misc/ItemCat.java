@@ -61,7 +61,8 @@ public class ItemCat extends Item {
         AWAKENED_BLOOD(13, "awakened_blood", "isorropia:awakened_blood"),
         DIAMOND_SKIN(14, "diamond_skin", "isorropia:diamond_skin"),
         QUICKSILVER_LIMBS(15, "quicksilver_limbs", "isorropia:quicksilver_limbs"),
-        PORTABILITY(16, "portability", "isorropia:portability");
+        PORTABILITY(16, "portability", "isorropia:portability"),
+        STEVE(17, "steve"),;
 
         private final int id;
         private final String name;

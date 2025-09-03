@@ -1,14 +1,14 @@
 package fr.wind_blade.isorropia.client.renderer.tiles;
 
 import fr.wind_blade.isorropia.Isorropia;
+import fr.wind_blade.isorropia.common.tiles.TileVatBottom;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import thaumcraft.client.lib.obj.AdvancedModelLoader;
 import thaumcraft.client.lib.obj.IModelCustom;
 
-public class RenderTileVat extends TileEntitySpecialRenderer {
+public class RenderTileVat extends TileEntitySpecialRenderer<TileVatBottom> {
     private final IModelCustom model = AdvancedModelLoader.loadModel(VAT);
     private static final ResourceLocation VAT = new ResourceLocation(Isorropia.MODID, "models/block/vat_redo.obj");
 
@@ -19,14 +19,12 @@ public class RenderTileVat extends TileEntitySpecialRenderer {
     }
 
     @Override
-    public boolean isGlobalRenderer(TileEntity te) {
+    public boolean isGlobalRenderer(TileVatBottom te) {
         return true;
     }
 
     @Override
-    public void render(TileEntity te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        if (te == null) return;
-
+    public void render(TileVatBottom te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         GlStateManager.pushMatrix();
         GlStateManager.enableBlend();
 

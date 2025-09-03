@@ -27,6 +27,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -40,6 +41,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -54,9 +56,9 @@ import thaumcraft.api.crafting.Part;
 import thaumcraft.common.lib.crafting.DustTriggerMultiblock;
 
 public class Common {
-    @CapabilityInject(value=LivingBaseCapability.class)
+    @CapabilityInject(LivingBaseCapability.class)
     public static final Capability<LivingBaseCapability> LIVING_BASE_CAPABILITY = null;
-    @CapabilityInject(value=LivingCapability.class)
+    @CapabilityInject(LivingCapability.class)
     public static final Capability<LivingCapability> LIVING_CAPABILITY = null;
     public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel("isorropia");
     public static final CreativeTabs isorropiaCreativeTabs = new IsorropiaCreativeTabs();
@@ -74,7 +76,7 @@ public class Common {
     public void init(FMLInitializationEvent event) {
         Config.initOreDictionary();
         ResearchsIS.init();
-        GameRegistry.addSmelting(new ItemStack(ItemsIS.itemGoldEgg) ,new ItemStack(net.minecraft.init.Items.GOLD_NUGGET),0.15f);
+        GameRegistry.addSmelting(new ItemStack(ItemsIS.itemGoldEgg), new ItemStack(net.minecraft.init.Items.GOLD_NUGGET), 0.15f);
     }
 
     public void postInit(FMLPostInitializationEvent event) {
@@ -88,6 +90,7 @@ public class Common {
         GameRegistry.registerTileEntity(TileVatConnector.class, new ResourceLocation("isorropia", "curative_connector"));
         GameRegistry.registerTileEntity(TileJarSoul.class, new ResourceLocation("isorropia", "soul_jar"));
         GameRegistry.registerTileEntity(TileModifiedMatrix.class, new ResourceLocation("isorropia", "modified_matrix"));
+        GameRegistry.registerTileEntity(TileSoulBeacon.class, new ResourceLocation("isorropia", "sou;_beacon"));
     }
 
     private static void initEntities() {
@@ -106,7 +109,7 @@ public class Common {
         registerEntity("nether_hound", EntityHellHound.class, 64, 3, true);
         registerEntity("ember", EntityEmber.class, 64, 1, true);
 
-        if(Loader.isModLoaded("thaumicbases"))
+        if (Loader.isModLoaded("thaumicbases"))
             registerEntity("dope_squid", EntityDopeSquid.class, 64, 3, true);
     }
 
@@ -140,6 +143,11 @@ public class Common {
         INSTANCE.registerMessage(ParticuleDestroyMessage.Handler.class, ParticuleDestroyMessage.class, 4, Side.CLIENT);
         INSTANCE.registerMessage(LensRemoveMessage.Handler.class, LensRemoveMessage.class, 5, Side.CLIENT);
         INSTANCE.registerMessage(LensRemoveMessageSP.Handler.class, LensRemoveMessageSP.class, 6, Side.SERVER);
+        INSTANCE.registerMessage(PacketPlayerInfusionSync.class, PacketPlayerInfusionSync.class, 7, Side.CLIENT);
+        INSTANCE.registerMessage(PacketFingersToServer.class, PacketFingersToServer.class, 7, Side.SERVER);
+        INSTANCE.registerMessage(PacketToggleClimbToServer.class, PacketToggleClimbToServer.class, 8, Side.SERVER);
+        INSTANCE.registerMessage(PacketToggleInvisibleToServer.class, PacketToggleInvisibleToServer.class, 9, Side.SERVER);
+        INSTANCE.registerMessage(PacketSyncCapability.Handler.class, PacketSyncCapability.class, 10, Side.CLIENT);
     }
 
     private static void initMultiBlocks() {
@@ -175,5 +183,19 @@ public class Common {
             return base.getCapability(LIVING_CAPABILITY, null);
         }
         return base.getCapability(LIVING_BASE_CAPABILITY, null);
+    }
+
+    public static boolean selfInfusionSecurityCheck(final MessageContext ctx, String action, int sentPlayerID, int requiredInfusion) {
+        final EntityPlayerMP player = ctx.getServerHandler().player;
+        if (player.getEntityId() != sentPlayerID) {
+            //PacketHandler.securityWarn("Player {} tried to {} for other people!", player.getGameProfile(), action);
+            return false;
+        }
+        LivingBaseCapability ieep = Common.getCap(player);
+        if (!ieep.hasPlayerInfusion(requiredInfusion)) {
+            // PacketHandler.securityWarn("Player {} tried to {} getting the ability legitimately", player.getGameProfile(), action);
+            return false;
+        }
+        return true;
     }
 }

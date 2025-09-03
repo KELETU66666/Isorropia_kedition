@@ -12,8 +12,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
-public class ItemIncubatedEgg
-        extends ItemEgg {
+public class ItemIncubatedEgg extends ItemEgg {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack stack = playerIn.getHeldItem(handIn);
         if (!playerIn.capabilities.isCreativeMode) {

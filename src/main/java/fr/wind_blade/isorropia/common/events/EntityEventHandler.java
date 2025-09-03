@@ -12,7 +12,10 @@ import fr.wind_blade.isorropia.common.lenses.Lens;
 import fr.wind_blade.isorropia.common.lenses.LensManager;
 import fr.wind_blade.isorropia.common.libs.helpers.IsorropiaHelper;
 import fr.wind_blade.isorropia.common.network.LensRemoveMessage;
+import fr.wind_blade.isorropia.common.network.PacketPlayerInfusionSync;
 import fr.wind_blade.isorropia.common.research.recipes.OrganCurativeInfusionRecipe;
+import fr.wind_blade.isorropia.common.tiles.TileSoulBeacon;
+import fr.wind_blade.isorropia.common.tiles.TileVat;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -25,17 +28,23 @@ import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -45,18 +54,27 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.IEssentiaContainerItem;
+import thaumcraft.api.blocks.BlocksTC;
 import thaumcraft.api.capabilities.IPlayerKnowledge;
+import thaumcraft.api.capabilities.IPlayerWarp;
 import thaumcraft.api.capabilities.ThaumcraftCapabilities;
 import thaumcraft.api.casters.ICaster;
+import thaumcraft.api.damagesource.DamageSourceThaumcraft;
 import thaumcraft.api.items.IGoggles;
 import thaumcraft.api.items.IRevealer;
 import thaumcraft.api.items.ItemsTC;
+import thaumcraft.api.potions.PotionFluxTaint;
+import thaumcraft.api.potions.PotionVisExhaust;
 import thaumcraft.api.research.ResearchEvent;
 import thaumcraft.client.fx.FXDispatcher;
 import thaumcraft.common.items.tools.ItemThaumometer;
+import thaumcraft.common.lib.potions.PotionInfectiousVisExhaust;
+import thaumcraft.common.lib.potions.PotionThaumarhia;
 import thaumcraft.common.lib.research.ResearchManager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Random;
 
 
@@ -83,6 +101,13 @@ public class EntityEventHandler {
                 }
                 if (!doubleLens && this.theRightLens != null) {
                     this.theRightLens.handleTicks(world, event.player, false);
+                }
+            }
+
+            if(!world.isRemote){
+                LivingBaseCapability lc = Common.getCap(event.player);
+                if (lc != null) {
+                    Common.getCap(event.player).syncLivingBaseCapability(event.player);
                 }
             }
         }
@@ -181,6 +206,101 @@ public class EntityEventHandler {
                     entity.getHealth() < entity.getMaxHealth())
                 entity.heal(1.0F);
         }
+        if (entity instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) entity;
+            LivingBaseCapability prop = Common.getCap(player);
+            if (prop.hasPlayerInfusion(5) && (player.getActivePotionEffect(MobEffects.POISON) != null
+                    || player.getActivePotionEffect(MobEffects.WITHER) != null
+                    || player.getActivePotionEffect(PotionInfectiousVisExhaust.instance) != null
+                    || player.getActivePotionEffect(PotionVisExhaust.instance) != null
+                    || player.getActivePotionEffect(PotionThaumarhia.instance) != null
+                    || player.getActivePotionEffect(PotionFluxTaint.instance) != null)) {
+
+                final Collection activePotionEffects = event.getEntityLiving().getActivePotionEffects();
+                final ArrayList<PotionEffect> toAdd = new ArrayList<>();
+
+                for (Object activePotionEffect : activePotionEffects) {
+                    final PotionEffect effect = (PotionEffect) activePotionEffect;
+                    if (effect.getPotion() == MobEffects.POISON || effect.getPotion() == MobEffects.WITHER
+                            || effect.getPotion() == PotionInfectiousVisExhaust.instance
+                            || effect.getPotion() == PotionVisExhaust.instance
+                            || effect.getPotion() == PotionThaumarhia.instance
+                            || effect.getPotion() == PotionFluxTaint.instance) {
+                        final Potion id = effect.getPotion();
+                        final int amplifier = 0;
+                        final int duration = effect.getDuration() - 1;
+                        toAdd.add(new PotionEffect(id, duration, amplifier, false, true));
+                    } else {
+                        toAdd.add(effect);
+                    }
+                }
+                event.getEntityLiving().clearActivePotions();
+                for (final PotionEffect effect : toAdd) {
+                    event.getEntityLiving().addPotionEffect(effect);
+                }
+            }
+            if (prop.hasPlayerInfusion(6) && event.getEntity().ticksExisted % 200 == 0
+                    && player.world.isDaytime()
+                    && player.world.canBlockSeeSky(
+                    new BlockPos(MathHelper.floor(player.posX),
+                            MathHelper.floor(player.posY),
+                            MathHelper.floor(player.posZ)))) {
+                player.getFoodStats().addStats(1, 0.0f);
+            }
+            if (prop.hasPlayerInfusion(7) && player.isInWater()) {
+                player.setAir(300);
+            }
+
+            if (player.ticksExisted % 30 == 0) {
+                if (prop.hasPlayerInfusion(8) && !player.world.isRemote) {
+                    //todo add a config for this.
+                    this.warpTumor(player, /*ThaumicHorizons.warpedTumorValue*/50 - prop.tumorWarpPermanent - prop.tumorWarp - prop.tumorWarpTemp);
+                }
+                this.applyPlayerPotionInfusions(player, prop.playerInfusions, prop.toggleInvisible);
+            }
+            if (prop.hasPlayerInfusion(9) && !prop.toggleClimb) {
+                if (event.getEntityLiving().collidedHorizontally) {
+                    event.getEntityLiving().motionY = 0.2;
+                    if (event.getEntityLiving().isSneaking()) {
+                        event.getEntityLiving().motionY = 0.0;
+                    }
+                    event.getEntity().fallDistance = 0.0f;
+                } else {
+                    final boolean listy = event.getEntityLiving().world.collidesWithAnyBlock(
+                            new AxisAlignedBB(
+                                    event.getEntityLiving().posX - event.getEntityLiving().width / 1.5,
+                                    event.getEntityLiving().posY,
+                                    event.getEntityLiving().posZ - event.getEntityLiving().width / 1.5,
+                                    event.getEntityLiving().posX + event.getEntityLiving().width / 1.5,
+                                    event.getEntityLiving().posY + event.getEntityLiving().height * 0.9,
+                                    event.getEntityLiving().posZ + event.getEntityLiving().width / 1.5));
+                    if (listy) {
+                        if (event.getEntityLiving().isSneaking()) {
+                            event.getEntityLiving().motionY = 0.0;
+                        } else {
+                            event.getEntityLiving().motionY = -0.15;
+                        }
+                        event.getEntity().fallDistance = 0.0f;
+                    }
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onPlayerClone(PlayerEvent.Clone event) {
+        EntityPlayer original = event.getOriginal();
+        EntityPlayer player = event.getEntityPlayer();
+
+        if (player.world.isRemote) return;
+
+        // Handle both death and dimension change cloning
+        LivingBaseCapability oldCap = Common.getCap(original);
+        LivingBaseCapability newCap = Common.getCap(player);
+
+        if (oldCap != null && newCap != null) {
+            Common.getCap(player).syncLivingBaseCapability(event.getEntityPlayer());
+        }
     }
 
     @SubscribeEvent
@@ -193,7 +313,7 @@ public class EntityEventHandler {
 
     @SubscribeEvent
     public void onPlayerJoin(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event) {
-        Common.getCap(event.player).synchStartTracking((EntityPlayerMP) event.player);
+        Common.getCap(event.player).syncLivingBaseCapability(event.player);
     }
 
     @SubscribeEvent
@@ -373,5 +493,217 @@ public class EntityEventHandler {
             if (Config.config != null && Config.config.hasChanged())
                 Config.save();
         }
+    }
+
+    @SubscribeEvent
+    public void EntityJoinWorld(final EntityJoinWorldEvent event) {
+        if (event.getEntity() instanceof EntityLivingBase) {
+            this.applyInfusions((EntityLivingBase) event.getEntity());
+        }
+        /*if (event.getWorld().isRemote && event.entity instanceof EntityNightmare
+                && event.entity.getEntityId() == EventHandlerEntity.clientNightmareID) {
+            event.entity.world.getEntityByID(EventHandlerEntity.clientPlayerID).ridingEntity = event.entity;
+            event.entity.riddenByEntity = event.entity.world.getEntityByID(EventHandlerEntity.clientPlayerID);
+            EventHandlerEntity.clientNightmareID = -2;
+            EventHandlerEntity.clientPlayerID = -2;
+        }*/
+    }
+
+    @SubscribeEvent
+    public void Respawn(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent event) {
+        // Exit Portal fix
+        if (!event.player.world.isRemote) {
+            this.applyInfusions(event.player);
+        }
+    }
+
+    @SubscribeEvent
+    public void onPlayerHurt(final LivingHurtEvent event) {
+        final LivingBaseCapability prop = Common.getCap(event.getEntityLiving());
+        if (prop.hasPlayerInfusion(5) && event.getSource() == DamageSourceThaumcraft.taint) {
+            event.setCanceled(true);
+            event.setAmount(0.0f);
+            return;
+        }
+        if (!event.getEntity().world.isRemote && event.getEntity() instanceof EntityPlayer && event.getEntityLiving().getHealth() - event.getAmount() <= 0.0f) {
+            final EntityPlayer player = (EntityPlayer) event.getEntity();
+            if (prop.tumorWarpPermanent > 0 || prop.tumorWarp > 0 || prop.tumorWarpTemp > 0) {
+                ThaumcraftCapabilities.getWarp(player).add(IPlayerWarp.EnumWarpType.PERMANENT, prop.tumorWarpPermanent);
+                ThaumcraftCapabilities.getWarp(player).add(IPlayerWarp.EnumWarpType.NORMAL, prop.tumorWarp);
+                ThaumcraftCapabilities.getWarp(player).add(IPlayerWarp.EnumWarpType.TEMPORARY, prop.tumorWarpTemp);
+            }
+            prop.resetPlayerInfusions();
+        }
+        if (!event.getEntity().world.isRemote && event.getEntityLiving() instanceof EntityPlayer
+                && event.getEntityLiving().getHealth() - event.getAmount() <= 0.0f
+                && event.getEntityLiving().getEntityData().getBoolean("soulBeacon")) {
+            final EntityPlayer player = (EntityPlayer) event.getEntity();
+            final int dim = player.getEntityData().getInteger("soulBeaconDim");
+            final World world = player.world.getMinecraftServer().getWorld(dim);
+            final int x = player.getEntityData().getIntArray("soulBeaconCoords")[0];
+            final int y = player.getEntityData().getIntArray("soulBeaconCoords")[1];
+            final int z = player.getEntityData().getIntArray("soulBeaconCoords")[2];
+            if (world.getTileEntity(new BlockPos(x, y, z)) instanceof TileSoulBeacon && world.getTileEntity(new BlockPos(x, y - 1, z)) instanceof TileVat && ((TileVat) world.getTileEntity(new BlockPos(x, y - 1, z))).getMode() == 4) {
+                event.setCanceled(true);
+                if (!world.isRemote) {
+                    world.createExplosion(
+                            null,
+                            player.posX,
+                            player.posY + player.getEyeHeight(),
+                            player.posZ,
+                            0.0f,
+                            false);
+                    for (int a2 = 0; a2 < 25; ++a2) {
+                        final int xx = (int) player.posX + world.rand.nextInt(8) - world.rand.nextInt(8);
+                        final int yy = (int) player.posY + world.rand.nextInt(8) - world.rand.nextInt(8);
+                        final int zz = (int) player.posZ + world.rand.nextInt(8) - world.rand.nextInt(8);
+                        BlockPos pos = new BlockPos(xx, yy, zz);
+                        if (world.isAirBlock(pos)) {
+                            if (yy <= (int) player.posY + 1) {
+                                world.setBlockState(pos, BlocksTC.fluxGoo.getStateFromMeta(8), 3);
+                            } else {
+                                world.setBlockState(pos, BlocksTC.fluxGoo.getStateFromMeta(8), 3);
+                            }
+                        }
+                    }
+                }
+                player.inventory.dropAllItems();
+                final IInventory baubles2 = BaublesApi.getBaubles(player);
+                for (int j = 0; j < baubles2.getSizeInventory(); ++j) {
+                    if (baubles2.getStackInSlot(j) != ItemStack.EMPTY) {
+                        final EntityItem bauble = new EntityItem(
+                                world,
+                                player.posX,
+                                player.posY,
+                                player.posZ,
+                                baubles2.getStackInSlot(j));
+                        world.spawnEntity(bauble);
+                        baubles2.setInventorySlotContents(j, ItemStack.EMPTY);
+                    }
+                }
+                baubles2.markDirty();
+                player.inventory.markDirty();
+                //PacketHandler.INSTANCE.sendTo(new PacketNoMoreItems(), (EntityPlayerMP) player);
+                player.curePotionEffects(new ItemStack(Items.MILK_BUCKET));
+                player.heal(999.0f);
+                if (dim != player.world.provider.getDimension()) {
+                    player.changeDimension(dim);
+                }
+                player.setPositionAndUpdate(x + 0.5, y - 2.5, z + 0.5);
+                //Thaumcraft.proxy.blockSparkle(world, x, y - 2, z, 16777215, 20);
+                //Thaumcraft.proxy.blockSparkle(world, x, y - 3, z, 16777215, 20);
+                //world.playSoundEffect(x + 0.5, y + 0.5, z + 0.5, "thaumcraft:whispers", 1.0f, world.rand.nextFloat());
+                this.applyPlayerInfusions(player, (TileVat) world.getTileEntity(new BlockPos(x, y - 1, z)));
+                Common.getCap(player).syncLivingBaseCapability(player);
+                ((TileVat) world.getTileEntity(new BlockPos(x, y - 1, z))).selfInfusions = new int[12];
+                ((TileVat) world.getTileEntity(new BlockPos(x, y - 1, z))).setMode(0);
+                ((TileVat) world.getTileEntity(new BlockPos(x, y - 1, z))).setEntityContained(player);
+                ((TileVat) world.getTileEntity(new BlockPos(x, y - 1, z))).setHasEffigy(false);
+                ((TileVat) world.getTileEntity(new BlockPos(x, y - 1, z))).setMyEssentia(0);
+                world.getTileEntity(new BlockPos(x, y - 1, z)).markDirty();
+                ((TileVat) world.getTileEntity(new BlockPos(x, y - 1, z))).syncTile(false);
+            }
+        } else if (event.getEntity().world.isRemote && event.getEntityLiving() instanceof EntityPlayer
+                && event.getEntityLiving().getHealth() - event.getAmount() <= 0.0f
+                && event.getEntityLiving().getEntityData().getBoolean("soulBeacon")) {
+            final EntityPlayer player = (EntityPlayer) event.getEntity();
+            Arrays.fill(player.inventory.mainInventory.toArray(), ItemStack.EMPTY);
+            Arrays.fill(player.inventory.armorInventory.toArray(), ItemStack.EMPTY);
+            Arrays.fill(player.inventory.offHandInventory.toArray(), ItemStack.EMPTY);
+            final IInventory baubles3 = BaublesApi.getBaubles(player);
+            for (int i = 0; i < baubles3.getSizeInventory(); i++) {
+                baubles3.setInventorySlotContents(i, ItemStack.EMPTY);
+            }
+        }
+    }
+
+    public void applyPlayerPotionInfusions(final EntityPlayer entity, final int[] infusions, final boolean toggled) {
+        for (int infusion : infusions) {
+            if (infusion == 1) {
+                PotionEffect effect = new PotionEffect(MobEffects.JUMP_BOOST, Integer.MAX_VALUE, 0, true, false);
+                effect.setCurativeItems(new ArrayList<>());
+                entity.addPotionEffect(effect);
+                effect = new PotionEffect(MobEffects.SPEED, Integer.MAX_VALUE, 0, true, false);
+                effect.setCurativeItems(new ArrayList<>());
+                entity.addPotionEffect(effect);
+            } else if (infusion == 3) {
+                final PotionEffect effect = new PotionEffect(MobEffects.REGENERATION, Integer.MAX_VALUE, 0, true, false);
+                effect.setCurativeItems(new ArrayList<>());
+                entity.addPotionEffect(effect);
+            } else if (infusion == 4) {
+                final PotionEffect effect = new PotionEffect(MobEffects.RESISTANCE, Integer.MAX_VALUE, 0, true, false);
+                effect.setCurativeItems(new ArrayList<>());
+                entity.addPotionEffect(effect);
+            } else if (infusion == 10 && !toggled) {
+                final PotionEffect effect = new PotionEffect(MobEffects.INVISIBILITY, Integer.MAX_VALUE, 0, true, false);
+                effect.setCurativeItems(new ArrayList<>());
+                entity.addPotionEffect(effect);
+                entity.setInvisible(true);
+            }
+        }
+    }
+
+    public void warpTumor(final EntityPlayer entity, int capacity) {
+        if (capacity <= 0) {
+            return;
+        }
+        final int warpPermanent = ThaumcraftCapabilities.getWarp(entity).get(IPlayerWarp.EnumWarpType.PERMANENT);
+        final int warp = ThaumcraftCapabilities.getWarp(entity).get(IPlayerWarp.EnumWarpType.NORMAL);
+        final int tempWarp = ThaumcraftCapabilities.getWarp(entity).get(IPlayerWarp.EnumWarpType.TEMPORARY);
+        LivingBaseCapability cap = Common.getCap(entity);
+
+        if (warpPermanent > capacity) {
+            ThaumcraftCapabilities.getWarp(entity).add(IPlayerWarp.EnumWarpType.PERMANENT, -capacity);
+            cap.tumorWarpPermanent += capacity;
+            capacity = 0;
+        } else {
+            capacity -= warpPermanent;
+            ThaumcraftCapabilities.getWarp(entity).add(IPlayerWarp.EnumWarpType.PERMANENT, -warpPermanent);
+            cap.tumorWarpPermanent += warpPermanent;
+            if (warp > capacity) {
+                ThaumcraftCapabilities.getWarp(entity).add(IPlayerWarp.EnumWarpType.NORMAL, -capacity);
+                cap.tumorWarp += capacity;
+                capacity = 0;
+            } else {
+                capacity -= warp;
+                ThaumcraftCapabilities.getWarp(entity).add(IPlayerWarp.EnumWarpType.NORMAL, -warp);
+                cap.tumorWarp += warp;
+                if (tempWarp > capacity) {
+                    ThaumcraftCapabilities.getWarp(entity).add(IPlayerWarp.EnumWarpType.TEMPORARY, -capacity);
+                    cap.tumorWarpTemp += capacity;
+                    capacity = 0;
+                } else {
+                    capacity -= tempWarp;
+                    ThaumcraftCapabilities.getWarp(entity).add(IPlayerWarp.EnumWarpType.TEMPORARY, -tempWarp);
+                    cap.tumorWarpTemp += tempWarp;
+                }
+            }
+        }
+    }
+
+    public void applyInfusions(final EntityLivingBase entity) {
+        LivingBaseCapability infusionProperties = Common.getCap(entity);
+        if (entity instanceof EntityPlayer) {
+            if (infusionProperties != null) {
+                if (infusionProperties.hasPlayerInfusion(8) && !entity.world.isRemote) {
+                    this.warpTumor((EntityPlayer) entity,/*ThaumicHorizons.warpedTumorValue*/50 - infusionProperties.tumorWarpPermanent - infusionProperties.tumorWarp - infusionProperties.tumorWarpTemp);
+                }
+
+                this.applyPlayerPotionInfusions((EntityPlayer) entity, infusionProperties.playerInfusions, infusionProperties.toggleInvisible);
+                if (!entity.world.isRemote) {
+                    Common.INSTANCE.sendToAll(new PacketPlayerInfusionSync(entity.getName(), infusionProperties.getPlayerInfusions(), infusionProperties.toggleClimb, infusionProperties.toggleInvisible));
+                }
+            }
+        }
+    }
+
+    void applyPlayerInfusions(final EntityPlayer player, final TileVat tile) {
+        final LivingBaseCapability prop = Common.getCap(player);
+        for (int i = 0; i < tile.selfInfusions.length; ++i) {
+            if (tile.selfInfusions[i] != 0) {
+                prop.addPlayerInfusion(tile.selfInfusions[i]);
+            }
+        }
+        this.applyInfusions(player);
     }
 }

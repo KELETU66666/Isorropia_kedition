@@ -1,0 +1,11 @@
+{
+    "forge_marker": 1,
+    "defaults":
+    {
+        "model": "isorropia:soul_beacon",
+        "transform": "forge:default-block"
+    },
+    "variants": {
+        "inventory": [{}], "normal":[{}]
+    }
+}

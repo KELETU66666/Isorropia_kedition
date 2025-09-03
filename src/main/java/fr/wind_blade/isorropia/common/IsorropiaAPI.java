@@ -5,9 +5,10 @@ import fr.wind_blade.isorropia.common.celestial.ICelestialBody;
 import fr.wind_blade.isorropia.common.curative.ICurativeEffectProvider;
 import fr.wind_blade.isorropia.common.items.IJellyAspectEffectProvider;
 import fr.wind_blade.isorropia.common.items.ItemsIS;
+import fr.wind_blade.isorropia.common.items.misc.ItemCat;
 import fr.wind_blade.isorropia.common.lenses.Lens;
 import fr.wind_blade.isorropia.common.research.recipes.CurativeInfusionRecipe;
-import fr.wind_blade.isorropia.common.tiles.TileVat;
+import fr.wind_blade.isorropia.common.research.recipes.SelfInfusionRecipe;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -17,6 +18,7 @@ import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.registries.ForgeRegistry;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.crafting.InfusionRecipe;
 
 import java.util.*;
 
@@ -44,6 +46,7 @@ public class IsorropiaAPI {
     private static final HashMap<ResourceLocation, ICelestialBody> registryCelestialBody;
     public static final List<ICurativeEffectProvider> curativeEffects;
     private static final Map<Aspect, IJellyAspectEffectProvider> jellyEffects;
+    public static Map<ResourceLocation, SelfInfusionRecipe> selfInfusionRecipes;
 
     private IsorropiaAPI() {
     }
@@ -69,6 +72,22 @@ public class IsorropiaAPI {
         }
     }
 
+    public static void registerSelfInfusionRecipe(ResourceLocation registryLocation, SelfInfusionRecipe recipeIn, String name) {
+        if (!selfInfusionRecipes.containsKey(registryLocation)) {
+            selfInfusionRecipes.put(registryLocation, recipeIn);
+            //creatureInfusionRecipesLocal.put(recipeIn, registryLocation);
+            InfusionRecipe fake = new InfusionRecipe(
+                    recipeIn.getResearch(),
+                    ItemCat.createCat(ItemCat.EnumCat.STEVE, name),
+                    recipeIn.getInstability(),
+                    recipeIn.getAspects(),
+                    ItemCat.createCat(ItemCat.EnumCat.STEVE, "Human"),
+                    (Object[]) recipeIn.getComponents());
+            ThaumcraftApi.addFakeCraftingRecipe(registryLocation, fake);
+
+        }
+    }
+
     public static void registerCurativeEffect(ICurativeEffectProvider effect) {
         if (!curativeEffects.contains(effect)) {
             curativeEffects.add(effect);
@@ -83,13 +102,24 @@ public class IsorropiaAPI {
         return jellyEffects.get(aspect);
     }
 
-    public static CurativeInfusionRecipe findMatchingCreatureInfusionRecipe(EntityLivingBase entityContained, ArrayList<ItemStack> components, EntityPlayer player, TileVat vat) {
+    public static CurativeInfusionRecipe findMatchingCreatureInfusionRecipe(EntityLivingBase entityContained, ArrayList<ItemStack> components, EntityPlayer player) {
         CurativeInfusionRecipe recipe;
         Iterator<CurativeInfusionRecipe> var3 = creatureInfusionRecipes.values().iterator();
         do {
             if (var3.hasNext()) continue;
             return null;
-        } while (!(recipe = var3.next()).matches(components, entityContained, player.world, player, vat));
+        } while (!(recipe = var3.next()).matches(components, entityContained, player.world, player));
+        return recipe;
+    }
+
+    //Self Infusion
+    public static SelfInfusionRecipe findMatchingCSelfInfusionRecipe(ArrayList<ItemStack> components, EntityPlayer player) {
+        SelfInfusionRecipe recipe;
+        Iterator<SelfInfusionRecipe> var3 = selfInfusionRecipes.values().iterator();
+        do {
+            if (var3.hasNext()) continue;
+            return null;
+        } while (!(recipe = var3.next()).matches(components, player.world, player));
         return recipe;
     }
 
@@ -104,5 +134,6 @@ public class IsorropiaAPI {
         registryCelestialBody = new HashMap();
         curativeEffects = new ArrayList<>();
         jellyEffects = new HashMap<>();
+        selfInfusionRecipes = new HashMap<>();
     }
 }

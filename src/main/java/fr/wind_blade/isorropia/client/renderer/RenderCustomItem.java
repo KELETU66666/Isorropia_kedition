@@ -2,7 +2,6 @@ package fr.wind_blade.isorropia.client.renderer;
 
 import fr.wind_blade.isorropia.client.libs.RenderEventHandler;
 import fr.wind_blade.isorropia.common.blocks.BlocksIS;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -20,7 +19,7 @@ public class RenderCustomItem extends TileEntityItemStackRenderer {
 
     public void renderByItem(ItemStack stack) {
         super.renderByItem(stack);
-        if (stack.getItem() == Item.getItemFromBlock((Block) BlocksIS.blockJarSoul)) {
+        if (stack.getItem() == Item.getItemFromBlock(BlocksIS.blockJarSoul)) {
             GlStateManager.pushMatrix();
             GlStateManager.translate(0.5D, 0.5D, 0.4D);
             Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);

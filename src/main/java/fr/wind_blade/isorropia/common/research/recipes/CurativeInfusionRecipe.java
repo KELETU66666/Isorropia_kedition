@@ -13,7 +13,6 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
@@ -57,8 +56,8 @@ public class CurativeInfusionRecipe extends InfusionRecipe {
         }
     }
 
-    public boolean matches(List<ItemStack> input, EntityLivingBase entity, World world, EntityPlayer player, TileVat vat) {
-        if (!this.research.isEmpty() && !ThaumcraftCapabilities.knowsResearch(player, new String[]{this.research})) {
+    public boolean matches(List<ItemStack> input, EntityLivingBase entity, World world, EntityPlayer player) {
+        if (!this.research.isEmpty() && !ThaumcraftCapabilities.knowsResearch(player, this.research)) {
             return false;
         }
         if (!this.predicate.test(entity)) {
@@ -165,7 +164,7 @@ public class CurativeInfusionRecipe extends InfusionRecipe {
     }
 
     public static class Builder<T extends Builder<T>> {
-        protected static final Ingredient DEFAULT_FAKE_INGREDIENT = Ingredient.fromItem((Item)ItemsIS.itemCat);
+        protected static final Ingredient DEFAULT_FAKE_INGREDIENT = Ingredient.fromItem(ItemsIS.itemCat);
         protected static final Predicate<EntityLivingBase> DEFAULT_PREDICATE = entity -> entity instanceof EntityLivingBase;
         protected Predicate<EntityLivingBase> predicate = DEFAULT_PREDICATE;
         protected String knwoledgeRequirement = "FIRSTSTEPS";
