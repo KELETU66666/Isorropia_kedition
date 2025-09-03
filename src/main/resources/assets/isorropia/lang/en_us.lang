@@ -70,7 +70,6 @@ entity.golden_chicken.name=Golden Chicken
 entity.guardian_panther.name=Guardian Panther
 entity.nether_hound.name=Nether Hound
 entity.dope_squid.name=Smoker Squid
-
 ##########################################
 # Isorropia Research
 ##########################################
@@ -279,6 +278,7 @@ lens.ordo_lens=Scholar's Lens
 lens.envy_lens=Trickster's Lens
 
 isorropia.containment.fail=Capture failed
+isorropia.setBeacon=Soul Beacon Set!
 
 isorropia.FOCUSCONTAINMENT.name=Containment
 isorropia.FOCUSCONTAINMENT.text=Has a chance to capture an entity (excluding players) into a Soul Jar if it is in your inventory, otherwise it does nothing. It's best to utilize this effect while the entity is severely weakened.
