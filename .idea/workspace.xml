@@ -4,59 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0487f38c-42ff-4f53-8da4-c5e9a0688d91" name="更改" comment="fix another bug.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/tiles/RenderSoulBeacon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/tiles/RenderVatSlave.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlockSoulBeacon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/items/misc/ItemCorpseEffigy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/network/PacketFingersToServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/network/PacketPlayerInfusionSync.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/network/PacketSyncCapability.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/network/PacketToggleClimbToServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/network/PacketToggleInvisibleToServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/research/recipes/SelfInfusionRecipe.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/tiles/TileSoulBeacon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/blockstates/soul_beacon.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/models/block/soul_beacon.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/models/item/cat_steve.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/models/item/corpse_effigy.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/blocks/soulbeacon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/items/corpseeffigy_x64.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/misc/chameleonskin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/misc/clone.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/misc/humaninfusion.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/misc/morphicfingers.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/misc/silverwoodheart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/misc/spiderclimb.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/misc/synthskin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/misc/warpedtumor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/models/corpseeffigy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/models/corpseeffigyrevived.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/research/steve.png" afterDir="false" />
+    <list default="true" id="0487f38c-42ff-4f53-8da4-c5e9a0688d91" name="更改" comment="fix a lang issue.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/libs/helpers/EmptyTeleporter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/Isorropia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/Isorropia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/RenderCustomItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/RenderCustomItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/tiles/RenderTileVat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/renderer/tiles/RenderTileVat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/Common.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/Common.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/IsorropiaAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/IsorropiaAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlocksIS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/blocks/BlocksIS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/capabilities/LivingBaseCapability.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/capabilities/LivingBaseCapability.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/curative/CurativeEffects.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/curative/CurativeEffects.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/events/EntityEventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/events/EntityEventHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/events/KeyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/events/KeyHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/items/ItemsIS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/items/ItemsIS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/items/misc/ItemCat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/items/misc/ItemCat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/items/misc/ItemIncubatedEgg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/items/misc/ItemIncubatedEgg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/network/TrackingCapabilityMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/network/TrackingCapabilityMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/research/ResearchsIS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/research/ResearchsIS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/research/recipes/CurativeInfusionRecipe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/research/recipes/CurativeInfusionRecipe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/tiles/TileVat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/tiles/TileVat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/isorropia_at.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/isorropia_at.cfg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/lang/en_us.lang" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/lang/en_us.lang" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/research/isorropia.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/research/isorropia.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mcmod.info" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mcmod.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -441,7 +392,23 @@
       <option name="project" value="LOCAL" />
       <updated>1756561735387</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="self infusion.&#10;version bump.">
+      <option name="closed" value="true" />
+      <created>1756874590586</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1756874590586</updated>
+    </task>
+    <task id="LOCAL-00033" summary="fix a lang issue.">
+      <option name="closed" value="true" />
+      <created>1756875277060</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1756875277060</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -458,8 +425,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Fix a bug" />
-    <MESSAGE value="Fix lots of bugs, added guardian panther" />
     <MESSAGE value="hell hound, portability, jar display" />
     <MESSAGE value="fix some small bugs." />
     <MESSAGE value="small pr" />
@@ -483,7 +448,9 @@
     <MESSAGE value="big bug fix update." />
     <MESSAGE value="version bump." />
     <MESSAGE value="fix another bug." />
-    <option name="LAST_COMMIT_MESSAGE" value="fix another bug." />
+    <MESSAGE value="self infusion.&#10;version bump." />
+    <MESSAGE value="fix a lang issue." />
+    <option name="LAST_COMMIT_MESSAGE" value="fix a lang issue." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -10,6 +10,7 @@ import fr.wind_blade.isorropia.common.entities.EntityHangingLabel;
 import fr.wind_blade.isorropia.common.items.ItemsIS;
 import fr.wind_blade.isorropia.common.lenses.Lens;
 import fr.wind_blade.isorropia.common.lenses.LensManager;
+import fr.wind_blade.isorropia.common.libs.helpers.EmptyTeleporter;
 import fr.wind_blade.isorropia.common.libs.helpers.IsorropiaHelper;
 import fr.wind_blade.isorropia.common.network.LensRemoveMessage;
 import fr.wind_blade.isorropia.common.network.PacketPlayerInfusionSync;
@@ -587,7 +588,7 @@ public class EntityEventHandler {
                 player.curePotionEffects(new ItemStack(Items.MILK_BUCKET));
                 player.heal(999.0f);
                 if (dim != player.world.provider.getDimension()) {
-                    player.changeDimension(dim);
+                    player.changeDimension(dim, new EmptyTeleporter());
                 }
                 player.setPositionAndUpdate(x + 0.5, y - 2.5, z + 0.5);
                 //Thaumcraft.proxy.blockSparkle(world, x, y - 2, z, 16777215, 20);
