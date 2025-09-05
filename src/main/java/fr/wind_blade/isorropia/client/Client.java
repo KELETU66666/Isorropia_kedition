@@ -34,8 +34,7 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.IEssentiaContainerItem;
 
 @SideOnly(value = Side.CLIENT)
-public class Client
-        extends Common {
+public class Client extends Common {
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);

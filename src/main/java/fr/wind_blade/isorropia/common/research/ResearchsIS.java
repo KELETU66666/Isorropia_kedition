@@ -355,10 +355,10 @@ public class ResearchsIS {
                         "SILVERHEART",
                         7,
                         (new AspectList()).add(Aspect.ORDER, 50).add(Aspect.LIFE, 50).add(Aspect.EXCHANGE, 30),
-                        new ItemStack[] { new ItemStack(BlocksTC.saplingSilverwood, 1, 0),
+                        new ItemStack[]{new ItemStack(BlocksTC.saplingSilverwood, 1, 0),
                                 new ItemStack(BlocksTC.logSilverwood, 1, 0),
                                 new ItemStack(BlocksTC.shimmerleaf, 1, 0),
-                                new ItemStack(BlocksTC.logSilverwood, 1, 0) },
+                                new ItemStack(BlocksTC.logSilverwood, 1, 0)},
                         5), "silverHeart");
         IsorropiaAPI.registerSelfInfusionRecipe(new ResourceLocation("isorropia", "selfInfusions.synthSkin"),
                 new SelfInfusionRecipe(
@@ -401,6 +401,17 @@ public class ResearchsIS {
                                 new ItemStack(ItemsTC.fabric), new ItemStack(Blocks.WEB),
                                 new ItemStack(Blocks.LADDER)},
                         9), "spiderClimb");
+        IsorropiaAPI.registerSelfInfusionRecipe(new ResourceLocation("isorropia", "selfInfusions.morphicFingers"),
+                new SelfInfusionRecipe(
+                        "MORPHICFINGERS",
+                        6,
+                        (new AspectList()).add(Aspect.TOOL, 10).add(Aspect.CRAFT, 10).add(Aspect.MAN, 10).add(Aspect.EXCHANGE, 5),
+                        new ItemStack[]{
+                                new ItemStack(BlocksTC.arcaneWorkbench, 1, 0),
+                                new ItemStack(ItemsTC.ingots, 1, 1),
+                                new ItemStack(ItemsTC.salisMundus, 1, 0),
+                                new ItemStack(ItemsTC.ingots, 1, 1)},
+                        2), "MorphicFingers");
         IsorropiaAPI.registerSelfInfusionRecipe(new ResourceLocation("isorropia", "selfInfusions.chameleonSkin"),
                 new SelfInfusionRecipe(
                         "CHAMELEONSKIN",

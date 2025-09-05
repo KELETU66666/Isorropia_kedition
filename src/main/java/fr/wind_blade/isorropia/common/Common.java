@@ -7,6 +7,7 @@ import fr.wind_blade.isorropia.common.capabilities.LivingBaseCapability;
 import fr.wind_blade.isorropia.common.capabilities.LivingCapability;
 import fr.wind_blade.isorropia.common.casters.foci.FocusEffectContainment;
 import fr.wind_blade.isorropia.common.config.Config;
+import fr.wind_blade.isorropia.common.container.GuiHandler;
 import fr.wind_blade.isorropia.common.curative.CurativeEffects;
 import fr.wind_blade.isorropia.common.entities.*;
 import fr.wind_blade.isorropia.common.entities.projectile.EntityEmber;
@@ -74,6 +75,8 @@ public class Common {
     }
 
     public void init(FMLInitializationEvent event) {
+        NetworkRegistry.INSTANCE.registerGuiHandler(Isorropia.instance, new GuiHandler());
+
         Config.initOreDictionary();
         ResearchsIS.init();
         GameRegistry.addSmelting(new ItemStack(ItemsIS.itemGoldEgg), new ItemStack(net.minecraft.init.Items.GOLD_NUGGET), 0.15f);

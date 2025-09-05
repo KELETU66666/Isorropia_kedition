@@ -1,13 +1,16 @@
 package fr.wind_blade.isorropia.common.events;
 
+import fr.wind_blade.isorropia.Isorropia;
 import fr.wind_blade.isorropia.common.Common;
 import fr.wind_blade.isorropia.common.lenses.LensManager;
 import fr.wind_blade.isorropia.common.network.LensRemoveMessageSP;
+import fr.wind_blade.isorropia.common.network.PacketFingersToServer;
 import fr.wind_blade.isorropia.common.network.PacketToggleClimbToServer;
 import fr.wind_blade.isorropia.common.network.PacketToggleInvisibleToServer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextComponentString;
@@ -23,15 +26,14 @@ import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
 
-public class KeyHandler
-{
+public class KeyHandler {
     public KeyBinding keyLens;
     public KeyBinding keyC;
     public KeyBinding keyX;
-    //public KeyBinding keyMorphic;
+    public KeyBinding keyMorphic;
     public static long lastPressV = 0L;
-    //public static long lastPressM = 0L;
-    //private boolean keyPressedM = false;
+    public static long lastPressM = 0L;
+    private boolean keyPressedM = false;
     public static long lastPressX = 0l;
     public static long lastPressC = 0l;
     private boolean keyPressedX = false;
@@ -41,11 +43,12 @@ public class KeyHandler
 
     public KeyHandler() {
         this.keyLens = new KeyBinding("Change Goggles Lens", 36, "key.categories.misc");
-        //this.keyMorphic = new KeyBinding("Activate Morphic Fingers", Keyboard.KEY_M, "key.categories.misc");
+        this.keyMorphic = new KeyBinding("Activate Morphic Fingers", Keyboard.KEY_M, "key.categories.misc");
         this.keyC = new KeyBinding("Toggle Spider Climb", Keyboard.KEY_NONE, "key.categories.misc");
         this.keyX = new KeyBinding("Toggle Chameleon Skin", Keyboard.KEY_NONE, "key.categories.misc");
+
         ClientRegistry.registerKeyBinding(this.keyLens);
-        //ClientRegistry.registerKeyBinding(this.keyMorphic);
+        ClientRegistry.registerKeyBinding(this.keyMorphic);
         ClientRegistry.registerKeyBinding(this.keyC);
         ClientRegistry.registerKeyBinding(this.keyX);
     }
@@ -80,7 +83,7 @@ public class KeyHandler
             return;
         }
 
-        /*if (this.keyMorphic.isPressed()) {
+        if (this.keyMorphic.isPressed()) {
             if (FMLClientHandler.instance().getClient().inGameHasFocus) {
                 final EntityPlayer player = Minecraft.getMinecraft().player;
                 if (player != null) {
@@ -105,7 +108,7 @@ public class KeyHandler
                 KeyHandler.lastPressM = System.currentTimeMillis();
             }
             this.keyPressedM = false;
-        }*/
+        }
         if (event.phase == TickEvent.Phase.START) {
             if (this.keyC.isPressed()) {
                 if (FMLClientHandler.instance().getClient().inGameHasFocus) {

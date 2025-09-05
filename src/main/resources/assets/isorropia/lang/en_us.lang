@@ -249,9 +249,9 @@ research.AMPHIBIOUS.title=Amphibious Breath
 research.AMPHIBIOUS.stage.1.text=Being a dedicated air-breather is often inconveniently fatal. You can correct this design flaw by adding a set of gills to supplement your lungs, allowing your new body to breathe air and water with equal ease.
 research.AMPHIBIOUS.stage.2.text=Being a dedicated air-breather is often inconveniently fatal. You can correct this design flaw by adding a set of gills to supplement your lungs, allowing your new body to breathe air and water with equal ease.<BR>It should be noted that gills are a rather sensitive body part. Please do not poke or prod your new gills, no matter how unfamiliar they may feel at first.
 #
-tc.research_name.morphicFingers=Morphic Fingers
-tc.research_text.morphicFingers=A workbench in the palm of your hands
-morphicFingers1=As a crafter, you have often found yourself wishing you had just the right tool for a particular task. As a thaumaturge, you can now ensure that this tool will always be (literally) at hand.<BR>The §5Morphic Fingers§0 infusion allows your fingers to transform between an enormous number of different shapes, mimicking the form and strength of common crafting tools as well as the various charms and resonators used in arcane crafting. Activating this ability with the M key will open an interface similar to an arcane workbench, although it cannot store items.
+research.MORPHICFINGERS.title=Morphic Fingers
+research.MORPHICFINGERS.stage.1.text=As a crafter, you have often found yourself wishing you had just the right tool for a particular task. As a thaumaturge, you can now ensure that this tool will always be (literally) at hand.
+research.MORPHICFINGERS.stage.2.text=As a crafter, you have often found yourself wishing you had just the right tool for a particular task. As a thaumaturge, you can now ensure that this tool will always be (literally) at hand.<BR>The §5Morphic Fingers§0 infusion allows your fingers to transform between an enormous number of different shapes, mimicking the form and strength of common crafting tools as well as the various charms and resonators used in arcane crafting. Activating this ability with the M key will open an interface similar to an arcane workbench, although it cannot store items.
 #
 research.SPIDERCLIMB.title=Spider Climb
 research.SPIDERCLIMB.stage.1.text=Have you ever envied a spider's ability to climb over walls and suck the juices from terrified miners? Now you can mimic the first of these, at least.

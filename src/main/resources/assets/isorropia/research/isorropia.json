@@ -1366,6 +1366,38 @@
           ]
         }
       ]
+    },
+    {
+      "key": "MORPHICFINGERS",
+      "name": "research.MORPHICFINGERS.title",
+      "icons": [
+        "isorropia:textures/misc/morphicfingers.png"
+      ],
+      "category": "ISORROPIA",
+      "location": [
+        15,
+        3
+      ],
+      "parents": [
+        "SELFINFUSION"
+      ],
+      "meta": [
+        "REVERSE"
+      ],
+      "stages": [
+        {
+          "text": "research.MORPHICFINGERS.stage.1.text",
+          "required_knowledge": [
+            "THEORY;ELDRITCH;1"
+          ]
+        },
+        {
+          "text": "research.MORPHICFINGERS.stage.2.text",
+          "recipes": [
+            "isorropia:selfInfusions.morphicFingers"
+          ]
+        }
+      ]
     }
   ]
 }
