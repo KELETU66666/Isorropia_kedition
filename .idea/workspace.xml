@@ -4,27 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0487f38c-42ff-4f53-8da4-c5e9a0688d91" name="更改" comment="fix a small bug.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/container/ContainerFingers.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/container/GuiFingers.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/container/GuiHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/container/SlotMorphicFingers.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/container/TileFinger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/gui/guifingers.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/Common.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/Common.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/events/KeyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/events/KeyHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/research/ResearchsIS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/wind_blade/isorropia/common/research/ResearchsIS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/fml_cache_annotation.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/fml_cache_class_versions.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/isorropia_at.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/isorropia_at.cfg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/lang/en_us.lang" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/lang/en_us.lang" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/research/isorropia.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/isorropia/research/isorropia.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/gui/gui_base.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/gui/gui_carpentry_block.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/isorropia/textures/gui/gui_magnet.png" beforeDir="false" />
-    </list>
+    <list default="true" id="0487f38c-42ff-4f53-8da4-c5e9a0688d91" name="更改" comment="aspect changes." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -432,7 +412,31 @@
       <option name="project" value="LOCAL" />
       <updated>1756876437747</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="morphic fingers.">
+      <option name="closed" value="true" />
+      <created>1757062333170</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1757062333170</updated>
+    </task>
+    <task id="LOCAL-00036" summary="eldritch -&gt; artifice.">
+      <option name="closed" value="true" />
+      <created>1757062451555</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1757062451555</updated>
+    </task>
+    <task id="LOCAL-00037" summary="aspect changes.">
+      <option name="closed" value="true" />
+      <created>1757062496038</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1757062496038</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -449,9 +453,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fix some small bugs." />
-    <MESSAGE value="small pr" />
-    <MESSAGE value="update credits, fix a lang error, version bump." />
     <MESSAGE value="fix a research error" />
     <MESSAGE value="update 1.0.0" />
     <MESSAGE value="fix a silliest bug, version bump" />
@@ -474,7 +475,10 @@
     <MESSAGE value="self infusion.&#10;version bump." />
     <MESSAGE value="fix a lang issue." />
     <MESSAGE value="fix a small bug." />
-    <option name="LAST_COMMIT_MESSAGE" value="fix a small bug." />
+    <MESSAGE value="morphic fingers." />
+    <MESSAGE value="eldritch -&gt; artifice." />
+    <MESSAGE value="aspect changes." />
+    <option name="LAST_COMMIT_MESSAGE" value="aspect changes." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
