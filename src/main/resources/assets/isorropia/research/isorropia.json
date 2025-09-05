@@ -1388,7 +1388,7 @@
         {
           "text": "research.MORPHICFINGERS.stage.1.text",
           "required_knowledge": [
-            "THEORY;ELDRITCH;1"
+            "THEORY;ARTIFICE;1"
           ]
         },
         {
