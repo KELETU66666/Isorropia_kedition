@@ -405,7 +405,7 @@ public class ResearchsIS {
                 new SelfInfusionRecipe(
                         "MORPHICFINGERS",
                         6,
-                        (new AspectList()).add(Aspect.TOOL, 10).add(Aspect.CRAFT, 10).add(Aspect.MAN, 10).add(Aspect.EXCHANGE, 5),
+                        (new AspectList()).add(Aspect.TOOL, 50).add(Aspect.CRAFT, 50).add(Aspect.MAN, 50).add(Aspect.EXCHANGE, 30),
                         new ItemStack[]{
                                 new ItemStack(BlocksTC.arcaneWorkbench, 1, 0),
                                 new ItemStack(ItemsTC.ingots, 1, 1),
