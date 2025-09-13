@@ -31,6 +31,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -300,6 +301,10 @@ public class EntityEventHandler {
         LivingBaseCapability newCap = Common.getCap(player);
 
         if (oldCap != null && newCap != null) {
+            if(!event.isWasDeath()){
+                NBTTagCompound data = oldCap.serializeNBT();
+                newCap.deserializeNBT(data);
+            }
             Common.getCap(player).syncLivingBaseCapability(event.getEntityPlayer());
         }
     }
