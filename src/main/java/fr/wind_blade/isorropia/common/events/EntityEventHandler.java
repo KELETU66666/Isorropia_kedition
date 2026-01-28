@@ -608,6 +608,7 @@ public class EntityEventHandler {
                 ((TileVat) world.getTileEntity(new BlockPos(x, y - 1, z))).setMyEssentia(0);
                 world.getTileEntity(new BlockPos(x, y - 1, z)).markDirty();
                 ((TileVat) world.getTileEntity(new BlockPos(x, y - 1, z))).syncTile(false);
+                player.getEntityData().setBoolean("soulBeacon", false);
             }
         } else if (event.getEntity().world.isRemote && event.getEntityLiving() instanceof EntityPlayer
                 && event.getEntityLiving().getHealth() - event.getAmount() <= 0.0f
