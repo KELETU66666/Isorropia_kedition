@@ -21,15 +21,15 @@ public class ScanFidelity
                 !ThaumcraftCapabilities.getKnowledge(var1).isResearchKnown("INSTILLEDFIDELITY@0") ||
                 ThaumcraftCapabilities.getKnowledge(var1).isResearchKnown("!scan.fidelity"))
             return false;
-        return !((EntityTameable)obj).isTamed();
+        return !((EntityTameable) obj).isTamed();
     }
 
 
     public void onSuccess(EntityPlayer player, Object obj) {
-        EntityTameable tame = (EntityTameable)obj;
+        EntityTameable tame = (EntityTameable) obj;
 
         memory.put(player.getUniqueID(), tame.getUniqueID());
-        player.sendMessage(new TextComponentString(TextFormatting.DARK_PURPLE + (new TextComponentTranslation("scan.fidelity", new Object[0]))
+        player.sendMessage(new TextComponentString(TextFormatting.DARK_PURPLE + (new TextComponentTranslation("scan.fidelity"))
                 .getFormattedText()));
         ThaumcraftCapabilities.getKnowledge(player).removeResearch("!scan.pretame");
     }

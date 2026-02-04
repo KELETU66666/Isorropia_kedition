@@ -1,7 +1,6 @@
 package fr.wind_blade.isorropia.common.research;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -27,15 +26,14 @@ public class ScanEntityResearch
         this.message = message;
     }
 
-
+    @Override
     public boolean checkThing(EntityPlayer player, Object obj) {
-        return (ThaumcraftCapabilities.getKnowledge(player).isResearchKnown(this.researchRequired) && super
-                .checkThing(player, obj));
+        return player != null && ThaumcraftCapabilities.getKnowledge(player).isResearchKnown(this.researchRequired) && super.checkThing(player, obj);
     }
 
 
     public void onSuccess(EntityPlayer player, Object object) {
-        player.sendMessage((ITextComponent)new TextComponentString(TextFormatting.DARK_PURPLE + (new TextComponentTranslation(this.message, new Object[0]))
+        player.sendMessage(new TextComponentString(TextFormatting.DARK_PURPLE + (new TextComponentTranslation(this.message))
                 .getFormattedText()));
     }
 }

@@ -56,7 +56,7 @@ public class EnvyLens extends Lens {
                 if (cap.hasLooted)
                     return;
                 try {
-                    ResourceLocation lootTableLocation = (ResourceLocation) getLootTable.invoke(living, new Object[0]);
+                    ResourceLocation lootTableLocation = (ResourceLocation) getLootTable.invoke(living);
                     if (lootTableLocation == null) {
                         cap.hasLooted = true;
                         Common.INSTANCE.sendTo(new CapabilityMessage(living, cap.serializeNBT()), (EntityPlayerMP) playerIn);

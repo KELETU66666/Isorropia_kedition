@@ -18,15 +18,13 @@ public class ScanTameable implements IScanThing {
         }
         EntityTameable tame = (EntityTameable)obj;
 
-        if (tame.isTamed() && ScanFidelity.memory.containsKey(var1.getUniqueID()) && ((UUID)ScanFidelity.memory
-                .get(var1.getUniqueID())).equals(tame.getUniqueID()))
-            return true;
-        return false;
+        return tame.isTamed() && ScanFidelity.memory.containsKey(var1.getUniqueID()) && ScanFidelity.memory
+                .get(var1.getUniqueID()).equals(tame.getUniqueID());
     }
 
 
     public void onSuccess(EntityPlayer player, Object object) {
-        player.sendMessage(new TextComponentString(TextFormatting.DARK_PURPLE + (new TextComponentTranslation("scan.pretame", new Object[0]))
+        player.sendMessage(new TextComponentString(TextFormatting.DARK_PURPLE + (new TextComponentTranslation("scan.pretame"))
                 .getFormattedText()));
         ScanFidelity.memory.remove(player.getUniqueID());
     }

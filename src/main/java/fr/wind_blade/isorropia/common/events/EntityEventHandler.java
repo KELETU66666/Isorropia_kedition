@@ -106,7 +106,7 @@ public class EntityEventHandler {
                 }
             }
 
-            if(!world.isRemote){
+            if (!world.isRemote) {
                 LivingBaseCapability lc = Common.getCap(event.player);
                 if (lc != null) {
                     Common.getCap(event.player).syncLivingBaseCapability(event.player);
@@ -301,7 +301,7 @@ public class EntityEventHandler {
         LivingBaseCapability newCap = Common.getCap(player);
 
         if (oldCap != null && newCap != null) {
-            if(!event.isWasDeath()){
+            if (!event.isWasDeath()) {
                 NBTTagCompound data = oldCap.serializeNBT();
                 newCap.deserializeNBT(data);
             }
@@ -371,7 +371,7 @@ public class EntityEventHandler {
 
                     ((EntityPlayer) event.getEntity()).sendStatusMessage(new TextComponentString(TextFormatting.DARK_PURPLE +
 
-                            I18n.format("research.experiment.villager_zombie.text", new Object[0])), false);
+                            I18n.format("research.experiment.villager_zombie.text")), false);
                 }
             }
         }
