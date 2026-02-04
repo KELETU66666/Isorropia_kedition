@@ -17,6 +17,10 @@ public class ScanFidelity
 
 
     public boolean checkThing(EntityPlayer var1, Object obj) {
+        if(var1 == null){
+            return false;
+        }
+
         if (!(obj instanceof EntityTameable) ||
                 !ThaumcraftCapabilities.getKnowledge(var1).isResearchKnown("INSTILLEDFIDELITY@0") ||
                 ThaumcraftCapabilities.getKnowledge(var1).isResearchKnown("!scan.fidelity"))

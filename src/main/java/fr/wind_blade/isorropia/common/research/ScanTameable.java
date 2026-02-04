@@ -12,6 +12,10 @@ import java.util.UUID;
 
 public class ScanTameable implements IScanThing {
     public boolean checkThing(EntityPlayer var1, Object obj) {
+        if(var1 == null){
+            return false;
+        }
+
         if (!(obj instanceof EntityTameable) ||
                 !ThaumcraftCapabilities.getKnowledge(var1).isResearchKnown("INSTILLEDFIDELITY")) {
             return false;

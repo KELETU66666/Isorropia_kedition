@@ -12,6 +12,10 @@ import thaumcraft.api.research.IScanThing;
 
 public class ScanSun implements IScanThing {
     public boolean checkThing(EntityPlayer player, Object obj) {
+        if(player == null){
+            return false;
+        }
+
         if (!ThaumcraftCapabilities.getKnowledge(player).isResearchKnown("FIRELENS@0") ||
                 CelestialBody.isNight(player.world) || obj != null || player.rotationPitch > 0.0F ||
                 !player.world.canSeeSky(player.getPosition().up()) || player.world.provider.getDimensionType() != DimensionType.OVERWORLD) {
@@ -37,7 +41,7 @@ public class ScanSun implements IScanThing {
 
 
     public void onSuccess(EntityPlayer player, Object object) {
-        player.sendMessage((ITextComponent)new TextComponentString(TextFormatting.DARK_PURPLE + (new TextComponentTranslation("research.scan.sun.text")).getFormattedText()));
+        player.sendMessage(new TextComponentString(TextFormatting.DARK_PURPLE + (new TextComponentTranslation("research.scan.sun.text")).getFormattedText()));
     }
 
 
